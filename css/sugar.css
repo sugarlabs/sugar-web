@@ -92,3 +92,6 @@ label {
   -moz-user-select: none;
   -webkit-user-select: none;
 }
+#toolbar #stop-button {
+  background-image: url('../icons/activity-stop.svg');
+}
