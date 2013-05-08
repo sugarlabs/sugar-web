@@ -35,5 +35,28 @@ define(function () {
         client.send();
     };
 
+    function getBackgroundURL(elem) {
+        var style = elem.currentStyle || window.getComputedStyle(elem, '');
+        // Remove prefix 'url(' and suffix ')' before return
+        return style.backgroundImage.slice(4, -1);
+    }
+
+    function setBackgroundURL(elem, url) {
+        elem.style.backgroundImage = "url('" + url + "')";
+    }
+
+    icons.colorize = function(elem, colors) {
+        var iconInfo = {
+            "uri": getBackgroundURL(elem),
+            "strokeColor": colors[0],
+            "fillColor": colors[1]
+        };
+
+        icons.load(iconInfo, function (url) {
+            setBackgroundURL(elem, url);
+        });
+
+    };
+
     return icons;
 });
