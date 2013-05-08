@@ -6,9 +6,6 @@ body {
   height: 100%;
   background-color: #c0c0c0;
 }
-button {
-  cursor: pointer;
-}
 .unselectable {
   -moz-user-select: none;
   -webkit-user-select: none;
