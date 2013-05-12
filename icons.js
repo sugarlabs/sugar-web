@@ -1,7 +1,8 @@
 define(function () {
-    icons = {};
+    var icons = {};
 
     icons.load = function (iconInfo, callback) {
+        var source;
         if ("uri" in iconInfo) {
             source = iconInfo.uri;
         }
@@ -9,10 +10,10 @@ define(function () {
             source = "lib/sugar-html-graphics/icons/" + iconInfo.name + ".svg";
         }
 
-        fillColor = iconInfo.fillColor;
-        strokeColor = iconInfo.strokeColor;
+        var fillColor = iconInfo.fillColor;
+        var strokeColor = iconInfo.strokeColor;
 
-        client = new XMLHttpRequest();
+        var client = new XMLHttpRequest();
 
         client.onload = function () {
             var iconData = this.responseText;
