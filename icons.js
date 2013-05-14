@@ -46,7 +46,7 @@ define(function () {
         elem.style.backgroundImage = "url('" + url + "')";
     }
 
-    icons.colorize = function(elem, colors) {
+    icons.colorize = function (elem, colors) {
         var iconInfo = {
             "uri": getBackgroundURL(elem),
             "strokeColor": colors[0],
