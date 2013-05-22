@@ -4,11 +4,8 @@ define(function (require) {
 
     beforeEach(function () {
         elem1 = document.createElement('button');
-        elem1.setAttribute('id', 'elem1');
         elem2 = document.createElement('button');
-        elem2.setAttribute('id', 'elem2');
         elem3 = document.createElement('button');
-        elem3.setAttribute('id', 'elem3');
     });
 
     describe("radioToolButton", function () {
