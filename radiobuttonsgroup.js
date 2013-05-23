@@ -3,6 +3,17 @@ define(function () {
 
     var radioButtonsGroup = {};
 
+    // ## RadioButtonsGroup
+    //
+    // A group of elements where only one can be active at the same
+    // time.
+    //
+    // When an element is clicked, it becomes the active one.  The
+    // active element gains the 'active' CSS class.
+    //
+    // Parameters:
+    //
+    // * **elems** Array of elements of the group.
     radioButtonsGroup.RadioButtonsGroup = function (elems) {
         this.elems = elems;
         var active;
@@ -11,11 +22,15 @@ define(function () {
             var elem = elems[i];
             elem.addEventListener("click", clickHandler);
 
+            // The first element that has 'active' CSS class is made
+            // the active of the group on startup.
             if (active === undefined && util.hasClass(elem, 'active')) {
                 active = elem;
             }
         }
 
+        // If no element has 'active' CSS class, the first element of
+        // the array is made the active.
         if (active === undefined) {
             active = elems[0];
             updateClasses();
@@ -34,6 +49,7 @@ define(function () {
             util.addClass(active, 'active');
         }
 
+        // Get the active element.
         this.getActive = function () {
             return active;
         };
