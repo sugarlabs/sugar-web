@@ -56,7 +56,7 @@ define(function (require) {
 
             waitsFor(function () {
                 return wasClicked;
-            }, "the element should be clicked", 200);
+            }, "the element should be clicked");
 
             runs(function () {
                 var elem = radio.getActive();
@@ -78,7 +78,7 @@ define(function (require) {
 
             waitsFor(function () {
                 return wasClicked;
-            }, "the element should be clicked", 200);
+            }, "the element should be clicked");
 
             runs(function () {
                 var elem = radio.getActive();
