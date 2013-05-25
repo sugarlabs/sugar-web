@@ -34,8 +34,7 @@ body {
 #toolbar button:hover {
   background-color: black;
 }
-#toolbar button:active,
-#toolbar button.active {
+#toolbar button:active, #toolbar button.active {
   background-color: #808080;
 }
 #toolbar button img {
