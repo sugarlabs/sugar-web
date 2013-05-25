@@ -13,14 +13,20 @@ files = [
   REQUIRE,
   REQUIRE_ADAPTER,
   'test/loader.js',
-  {pattern: 'test/*Spec.js', included: false},
-  {pattern: '*js', included: false}
+    {
+        pattern: 'test/*Spec.js',
+        included: false
+    },
+    {
+        pattern: '*js',
+        included: false
+    }
 ];
 
 
 // list of files to exclude
 exclude = [
-  
+
 ];
 
 
