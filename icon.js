@@ -5,8 +5,7 @@ define(function () {
         var source;
         if ("uri" in iconInfo) {
             source = iconInfo.uri;
-        }
-        else if ("name" in iconInfo) {
+        } else if ("name" in iconInfo) {
             source = "lib/sugar-html-graphics/icons/" + iconInfo.name + ".svg";
         }
 
