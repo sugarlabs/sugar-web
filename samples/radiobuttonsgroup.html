@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../css/sugar.css">
+<style>
+
+#toolbar #zoom-neighborhood {
+  background-image: url(../icons/zoom-neighborhood.svg);
+}
+
+#toolbar #zoom-groups {
+  background-image: url(../icons/zoom-groups.svg);
+}
+
+#toolbar #zoom-home {
+  background-image: url(../icons/zoom-home.svg);
+}
+
+</style>
+<script src="js/require.js"></script>
+<script>
+requirejs.config({
+    baseUrl: "../..",
+    paths: {
+        samplelibs: "sugar-html-graphics/samples/js"
+    }
+});
+
+require(["sugar-html-graphics/util", "sugar-html-graphics/radiobuttonsgroup",
+    "samplelibs/domReady!"], function (radioButtonsGroup, doc) {
+
+    var radioButtonsGroup = require("sugar-html-graphics/radiobuttonsgroup");
+    var neighbButton = document.getElementById("zoom-neighborhood");
+    var groupsButton = document.getElementById("zoom-groups");
+    var homeButton = document.getElementById("zoom-home");
+
+    var radio = new radioButtonsGroup.RadioButtonsGroup(
+        [neighbButton, groupsButton, homeButton]);
+
+});
+</script>
+</head>
+<body>
+<div id="toolbar">
+  <button id="zoom-neighborhood"></button>
+  <button id="zoom-groups"></button>
+  <button id="zoom-home"></button>
+</div>
+<div id="canvas"></div>
+</body>
+</html>
