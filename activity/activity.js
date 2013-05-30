@@ -1,9 +1,9 @@
 define(function (require) {
-    var shortcut = require("activity/shortcut");
+    var shortcut = require("sugar-web/activity/shortcut");
 
     var activity = {};
 
-    var bus = require("bus/bus");
+    var bus = require("sugar-web/bus/bus");
 
     activity.setup = function () {
         shortcut.add("Ctrl", "Q", this.close);

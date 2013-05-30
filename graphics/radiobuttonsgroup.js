@@ -1,5 +1,5 @@
 define(function () {
-    var util = require("graphics/util");
+    var util = require("sugar-web/graphics/util");
 
     var radioButtonsGroup = {};
 

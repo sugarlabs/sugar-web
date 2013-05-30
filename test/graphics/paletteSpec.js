@@ -1,5 +1,5 @@
 define(function (require) {
-    var palette = require("graphics/palette");
+    var palette = require("sugar-web/graphics/palette");
 
     describe("palette", function () {
         it("should start down", function () {

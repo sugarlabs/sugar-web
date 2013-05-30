@@ -7,7 +7,7 @@ requirejs.config({
     baseUrl: "/base",
 
     paths: {
-        "sugar-html-graphics": "."
+        "sugar-web": "."
     },
 
     // ask Require.js to load these files (all our tests)
