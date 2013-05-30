@@ -34,7 +34,8 @@ body {
 #toolbar button:hover {
   background-color: black;
 }
-#toolbar button:active, #toolbar button.active {
+#toolbar button:active,
+#toolbar button.active {
   background-color: #808080;
 }
 #toolbar button img {
@@ -89,7 +90,7 @@ label {
   -webkit-user-select: none;
 }
 #toolbar #stop-button {
-  background-image: url('../icons/activity-stop.svg');
+  background-image: url('../icons/actions/activity-stop.svg');
 }
 .palette {
   color: white;
