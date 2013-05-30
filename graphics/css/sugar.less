@@ -1,9 +1,17 @@
 @toolbar-grey: #282828;
 @button-grey: #808080;
 @panel-grey: #C0C0C0;
+@text-field-grey: #E5E5E5;
 
 @toolbutton-size: 46px;
 @toolbutton-margin: 2px;
+@toolbar-height: @toolbutton-size + (4 * @toolbutton-margin);
+
+@input-text-padding: 4px;
+@input-text-line-height: 20px;
+@toolbar-input-height: (@toolbar-height / 2) - (@input-text-line-height / 2) -
+                       (@input-text-padding + 2px);
+
 html {
   height: 100%;
 }
@@ -23,7 +31,7 @@ body {
   color: white;
   background-color: @toolbar-grey;
   padding: 0 @toolbutton-size + (5 * @toolbutton-margin);
-  height: @toolbutton-size + (4 * @toolbutton-margin);
+  height: @toolbar-height;
   .unselectable;
 }
 
@@ -81,6 +89,28 @@ body {
   background-color: white;
   color: black;
   border-color: @button-grey;
+}
+
+input[type='text'] {
+  background-color: @text-field-grey;
+  border: 2px solid @text-field-grey;
+  border-radius: 500px;
+  padding: @input-text-padding;
+  line-height: @input-text-line-height;
+  outline: 0;
+}
+
+input[type='text']:focus {
+  background-color: white;
+}
+
+input[type='text']:disabled {
+  border-color: @button-grey;
+  background-color: @button-grey;
+}
+
+#toolbar input[type='text'] {
+  margin-top: @toolbar-input-height;
 }
 
 input[type='range'] {
