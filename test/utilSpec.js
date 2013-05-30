@@ -1,5 +1,5 @@
 define(function (require) {
-    var util = require("graphic/util");
+    var util = require("graphics/util");
 
     beforeEach(function () {
         elem = document.createElement('div');

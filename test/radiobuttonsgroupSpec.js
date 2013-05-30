@@ -1,6 +1,6 @@
 define(function (require) {
-    var util = require("graphic/util");
-    var radioButtonsGroup = require("graphic/radiobuttonsgroup");
+    var util = require("graphics/util");
+    var radioButtonsGroup = require("graphics/radiobuttonsgroup");
 
     beforeEach(function () {
         elem1 = document.createElement('button');

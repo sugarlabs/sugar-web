@@ -1,5 +1,5 @@
 define(function () {
-    var util = require("graphic/util");
+    var util = require("graphics/util");
 
     var radioButtonsGroup = {};
 

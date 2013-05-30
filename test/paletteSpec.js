@@ -1,5 +1,5 @@
 define(function (require) {
-    var palette = require("graphic/palette");
+    var palette = require("graphics/palette");
 
     describe("palette", function () {
         it("should start down", function () {
