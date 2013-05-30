@@ -1,5 +1,5 @@
 define(function (require) {
-    var util = require("sugar-html-graphics/util");
+    var util = require("graphic/util");
 
     beforeEach(function () {
         elem = document.createElement('div');

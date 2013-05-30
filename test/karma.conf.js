@@ -65,7 +65,7 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ["sugar-html-test"];
+browsers = ["sugar-web-test"];
 
 
 // If browser does not capture in given timeout [ms], kill it

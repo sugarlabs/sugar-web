@@ -1,6 +1,6 @@
 define(function (require) {
 
-    var datastore = require("sugar-html-datastore/datastore");
+    var datastore = require("datastore/datastore");
 
     describe("datastore", function () {
 

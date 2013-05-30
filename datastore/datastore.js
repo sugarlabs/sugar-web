@@ -1,5 +1,5 @@
 define(function (require) {
-    var bus = require("sugar-html-bus/bus");
+    var bus = require("bus/bus");
 
     var datastore = {};
 
