@@ -8,17 +8,18 @@ basePath = '..';
 
 // list of files / patterns to load in the browser
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  REQUIRE,
-  REQUIRE_ADAPTER,
-  'test/loader.js',
-    {
+    JASMINE,
+    JASMINE_ADAPTER,
+    REQUIRE,
+    REQUIRE_ADAPTER,
+        'test/loader.js', {
         pattern: 'test/*Spec.js',
         included: false
-    },
-    {
+    }, {
         pattern: '*js',
+        included: false
+    }, {
+        pattern: 'lib/**/*.js',
         included: false
     }
 ];
