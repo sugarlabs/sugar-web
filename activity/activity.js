@@ -3,7 +3,7 @@ define(function (require) {
 
     var activity = {};
 
-    var bus = require("sugar-web/bus/bus");
+    var bus = require("sugar-web/bus");
 
     activity.setup = function () {
         shortcut.add("Ctrl", "Q", this.close);
