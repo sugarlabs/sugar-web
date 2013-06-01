@@ -1,69 +1,58 @@
 define(function (require) {
+    var env = require("sugar-web/env");
+
     var lastId = 0;
     var callbacks = {};
-    var queue = [];
-    var socket = null;
+    var client = null;
     var inputStreams = [];
 
-    function start() {
-        socket = new WebSocket("ws://localhost:" + window.top.sugarPort);
-        socket.binaryType = "arraybuffer";
+    function WebSocketClient(environment) {
+        this.queue = [];
+        this.socket = null;
 
-        socket.onopen = function () {
-            params = [window.top.sugarId, window.top.sugarKey];
+        var me = this;
 
-            socket.send(JSON.stringify({
-                "method": "authenticate",
-                "id": "authenticate",
-                "params": params
-            }));
+        env.getEnvironment(function (error, environment) {
+            var socket = new WebSocket("ws://localhost:" +
+                                       environment.apiSocketPort);
+            socket.binaryType = "arraybuffer";
 
-            while (queue.length > 0) {
-                socket.send(queue.shift());
-            }
-        };
+            socket.onopen = function () {
+                var params = [environment.activityId,
+                              environment.apiSocketKey];
 
-        socket.onmessage = function (message) {
-            if (typeof message.data != "string") {
-                var dataView = new Uint8Array(message.data);
-                var streamId = dataView[0];
+                socket.send(JSON.stringify({
+                    "method": "authenticate",
+                    "id": "authenticate",
+                    "params": params
+                }));
 
-                if (streamId in inputStreams) {
-                    var inputStream = inputStreams[streamId];
-                    inputStream.gotData(message.data.slice(1));
+                while (me.queue.length > 0) {
+                    socket.send(me.queue.shift());
                 }
+            };
 
-                return;
-            }
+            socket.onmessage = function (message) {
+                me.onMessage(message);
+            };
 
-            var parsed = JSON.parse(message.data);
-            var responseId = parsed.id;
-            if (responseId in callbacks) {
-                callbacks[responseId](parsed.result);
-                delete callbacks[responseId];
-            }
-        };
+            me.socket = socket;
+        });
     }
 
-    function sendOrQueue(data) {
-        if (socket.readyState == WebSocket.OPEN) {
-            socket.send(data);
+    WebSocketClient.prototype.send = function (data) {
+        if (this.socket && this.socket.readyState == WebSocket.OPEN) {
+            this.socket.send(data);
         } else {
-            queue.push(data);
+            this.queue.push(data);
         }
-    }
+    };
 
-    if (window.top.sugarKey &&
-        window.top.sugarPort &&
-        window.top.sugarId) {
-        start();
-    } else {
-        window.top.onSugarAuthSet = function () {
-            start();
-        };
-    }
+    WebSocketClient.prototype.close = function () {
+        this.socket.close();
+    };
 
-    var Bus = {};
+    var bus = {};
 
     function InputStream() {
         this.streamId = null;
@@ -72,7 +61,7 @@ define(function (require) {
 
     InputStream.prototype.open = function (callback) {
         var me = this;
-        Bus.sendMessage("open_stream", [], function (result) {
+        bus.sendMessage("open_stream", [], function (result) {
             me.streamId = result;
             inputStreams[me.streamId] = me;
             callback();
@@ -94,7 +83,7 @@ define(function (require) {
         var bodyView = new Uint32Array(buffer, 4, 1);
         bodyView[0] = count;
 
-        Bus.sendBinary(buffer);
+        bus.sendBinary(buffer);
     };
 
     InputStream.prototype.gotData = function (buffer) {
@@ -104,7 +93,7 @@ define(function (require) {
 
     InputStream.prototype.close = function () {
         var me = this;
-        Bus.sendMessage("close_stream", [this.streamId], function () {
+        bus.sendMessage("close_stream", [this.streamId], function () {
             delete inputStreams[me.streamId];
         });
     };
@@ -115,7 +104,7 @@ define(function (require) {
 
     OutputStream.prototype.open = function (callback) {
         var me = this;
-        Bus.sendMessage("open_stream", [], function (result) {
+        bus.sendMessage("open_stream", [], function (result) {
             me.streamId = result;
             callback();
         });
@@ -128,23 +117,23 @@ define(function (require) {
         bufferView[0] = this.streamId;
         bufferView.set(new Uint8Array(data), 1);
 
-        Bus.sendBinary(buffer);
+        bus.sendBinary(buffer);
     };
 
     OutputStream.prototype.close = function () {
-        Bus.sendMessage("close_stream", [this.streamId]);
+        bus.sendMessage("close_stream", [this.streamId]);
     };
 
-    Bus.createInputStream = function (callback) {
+    bus.createInputStream = function (callback) {
         return new InputStream();
     };
 
-    Bus.createOutputStream = function (callback) {
+    bus.createOutputStream = function (callback) {
         return new OutputStream();
     };
 
-    Bus.sendMessage = function (method, params, callback) {
-        message = {
+    bus.sendMessage = function (method, params, callback) {
+        var message = {
             "method": method,
             "id": lastId,
             "params": params
@@ -154,14 +143,48 @@ define(function (require) {
             callbacks[lastId] = callback;
         }
 
-        sendOrQueue(JSON.stringify(message));
+        client.send(JSON.stringify(message));
 
         lastId++;
     };
 
-    Bus.sendBinary = function (buffer, callback) {
-        sendOrQueue(buffer);
+    bus.sendBinary = function (buffer, callback) {
+        client.send(buffer);
     };
 
-    return Bus;
+    bus.listen = function (customClient) {
+        if (customClient) {
+            client = customClient;
+        } else {
+            client = new WebSocketClient();
+        }
+
+        client.onMessage = function (message) {
+            if (typeof message.data != "string") {
+                var dataView = new Uint8Array(message.data);
+                var streamId = dataView[0];
+
+                if (streamId in inputStreams) {
+                    var inputStream = inputStreams[streamId];
+                    inputStream.gotData(message.data.slice(1));
+                }
+
+                return;
+            }
+
+            var parsed = JSON.parse(message.data);
+            var responseId = parsed.id;
+            if (responseId in callbacks) {
+                callbacks[responseId](parsed.result);
+                delete callbacks[responseId];
+            }
+        };
+    };
+
+    bus.close = function () {
+        client.close();
+        client = null;
+    };
+
+    return bus;
 });
