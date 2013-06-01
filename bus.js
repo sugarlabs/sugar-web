@@ -3,57 +3,54 @@ define(function (require) {
 
     var lastId = 0;
     var callbacks = {};
-    var queue = [];
-    var socket = null;
+    var client = null;
     var inputStreams = [];
 
-    function start(environment) {
-        socket = new WebSocket("ws://localhost:" + environment.apiSocketPort);
-        socket.binaryType = "arraybuffer";
+    function WebSocketClient(environment) {
+        this.queue = [];
+        this.socket = null;
 
-        socket.onopen = function () {
-            var params = [environment.activityId, environment.apiSocketKey];
+        var me = this;
 
-            socket.send(JSON.stringify({
-                "method": "authenticate",
-                "id": "authenticate",
-                "params": params
-            }));
+        env.getEnvironment(function (error, environment) {
+            var socket = new WebSocket("ws://localhost:" +
+                                       environment.apiSocketPort);
+            socket.binaryType = "arraybuffer";
 
-            while (queue.length > 0) {
-                socket.send(queue.shift());
-            }
-        };
+            socket.onopen = function () {
+                var params = [environment.activityId,
+                              environment.apiSocketKey];
 
-        socket.onmessage = function (message) {
-            if (typeof message.data != "string") {
-                var dataView = new Uint8Array(message.data);
-                var streamId = dataView[0];
+                socket.send(JSON.stringify({
+                    "method": "authenticate",
+                    "id": "authenticate",
+                    "params": params
+                }));
 
-                if (streamId in inputStreams) {
-                    var inputStream = inputStreams[streamId];
-                    inputStream.gotData(message.data.slice(1));
+                while (me.queue.length > 0) {
+                    socket.send(me.queue.shift());
                 }
+            };
 
-                return;
-            }
+            socket.onmessage = function (message) {
+                me.onMessage(message);
+            };
 
-            var parsed = JSON.parse(message.data);
-            var responseId = parsed.id;
-            if (responseId in callbacks) {
-                callbacks[responseId](parsed.result);
-                delete callbacks[responseId];
-            }
-        };
+            me.socket = socket;
+        });
     }
 
-    function sendOrQueue(data) {
-        if (socket && socket.readyState == WebSocket.OPEN) {
-            socket.send(data);
+    WebSocketClient.prototype.send = function (data) {
+        if (this.socket && this.socket.readyState == WebSocket.OPEN) {
+            this.socket.send(data);
         } else {
-            queue.push(data);
+            this.queue.push(data);
         }
-    }
+    };
+
+    WebSocketClient.prototype.close = function () {
+        this.socket.close();
+    };
 
     var bus = {};
 
@@ -146,24 +143,43 @@ define(function (require) {
             callbacks[lastId] = callback;
         }
 
-        sendOrQueue(JSON.stringify(message));
+        client.send(JSON.stringify(message));
 
         lastId++;
     };
 
     bus.sendBinary = function (buffer, callback) {
-        sendOrQueue(buffer);
+        client.send(buffer);
     };
 
     bus.listen = function () {
-        env.getEnvironment(function (error, environment) {
-            start(environment);
-        });
+        client = new WebSocketClient();
+
+        client.onMessage = function (message) {
+            if (typeof message.data != "string") {
+                var dataView = new Uint8Array(message.data);
+                var streamId = dataView[0];
+
+                if (streamId in inputStreams) {
+                    var inputStream = inputStreams[streamId];
+                    inputStream.gotData(message.data.slice(1));
+                }
+
+                return;
+            }
+
+            var parsed = JSON.parse(message.data);
+            var responseId = parsed.id;
+            if (responseId in callbacks) {
+                callbacks[responseId](parsed.result);
+                delete callbacks[responseId];
+            }
+        };
     };
 
     bus.close = function () {
-        socket.close();
-        socket = null;
+        client.close();
+        client = null;
     };
 
     return bus;
