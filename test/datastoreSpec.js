@@ -8,15 +8,15 @@ define(function (require) {
         function loadData(objectId, onLoaded) {
             var objectData;
 
-            function onObjectLoaded() {
-                onLoaded(objectData);
+            function onObjectLoaded(error, result) {
+                onLoaded(error, objectData);
             }
 
             function onRead(data) {
                 objectData = data;
             }
 
-            function onStream(inputStream) {
+            function onStream(error, inputStream) {
                 inputStream.read(8192, onRead);
                 inputStream.close();
             }
@@ -25,7 +25,7 @@ define(function (require) {
         }
 
         function createObject(metadata, data, onCreated) {
-            function onStream(outputStream) {
+            function onStream(error, outputStream) {
                 outputStream.write(data);
                 outputStream.close();
             }
@@ -47,7 +47,7 @@ define(function (require) {
             runs(function () {
                 wasCreated = false;
 
-                function onCreated(objectId) {
+                function onCreated(error, objectId) {
                     expect(objectId).toEqual(jasmine.any(String));
                     wasCreated = true;
                 }
@@ -67,13 +67,12 @@ define(function (require) {
             var testTitle = "hello";
 
             runs(function () {
-                function onGotMetadata(metadata) {
-                    console.log(metadata.title);
+                function onGotMetadata(error, metadata) {
                     expect(metadata.title).toEqual(testTitle);
                     gotMetadata = true;
                 }
 
-                function onCreated(objectId) {
+                function onCreated(error, objectId) {
                     datastore.getMetadata(objectId, onGotMetadata);
                 }
 
@@ -93,13 +92,13 @@ define(function (require) {
             var testData = new Uint8Array([1, 2, 3, 4]);
 
             runs(function () {
-                function onLoaded(data) {
+                function onLoaded(error, data) {
                     expect(data).toEqual(testData.buffer);
 
                     wasLoaded = true;
                 }
 
-                function onCreated(objectId) {
+                function onCreated(error, objectId) {
                     loadData(objectId, onLoaded);
                 }
 

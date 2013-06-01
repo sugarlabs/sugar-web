@@ -61,10 +61,10 @@ define(function (require) {
 
     InputStream.prototype.open = function (callback) {
         var me = this;
-        bus.sendMessage("open_stream", [], function (result) {
-            me.streamId = result;
+        bus.sendMessage("open_stream", [], function (error, result) {
+            me.streamId = result[0];
             inputStreams[me.streamId] = me;
-            callback();
+            callback(error);
         });
     };
 
@@ -93,9 +93,12 @@ define(function (require) {
 
     InputStream.prototype.close = function () {
         var me = this;
-        bus.sendMessage("close_stream", [this.streamId], function () {
+
+        function onStreamClosed(error, result) {
             delete inputStreams[me.streamId];
-        });
+        }
+
+        bus.sendMessage("close_stream", [this.streamId], onStreamClosed);
     };
 
     function OutputStream() {
@@ -104,9 +107,9 @@ define(function (require) {
 
     OutputStream.prototype.open = function (callback) {
         var me = this;
-        bus.sendMessage("open_stream", [], function (result) {
-            me.streamId = result;
-            callback();
+        bus.sendMessage("open_stream", [], function (error, result) {
+            me.streamId = result[0];
+            callback(error);
         });
     };
 
@@ -175,7 +178,14 @@ define(function (require) {
             var parsed = JSON.parse(message.data);
             var responseId = parsed.id;
             if (responseId in callbacks) {
-                callbacks[responseId](parsed.result);
+                var callback = callbacks[responseId];
+
+                if (parsed.error === null) {
+                    callback(null, parsed.result);
+                } else {
+                    callback(new Error(parsed.error), null);
+                }
+
                 delete callbacks[responseId];
             }
         };
