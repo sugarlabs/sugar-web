@@ -55,7 +55,7 @@ define(function (require) {
         }
     }
 
-    var Bus = {};
+    var bus = {};
 
     function InputStream() {
         this.streamId = null;
@@ -64,7 +64,7 @@ define(function (require) {
 
     InputStream.prototype.open = function (callback) {
         var me = this;
-        Bus.sendMessage("open_stream", [], function (result) {
+        bus.sendMessage("open_stream", [], function (result) {
             me.streamId = result;
             inputStreams[me.streamId] = me;
             callback();
@@ -86,7 +86,7 @@ define(function (require) {
         var bodyView = new Uint32Array(buffer, 4, 1);
         bodyView[0] = count;
 
-        Bus.sendBinary(buffer);
+        bus.sendBinary(buffer);
     };
 
     InputStream.prototype.gotData = function (buffer) {
@@ -96,7 +96,7 @@ define(function (require) {
 
     InputStream.prototype.close = function () {
         var me = this;
-        Bus.sendMessage("close_stream", [this.streamId], function () {
+        bus.sendMessage("close_stream", [this.streamId], function () {
             delete inputStreams[me.streamId];
         });
     };
@@ -107,7 +107,7 @@ define(function (require) {
 
     OutputStream.prototype.open = function (callback) {
         var me = this;
-        Bus.sendMessage("open_stream", [], function (result) {
+        bus.sendMessage("open_stream", [], function (result) {
             me.streamId = result;
             callback();
         });
@@ -120,22 +120,22 @@ define(function (require) {
         bufferView[0] = this.streamId;
         bufferView.set(new Uint8Array(data), 1);
 
-        Bus.sendBinary(buffer);
+        bus.sendBinary(buffer);
     };
 
     OutputStream.prototype.close = function () {
-        Bus.sendMessage("close_stream", [this.streamId]);
+        bus.sendMessage("close_stream", [this.streamId]);
     };
 
-    Bus.createInputStream = function (callback) {
+    bus.createInputStream = function (callback) {
         return new InputStream();
     };
 
-    Bus.createOutputStream = function (callback) {
+    bus.createOutputStream = function (callback) {
         return new OutputStream();
     };
 
-    Bus.sendMessage = function (method, params, callback) {
+    bus.sendMessage = function (method, params, callback) {
         message = {
             "method": method,
             "id": lastId,
@@ -151,20 +151,20 @@ define(function (require) {
         lastId++;
     };
 
-    Bus.sendBinary = function (buffer, callback) {
+    bus.sendBinary = function (buffer, callback) {
         sendOrQueue(buffer);
     };
 
-    Bus.listen = function () {
+    bus.listen = function () {
         env.getEnvironment(function (error, environment) {
             start(environment);
         });
     };
 
-    Bus.close = function () {
+    bus.close = function () {
         socket.close();
         socket = null;
     };
 
-    return Bus;
+    return bus;
 });
