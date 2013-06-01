@@ -133,7 +133,7 @@ define(function (require) {
     };
 
     bus.sendMessage = function (method, params, callback) {
-        message = {
+        var message = {
             "method": method,
             "id": lastId,
             "params": params
@@ -152,8 +152,12 @@ define(function (require) {
         client.send(buffer);
     };
 
-    bus.listen = function () {
-        client = new WebSocketClient();
+    bus.listen = function (customClient) {
+        if (customClient) {
+            client = customClient;
+        } else {
+            client = new WebSocketClient();
+        }
 
         client.onMessage = function (message) {
             if (typeof message.data != "string") {
