@@ -9,8 +9,13 @@
 
 @input-text-padding: 4px;
 @input-text-line-height: 20px;
+@input-text-width: 190px;
 @toolbar-input-height: (@toolbar-height / 2) - (@input-text-line-height / 2) -
                        (@input-text-padding + 2px);
+
+@icon-small-size: 20px;
+@button-small-size: @input-text-line-height + (2 * @input-text-padding) +
+                    (2 * 2px);
 
 * {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -100,6 +105,7 @@ input[type='text'] {
   border: 2px solid @text-field-grey;
   border-radius: 500px;
   padding: @input-text-padding;
+  width: @input-text-width;
   line-height: @input-text-line-height;
   outline: 0;
 }
@@ -115,6 +121,63 @@ input[type='text']:disabled {
 
 #toolbar input[type='text'] {
   margin-top: @toolbar-input-height;
+}
+
+.icon-input {
+  display: inline-block;
+  position: relative;
+}
+
+.icon-input input[type='text'] {
+  width: @input-text-width + @input-text-padding - @button-small-size;
+  padding-right: @button-small-size;
+}
+
+#canvas .icon-input button,
+#toolbar .icon-input button {
+  width: @button-small-size;
+  height: @button-small-size;
+  padding: 0;
+  position: absolute;
+  background-size: @icon-small-size @icon-small-size;
+}
+
+#canvas .icon-input button.right,
+#toolbar .icon-input button.right {
+  margin: 0 0 0 -@button-small-size;
+  border-radius: 0 5000px 5000px 0;
+  right: 0;
+}
+
+#canvas .icon-input button {
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+#canvas .icon-input button {
+  top: 2px;
+}
+
+#toolbar .icon-input button:hover {
+  background-color: transparent;
+}
+
+#toolbar .icon-input button {
+  top: @toolbar-input-height;
+}
+
+button.cancel {
+  background-image: url(../icons/actions/entry-cancel.svg);
+}
+
+button.cancel:active {
+  background-image: url(../icons/actions/entry-cancel-active.svg);
+}
+
+button.cancel:disabled {
+  background-image: url(../icons/actions/entry-cancel-disabled.svg);
 }
 
 input[type='range'] {
