@@ -1,5 +1,6 @@
 define(function (require) {
 
+    var bus = require("sugar-web/bus");
     var datastore = require("sugar-web/datastore");
 
     describe("datastore", function () {
@@ -31,6 +32,14 @@ define(function (require) {
 
             datastore.create(metadata, onStream, onCreated);
         }
+
+        beforeEach(function () {
+            bus.listen();
+        });
+
+        afterEach(function () {
+            bus.close();
+        });
 
         it("should be able to create an object", function () {
             var wasCreated;
