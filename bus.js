@@ -1,16 +1,18 @@
 define(function (require) {
+    var env = require("sugar-web/env");
+
     var lastId = 0;
     var callbacks = {};
     var queue = [];
     var socket = null;
     var inputStreams = [];
 
-    function start() {
-        socket = new WebSocket("ws://localhost:" + window.top.sugarPort);
+    function start(environment) {
+        socket = new WebSocket("ws://localhost:" + environment.apiSocketPort);
         socket.binaryType = "arraybuffer";
 
         socket.onopen = function () {
-            params = [window.top.sugarId, window.top.sugarKey];
+            var params = [environment.activityId, environment.apiSocketKey];
 
             socket.send(JSON.stringify({
                 "method": "authenticate",
@@ -46,21 +48,11 @@ define(function (require) {
     }
 
     function sendOrQueue(data) {
-        if (socket.readyState == WebSocket.OPEN) {
+        if (socket && socket.readyState == WebSocket.OPEN) {
             socket.send(data);
         } else {
             queue.push(data);
         }
-    }
-
-    if (window.top.sugarKey &&
-        window.top.sugarPort &&
-        window.top.sugarId) {
-        start();
-    } else {
-        window.top.onSugarAuthSet = function () {
-            start();
-        };
     }
 
     var Bus = {};
@@ -161,6 +153,17 @@ define(function (require) {
 
     Bus.sendBinary = function (buffer, callback) {
         sendOrQueue(buffer);
+    };
+
+    Bus.listen = function () {
+        env.getEnvironment(function (error, environment) {
+            start(environment);
+        });
+    };
+
+    Bus.close = function () {
+        socket.close();
+        socket = null;
     };
 
     return Bus;
