@@ -74,6 +74,7 @@ input[type='text'] {
   border: 2px solid #e5e5e5;
   border-radius: 500px;
   padding: 4px;
+  width: 190px;
   line-height: 20px;
   outline: 0;
 }
@@ -86,6 +87,52 @@ input[type='text']:disabled {
 }
 #toolbar input[type='text'] {
   margin-top: 11px;
+}
+.icon-input {
+  display: inline-block;
+  position: relative;
+}
+.icon-input input[type='text'] {
+  width: 162px;
+  padding-right: 32px;
+}
+#canvas .icon-input button,
+#toolbar .icon-input button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  position: absolute;
+  background-size: 20px 20px;
+}
+#canvas .icon-input button.right,
+#toolbar .icon-input button.right {
+  margin: 0 0 0 -32px;
+  border-radius: 0 5000px 5000px 0;
+  right: 0;
+}
+#canvas .icon-input button {
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 0;
+}
+#canvas .icon-input button {
+  top: 2px;
+}
+#toolbar .icon-input button:hover {
+  background-color: transparent;
+}
+#toolbar .icon-input button {
+  top: 11px;
+}
+button.cancel {
+  background-image: url(../icons/actions/entry-cancel.svg);
+}
+button.cancel:active {
+  background-image: url(../icons/actions/entry-cancel-active.svg);
+}
+button.cancel:disabled {
+  background-image: url(../icons/actions/entry-cancel-disabled.svg);
 }
 input[type='range'] {
   -webkit-appearance: none !important;
