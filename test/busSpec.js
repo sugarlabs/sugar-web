@@ -42,7 +42,8 @@ define(function (require) {
             runs(function () {
                 responseReceived = false;
 
-                function onResponseReceived(result) {
+                function onResponseReceived(error, result) {
+                    expect(error).toBeNull();
                     expect(result).toEqual(["hello"]);
                     responseReceived = true;
                 }
@@ -55,6 +56,30 @@ define(function (require) {
             waitsFor(function () {
                 return responseReceived;
             }, "a response should be received");
+        });
+
+        it("should receive an error", function () {
+            var errorReceived;
+
+            runs(function () {
+                errorReceived = false;
+
+                function onResponseReceived(error, result) {
+                    expect(error).toEqual(jasmine.any(Error));
+                    expect(result).toBeNull();
+
+                    errorReceived = true;
+                }
+
+                client.result = null;
+                client.error = new Error("error");
+
+                bus.sendMessage("hello", [], onResponseReceived);
+            });
+
+            waitsFor(function () {
+                return errorReceived;
+            }, "an error should be received");
         });
 
     });

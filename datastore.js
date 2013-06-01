@@ -4,50 +4,75 @@ define(function (require) {
     var datastore = {};
 
     datastore.getMetadata = function (objectId, onGotMetadata) {
-        var params = [objectId];
-        bus.sendMessage("datastore.get_metadata", params, function (result) {
-            onGotMetadata(result[0]);
-        });
+        function onResponseReceived(error, result) {
+            if (error === null) {
+                onGotMetadata(null, result[0]);
+            } else {
+                onGotMetadata(error, null);
+            }
+        }
+
+        bus.sendMessage("datastore.get_metadata",
+                        [objectId], onResponseReceived);
     };
 
     datastore.loadData = function (objectId, onStream, onLoaded) {
         inputStream = bus.createInputStream();
 
-        inputStream.open(function () {
-            var params = [objectId, inputStream.streamId];
-            bus.sendMessage("datastore.load_data", params, function (result) {
-                if (onLoaded) {
-                    onLoaded();
+        inputStream.open(function (error) {
+            function onResponseReceived(responseError, result) {
+                if (responseError === null) {
+                    onLoaded(null, result[0]);
+                } else {
+                    onLoaded(responseError, null);
                 }
-            });
+            }
 
-            onStream(inputStream);
+            bus.sendMessage("datastore.load_data",
+                            [objectId, inputStream.streamId],
+                            onResponseReceived);
+
+            onStream(error, inputStream);
         });
     };
 
     datastore.create = function (metadata, onStream, onCreated) {
         outputStream = bus.createOutputStream();
 
-        outputStream.open(function () {
-            var params = [metadata, outputStream.streamId];
-            bus.sendMessage("datastore.create", params, function (result) {
-                onCreated(result);
-            });
+        outputStream.open(function (error) {
+            function onResponseReceived(responseError, result) {
+                if (responseError === null) {
+                    onCreated(null, result[0]);
+                } else {
+                    onCreated(responseError, null);
+                }
+            }
 
-            onStream(outputStream);
+            bus.sendMessage("datastore.create",
+                            [metadata, outputStream.streamId],
+                            onResponseReceived);
+
+            onStream(error, outputStream);
         });
     };
 
     datastore.update = function (objectId, metadata, onStream, onUpdated) {
         outputStream = bus.createOutputStream();
 
-        outputStream.open(function () {
-            var params = [objectId, metadata, outputStream.streamId];
-            bus.sendMessage("datastore.update", params, function () {
-                onUpdated();
-            });
+        outputStream.open(function (error) {
+            function onResponseReceived(responseError, result) {
+                if (responseError === null) {
+                    onUpdated(null, result[0]);
+                } else {
+                    onUpdated(responseError, null);
+                }
+            }
 
-            onStream(outputStream);
+            bus.sendMessage("datastore.update",
+                            [objectId, metadata, outputStream.streamId],
+                            onResponseReceived);
+
+            onStream(error, outputStream);
         });
     };
 
