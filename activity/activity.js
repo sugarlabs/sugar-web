@@ -1,12 +1,20 @@
 define(function (require) {
     var shortcut = require("sugar-web/activity/shortcut");
+    var bus = require("sugar-web/bus");
+    var datastore = require("sugar-web/datastore");
+
+    var datastoreObject = null;
 
     var activity = {};
 
-    var bus = require("sugar-web/bus");
-
     activity.setup = function () {
         shortcut.add("Ctrl", "Q", this.close);
+
+        datastoreObject = new datastore.DatastoreObject();
+    };
+
+    activity.getDatastoreObject = function () {
+        return datastoreObject;
     };
 
     activity.getXOColor = function (callback) {
