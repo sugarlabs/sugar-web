@@ -3,188 +3,727 @@ define(function (require) {
     var xocolor = {};
 
     xocolor.colors = [
-        ['#B20008', '#FF2B34'],
-        ['#FF2B34', '#B20008'],
-        ['#E6000A', '#FF2B34'],
-        ['#FF2B34', '#E6000A'],
-        ['#FFADCE', '#FF2B34'],
-        ['#9A5200', '#FF2B34'],
-        ['#FF2B34', '#9A5200'],
-        ['#FF8F00', '#FF2B34'],
-        ['#FF2B34', '#FF8F00'],
-        ['#FFC169', '#FF2B34'],
-        ['#807500', '#FF2B34'],
-        ['#FF2B34', '#807500'],
-        ['#BE9E00', '#FF2B34'],
-        ['#FF2B34', '#BE9E00'],
-        ['#F8E800', '#FF2B34'],
-        ['#008009', '#FF2B34'],
-        ['#FF2B34', '#008009'],
-        ['#00B20D', '#FF2B34'],
-        ['#FF2B34', '#00B20D'],
-        ['#8BFF7A', '#FF2B34'],
-        ['#00588C', '#FF2B34'],
-        ['#FF2B34', '#00588C'],
-        ['#005FE4', '#FF2B34'],
-        ['#FF2B34', '#005FE4'],
-        ['#BCCDFF', '#FF2B34'],
-        ['#5E008C', '#FF2B34'],
-        ['#FF2B34', '#5E008C'],
-        ['#7F00BF', '#FF2B34'],
-        ['#FF2B34', '#7F00BF'],
-        ['#D1A3FF', '#FF2B34'],
-        ['#9A5200', '#FF8F00'],
-        ['#FF8F00', '#9A5200'],
-        ['#C97E00', '#FF8F00'],
-        ['#FF8F00', '#C97E00'],
-        ['#FFC169', '#FF8F00'],
-        ['#807500', '#FF8F00'],
-        ['#FF8F00', '#807500'],
-        ['#BE9E00', '#FF8F00'],
-        ['#FF8F00', '#BE9E00'],
-        ['#F8E800', '#FF8F00'],
-        ['#008009', '#FF8F00'],
-        ['#FF8F00', '#008009'],
-        ['#00B20D', '#FF8F00'],
-        ['#FF8F00', '#00B20D'],
-        ['#8BFF7A', '#FF8F00'],
-        ['#00588C', '#FF8F00'],
-        ['#FF8F00', '#00588C'],
-        ['#005FE4', '#FF8F00'],
-        ['#FF8F00', '#005FE4'],
-        ['#BCCDFF', '#FF8F00'],
-        ['#5E008C', '#FF8F00'],
-        ['#FF8F00', '#5E008C'],
-        ['#A700FF', '#FF8F00'],
-        ['#FF8F00', '#A700FF'],
-        ['#D1A3FF', '#FF8F00'],
-        ['#B20008', '#FF8F00'],
-        ['#FF8F00', '#B20008'],
-        ['#FF2B34', '#FF8F00'],
-        ['#FF8F00', '#FF2B34'],
-        ['#FFADCE', '#FF8F00'],
-        ['#807500', '#F8E800'],
-        ['#F8E800', '#807500'],
-        ['#BE9E00', '#F8E800'],
-        ['#F8E800', '#BE9E00'],
-        ['#FFFA00', '#EDDE00'],
-        ['#008009', '#F8E800'],
-        ['#F8E800', '#008009'],
-        ['#00EA11', '#F8E800'],
-        ['#F8E800', '#00EA11'],
-        ['#8BFF7A', '#F8E800'],
-        ['#00588C', '#F8E800'],
-        ['#F8E800', '#00588C'],
-        ['#00A0FF', '#F8E800'],
-        ['#F8E800', '#00A0FF'],
-        ['#BCCEFF', '#F8E800'],
-        ['#5E008C', '#F8E800'],
-        ['#F8E800', '#5E008C'],
-        ['#AC32FF', '#F8E800'],
-        ['#F8E800', '#AC32FF'],
-        ['#D1A3FF', '#F8E800'],
-        ['#B20008', '#F8E800'],
-        ['#F8E800', '#B20008'],
-        ['#FF2B34', '#F8E800'],
-        ['#F8E800', '#FF2B34'],
-        ['#FFADCE', '#F8E800'],
-        ['#9A5200', '#F8E800'],
-        ['#F8E800', '#9A5200'],
-        ['#FF8F00', '#F8E800'],
-        ['#F8E800', '#FF8F00'],
-        ['#FFC169', '#F8E800'],
-        ['#008009', '#00EA11'],
-        ['#00EA11', '#008009'],
-        ['#00B20D', '#00EA11'],
-        ['#00EA11', '#00B20D'],
-        ['#8BFF7A', '#00EA11'],
-        ['#00588C', '#00EA11'],
-        ['#00EA11', '#00588C'],
-        ['#005FE4', '#00EA11'],
-        ['#00EA11', '#005FE4'],
-        ['#BCCDFF', '#00EA11'],
-        ['#5E008C', '#00EA11'],
-        ['#00EA11', '#5E008C'],
-        ['#7F00BF', '#00EA11'],
-        ['#00EA11', '#7F00BF'],
-        ['#D1A3FF', '#00EA11'],
-        ['#B20008', '#00EA11'],
-        ['#00EA11', '#B20008'],
-        ['#FF2B34', '#00EA11'],
-        ['#00EA11', '#FF2B34'],
-        ['#FFADCE', '#00EA11'],
-        ['#9A5200', '#00EA11'],
-        ['#00EA11', '#9A5200'],
-        ['#FF8F00', '#00EA11'],
-        ['#00EA11', '#FF8F00'],
-        ['#FFC169', '#00EA11'],
-        ['#807500', '#00EA11'],
-        ['#00EA11', '#807500'],
-        ['#BE9E00', '#00EA11'],
-        ['#00EA11', '#BE9E00'],
-        ['#F8E800', '#00EA11'],
-        ['#00588C', '#00A0FF'],
-        ['#00A0FF', '#00588C'],
-        ['#005FE4', '#00A0FF'],
-        ['#00A0FF', '#005FE4'],
-        ['#BCCDFF', '#00A0FF'],
-        ['#5E008C', '#00A0FF'],
-        ['#00A0FF', '#5E008C'],
-        ['#9900E6', '#00A0FF'],
-        ['#00A0FF', '#9900E6'],
-        ['#D1A3FF', '#00A0FF'],
-        ['#B20008', '#00A0FF'],
-        ['#00A0FF', '#B20008'],
-        ['#FF2B34', '#00A0FF'],
-        ['#00A0FF', '#FF2B34'],
-        ['#FFADCE', '#00A0FF'],
-        ['#9A5200', '#00A0FF'],
-        ['#00A0FF', '#9A5200'],
-        ['#FF8F00', '#00A0FF'],
-        ['#00A0FF', '#FF8F00'],
-        ['#FFC169', '#00A0FF'],
-        ['#807500', '#00A0FF'],
-        ['#00A0FF', '#807500'],
-        ['#BE9E00', '#00A0FF'],
-        ['#00A0FF', '#BE9E00'],
-        ['#F8E800', '#00A0FF'],
-        ['#008009', '#00A0FF'],
-        ['#00A0FF', '#008009'],
-        ['#00B20D', '#00A0FF'],
-        ['#00A0FF', '#00B20D'],
-        ['#8BFF7A', '#00A0FF'],
-        ['#5E008C', '#AC32FF'],
-        ['#AC32FF', '#5E008C'],
-        ['#7F00BF', '#AC32FF'],
-        ['#AC32FF', '#7F00BF'],
-        ['#D1A3FF', '#AC32FF'],
-        ['#B20008', '#AC32FF'],
-        ['#AC32FF', '#B20008'],
-        ['#FF2B34', '#AC32FF'],
-        ['#AC32FF', '#FF2B34'],
-        ['#FFADCE', '#AC32FF'],
-        ['#9A5200', '#AC32FF'],
-        ['#AC32FF', '#9A5200'],
-        ['#FF8F00', '#AC32FF'],
-        ['#AC32FF', '#FF8F00'],
-        ['#FFC169', '#AC32FF'],
-        ['#807500', '#AC32FF'],
-        ['#AC32FF', '#807500'],
-        ['#BE9E00', '#AC32FF'],
-        ['#AC32FF', '#BE9E00'],
-        ['#F8E800', '#AC32FF'],
-        ['#008009', '#AC32FF'],
-        ['#AC32FF', '#008009'],
-        ['#00B20D', '#AC32FF'],
-        ['#AC32FF', '#00B20D'],
-        ['#8BFF7A', '#AC32FF'],
-        ['#00588C', '#AC32FF'],
-        ['#AC32FF', '#00588C'],
-        ['#005FE4', '#AC32FF'],
-        ['#AC32FF', '#005FE4'],
-        ['#BCCDFF', '#AC32FF']
+        {
+            stroke: '#B20008',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#B20008'
+        },
+        {
+            stroke: '#E6000A',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#E6000A'
+        },
+        {
+            stroke: '#FFADCE',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#9A5200',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#9A5200'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FFC169',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#807500',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#807500'
+        },
+        {
+            stroke: '#BE9E00',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#BE9E00'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#008009',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#008009'
+        },
+        {
+            stroke: '#00B20D',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#00B20D'
+        },
+        {
+            stroke: '#8BFF7A',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#00588C',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#00588C'
+        },
+        {
+            stroke: '#005FE4',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#005FE4'
+        },
+        {
+            stroke: '#BCCDFF',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#5E008C',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#5E008C'
+        },
+        {
+            stroke: '#7F00BF',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#7F00BF'
+        },
+        {
+            stroke: '#D1A3FF',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#9A5200',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#9A5200'
+        },
+        {
+            stroke: '#C97E00',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#C97E00'
+        },
+        {
+            stroke: '#FFC169',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#807500',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#807500'
+        },
+        {
+            stroke: '#BE9E00',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#BE9E00'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#008009',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#008009'
+        },
+        {
+            stroke: '#00B20D',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#00B20D'
+        },
+        {
+            stroke: '#8BFF7A',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#00588C',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#00588C'
+        },
+        {
+            stroke: '#005FE4',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#005FE4'
+        },
+        {
+            stroke: '#BCCDFF',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#5E008C',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#5E008C'
+        },
+        {
+            stroke: '#A700FF',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#A700FF'
+        },
+        {
+            stroke: '#D1A3FF',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#B20008',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#B20008'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FFADCE',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#807500',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#807500'
+        },
+        {
+            stroke: '#BE9E00',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#BE9E00'
+        },
+        {
+            stroke: '#FFFA00',
+            fill: '#EDDE00'
+        },
+        {
+            stroke: '#008009',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#008009'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#8BFF7A',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#00588C',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#00588C'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#BCCEFF',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#5E008C',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#5E008C'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#D1A3FF',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#B20008',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#B20008'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FFADCE',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#9A5200',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#9A5200'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FFC169',
+            fill: '#F8E800'
+        },
+        {
+            stroke: '#008009',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#008009'
+        },
+        {
+            stroke: '#00B20D',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#00B20D'
+        },
+        {
+            stroke: '#8BFF7A',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00588C',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#00588C'
+        },
+        {
+            stroke: '#005FE4',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#005FE4'
+        },
+        {
+            stroke: '#BCCDFF',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#5E008C',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#5E008C'
+        },
+        {
+            stroke: '#7F00BF',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#7F00BF'
+        },
+        {
+            stroke: '#D1A3FF',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#B20008',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#B20008'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FFADCE',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#9A5200',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#9A5200'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FFC169',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#807500',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#807500'
+        },
+        {
+            stroke: '#BE9E00',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00EA11',
+            fill: '#BE9E00'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#00EA11'
+        },
+        {
+            stroke: '#00588C',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#00588C'
+        },
+        {
+            stroke: '#005FE4',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#005FE4'
+        },
+        {
+            stroke: '#BCCDFF',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#5E008C',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#5E008C'
+        },
+        {
+            stroke: '#9900E6',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#9900E6'
+        },
+        {
+            stroke: '#D1A3FF',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#B20008',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#B20008'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FFADCE',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#9A5200',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#9A5200'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FFC169',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#807500',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#807500'
+        },
+        {
+            stroke: '#BE9E00',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#BE9E00'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#008009',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#008009'
+        },
+        {
+            stroke: '#00B20D',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#00A0FF',
+            fill: '#00B20D'
+        },
+        {
+            stroke: '#8BFF7A',
+            fill: '#00A0FF'
+        },
+        {
+            stroke: '#5E008C',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#5E008C'
+        },
+        {
+            stroke: '#7F00BF',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#7F00BF'
+        },
+        {
+            stroke: '#D1A3FF',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#B20008',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#B20008'
+        },
+        {
+            stroke: '#FF2B34',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#FF2B34'
+        },
+        {
+            stroke: '#FFADCE',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#9A5200',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#9A5200'
+        },
+        {
+            stroke: '#FF8F00',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#FF8F00'
+        },
+        {
+            stroke: '#FFC169',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#807500',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#807500'
+        },
+        {
+            stroke: '#BE9E00',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#BE9E00'
+        },
+        {
+            stroke: '#F8E800',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#008009',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#008009'
+        },
+        {
+            stroke: '#00B20D',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#00B20D'
+        },
+        {
+            stroke: '#8BFF7A',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#00588C',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#00588C'
+        },
+        {
+            stroke: '#005FE4',
+            fill: '#AC32FF'
+        },
+        {
+            stroke: '#AC32FF',
+            fill: '#005FE4'
+        },
+        {
+            stroke: '#BCCDFF',
+            fill: '#AC32FF'
+        }
     ];
 
     return xocolor;
-
 });
