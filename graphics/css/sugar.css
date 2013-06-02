@@ -37,8 +37,7 @@ body {
 #toolbar button:hover {
   background-color: black;
 }
-#toolbar button:active,
-#toolbar button.active {
+#toolbar button:active, #toolbar button.active {
   background-color: #808080;
 }
 #toolbar button img {
@@ -96,16 +95,14 @@ input[type='text']:disabled {
   width: 162px;
   padding-right: 32px;
 }
-#canvas .icon-input button,
-#toolbar .icon-input button {
+#canvas .icon-input button, #toolbar .icon-input button {
   width: 32px;
   height: 32px;
   padding: 0;
   position: absolute;
   background-size: 20px 20px;
 }
-#canvas .icon-input button.right,
-#toolbar .icon-input button.right {
+#canvas .icon-input button.right, #toolbar .icon-input button.right {
   margin: 0 0 0 -32px;
   border-radius: 0 5000px 5000px 0;
   right: 0;
