@@ -91,10 +91,11 @@ define(function (require) {
         this._readCallback = null;
     };
 
-    InputStream.prototype.close = function () {
+    InputStream.prototype.close = function (callback) {
         var me = this;
 
         function onStreamClosed(error, result) {
+            callback(error);
             delete inputStreams[me.streamId];
         }
 
@@ -123,8 +124,8 @@ define(function (require) {
         bus.sendBinary(buffer);
     };
 
-    OutputStream.prototype.close = function () {
-        bus.sendMessage("close_stream", [this.streamId]);
+    OutputStream.prototype.close = function (callback) {
+        bus.sendMessage("close_stream", [this.streamId], callback);
     };
 
     bus.createInputStream = function (callback) {

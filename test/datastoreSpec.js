@@ -5,32 +5,39 @@ define(function (require) {
 
     describe("datastore", function () {
 
-        function loadData(objectId, onLoaded) {
+        function loadData(objectId, callback) {
             var objectData;
 
-            function onObjectLoaded(error, result) {
-                onLoaded(error, objectData);
+            function onStreamClose(error, result) {
+                callback(error, objectData);
             }
 
-            function onRead(data) {
+            function onStreamRead(data) {
                 objectData = data;
             }
 
-            function onStream(error, inputStream) {
-                inputStream.read(8192, onRead);
-                inputStream.close();
+            function onLoaded(error, inputStream) {
+                inputStream.read(8192, onStreamRead);
+                inputStream.close(onStreamClose);
             }
 
-            datastore.loadData(objectId, onStream, onObjectLoaded);
+            datastore.loadData(objectId, onLoaded);
         }
 
-        function createObject(metadata, data, onCreated) {
-            function onStream(error, outputStream) {
-                outputStream.write(data);
-                outputStream.close();
+        function createObject(metadata, data, callback) {
+            var createdObjectId;
+
+            function onStreamClose(error) {
+                callback(error, createdObjectId);
             }
 
-            datastore.create(metadata, onStream, onCreated);
+            function onCreated(error, objectId, outputStream) {
+                createdObjectId = objectId;
+                outputStream.write(data);
+                outputStream.close(onStreamClose);
+            }
+
+            datastore.create(metadata, onCreated);
         }
 
         beforeEach(function () {
