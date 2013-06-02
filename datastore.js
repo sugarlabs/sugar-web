@@ -3,6 +3,19 @@ define(function (require) {
 
     var datastore = {};
 
+    datastore.setMetadata = function (objectId, metadata, callback) {
+        function onResponseReceived(error, result) {
+            if (error === null) {
+                callback(null);
+            } else {
+                callback(error);
+            }
+        }
+
+        bus.sendMessage("datastore.set_metadata",
+                        [objectId, metadata], onResponseReceived);
+    };
+
     datastore.getMetadata = function (objectId, callback) {
         function onResponseReceived(error, result) {
             if (error === null) {

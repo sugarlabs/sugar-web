@@ -67,6 +67,50 @@ define(function (require) {
             }, "the object should be created");
         });
 
+        it("should be able to set object metadata", function () {
+            var metadataSet;
+            var gotMetadata;
+            var objectId;
+            var testTitle = "hello";
+
+            runs(function () {
+                function onMetadataSet(error) {
+                    expect(error).toBeNull();
+                    metadataSet = true;
+                }
+
+                function onCreated(error, createdObjectId) {
+                    objectId = createdObjectId;
+
+                    var metadata = {title: testTitle};
+                    datastore.setMetadata(objectId,  metadata, onMetadataSet);
+                }
+
+                metadataSet = false;
+
+                createObject({}, new Uint8Array(), onCreated);
+            });
+
+            waitsFor(function () {
+                return metadataSet;
+            }, "metadata should be set");
+
+            runs(function () {
+                function onGotMetadata(error, metadata) {
+                    expect(metadata.title).toEqual(testTitle);
+                    gotMetadata = true;
+                }
+
+                gotMetadata = false;
+
+                datastore.getMetadata(objectId, onGotMetadata);
+            });
+
+            waitsFor(function () {
+                return gotMetadata;
+            }, "should have got object metadata");
+        });
+
         it("should be able to get object metadata", function () {
             var gotMetadata = false;
 
