@@ -3,6 +3,57 @@ define(function (require) {
     var bus = require("sugar-web/bus");
     var datastore = require("sugar-web/datastore");
 
+    describe("datastore object", function () {
+
+        beforeEach(function () {
+            bus.listen();
+        });
+
+        afterEach(function () {
+            bus.close();
+        });
+
+        it("should be able to get metadata", function () {
+            var saved;
+            var gotMetadata;
+            var datastoreObject;
+            var objectId;
+            var testTitle = "hello";
+
+            runs(function () {
+                saved = false;
+
+                datastoreObject = new datastore.DatastoreObject();
+                datastoreObject.setMetadata({title: testTitle});
+                datastoreObject.setDataAsText("");
+
+                datastoreObject.save(function() {
+                    saved = true;
+                    objectId = datastoreObject.objectId;
+                });
+            });
+
+            waitsFor(function () {
+                return saved;
+            }, "should have saved the object");
+
+            runs(function () {
+                gotMetadata = false;
+
+                datastoreObject = new datastore.DatastoreObject(objectId);
+                datastoreObject.getMetadata(function (error, metadata) {
+                    expect(metadata.title).toEqual(testTitle);
+                    gotMetadata = true;
+                });
+            });
+
+            waitsFor(function () {
+                return gotMetadata;
+            }, "should have got the object metadata");
+        });
+
+    });
+
     describe("datastore", function () {
 
         function loadData(objectId, callback) {
