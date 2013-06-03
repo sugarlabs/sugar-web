@@ -7,7 +7,7 @@ define(function (require) {
         this.objectId = objectId;
         this.newMetadata = {};
 
-        var me = this;
+        var that = this;
 
         this.textToArrayBuffer = function (text, callback) {
             var blob = new Blob([text]);
@@ -20,19 +20,19 @@ define(function (require) {
         };
 
         this.saveDataAndMetadata = function (metadata, callback) {
-            var me = this;
+            var that = this;
 
             function onGotOutputStream(outputStream) {
                 var data = this.newDataAsText;
 
-                me.textToArrayBuffer(data, function (buffer) {
+                that.textToArrayBuffer(data, function (buffer) {
                     outputStream.write(buffer);
                     outputStream.close(callback);
                 });
             }
 
             function onCreated(error, objectId, outputStream) {
-                me.objectId = objectId;
+                that.objectId = objectId;
                 onGotOutputStream(outputStream);
             }
 
@@ -40,10 +40,10 @@ define(function (require) {
                 onGotOutputStream(outputStream);
             }
 
-            if (me.objectId === undefined) {
+            if (that.objectId === undefined) {
                 datastore.create(metadata, onCreated);
             } else {
-                datastore.update(me.objectId, metadata, onUpdated);
+                datastore.update(that.objectId, metadata, onUpdated);
             }
         };
 

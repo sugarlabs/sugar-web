@@ -10,7 +10,7 @@ define(function (require) {
         this.queue = [];
         this.socket = null;
 
-        var me = this;
+        var that = this;
 
         env.getEnvironment(function (error, environment) {
             var port = environment.apiSocketPort;
@@ -28,16 +28,16 @@ define(function (require) {
                     "params": params
                 }));
 
-                while (me.queue.length > 0) {
-                    socket.send(me.queue.shift());
+                while (that.queue.length > 0) {
+                    socket.send(that.queue.shift());
                 }
             };
 
             socket.onmessage = function (message) {
-                me.onMessage(message);
+                that.onMessage(message);
             };
 
-            me.socket = socket;
+            that.socket = socket;
         });
     }
 
@@ -61,10 +61,10 @@ define(function (require) {
     }
 
     InputStream.prototype.open = function (callback) {
-        var me = this;
+        var that = this;
         bus.sendMessage("open_stream", [], function (error, result) {
-            me.streamId = result[0];
-            inputStreams[me.streamId] = me;
+            that.streamId = result[0];
+            inputStreams[that.streamId] = that;
             callback(error);
         });
     };
@@ -93,11 +93,11 @@ define(function (require) {
     };
 
     InputStream.prototype.close = function (callback) {
-        var me = this;
+        var that = this;
 
         function onStreamClosed(error, result) {
             callback(error);
-            delete inputStreams[me.streamId];
+            delete inputStreams[that.streamId];
         }
 
         bus.sendMessage("close_stream", [this.streamId], onStreamClosed);
@@ -108,9 +108,9 @@ define(function (require) {
     }
 
     OutputStream.prototype.open = function (callback) {
-        var me = this;
+        var that = this;
         bus.sendMessage("open_stream", [], function (error, result) {
-            me.streamId = result[0];
+            that.streamId = result[0];
             callback(error);
         });
     };

@@ -11,19 +11,19 @@ define(function (require) {
         }
 
         MockClient.prototype.send = function (data) {
-            var me = this;
+            var that = this;
             setTimeout(function () {
                 parsed = JSON.parse(data);
 
                 message = {
                     data: JSON.stringify({
-                        result: me.result,
-                        error: me.error,
+                        result: that.result,
+                        error: that.error,
                         id: parsed.id
                     })
                 };
 
-                me.onMessage(message);
+                that.onMessage(message);
             }, 0);
         };
 
