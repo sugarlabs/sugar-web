@@ -4,10 +4,12 @@
 @text-field-grey: #E5E5E5;
 
 @line-width: 2px;
+@toolbar-height: 54px;
+@icon-small-size: 20px;
 
-@toolbutton-size: 46px;
-@toolbutton-margin: @line-width;
-@toolbar-height: @toolbutton-size + (4 * @toolbutton-margin);
+@toolbutton-size: @toolbar-height - (4 * @line-width);
+@toolbar-button-margin-top: (@toolbar-height / 2) - (2 * @line-width) -
+                            (@icon-small-size / 2);
 
 @input-text-padding: (2 * @line-width);
 @input-text-line-height: 20px;
@@ -15,7 +17,6 @@
 @toolbar-input-height: (@toolbar-height / 2) - (@input-text-line-height / 2) -
                        (@input-text-padding + @line-width);
 
-@icon-small-size: 20px;
 @button-small-size: @input-text-line-height + (2 * @input-text-padding) +
                     (2 * @line-width);
 
@@ -47,14 +48,14 @@ body {
 .toolbar {
   color: white;
   background-color: @toolbar-grey;
-  padding: 0 @toolbutton-size + (5 * @toolbutton-margin);
+  padding: 0 @toolbutton-size + (5 * @line-width);
   height: @toolbar-height;
   .unselectable;
 }
 
-/* Toolbar button */
+/* Toolbar toolbutton */
 
-.toolbar button {
+.toolbar .toolbutton {
   background-color: transparent;
   background-position: center;
   background-size: contain;
@@ -63,20 +64,20 @@ body {
   color: transparent;
   border: 0;
   border-radius: 5px;
-  margin: (2 * @toolbutton-margin) @toolbutton-margin;
+  margin: (2 * @line-width) @line-width;
   width: @toolbutton-size;
   height: @toolbutton-size;
 }
 
-.toolbar button:hover {
+.toolbar .toolbutton:hover {
   background-color: black;
 }
 
-.toolbar button:active, .toolbar button.active {
+.toolbar .toolbutton:active, .toolbar .toolbutton.active {
   background-color: @button-grey;
 }
 
-.toolbar button img {
+.toolbar .toolbutton img {
   width: 100%;
   height: 100%;
 }
@@ -117,6 +118,10 @@ button:active {
 
 button:focus {
   border-color: white;
+}
+
+.toolbar button {
+  margin-top: @toolbar-button-margin-top;
 }
 
 /* Button with icon */
