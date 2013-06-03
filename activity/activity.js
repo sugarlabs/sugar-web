@@ -22,9 +22,16 @@ define(function (require) {
     activity.getXOColor = function (callback) {
         function onResponseReceived(error, result) {
             if (error === null) {
-                callback(null, ["#00A0FF", "#8BFF7A"]);
-            } else {
-                callback(null, result[0]);
+                callback(null, {
+                    stroke: result[0][0],
+                    fill: result[0][1]
+                });
+            }
+            else {
+                callback(null, {
+                    stroke: "#00A0FF",
+                    fill: "#8BFF7A"
+                });
             }
         }
 
@@ -34,10 +41,11 @@ define(function (require) {
     activity.close = function (callback) {
         function onResponseReceived(error, result) {
             if (error === null) {
+                callback(null);
+            }
+            else {
                 console.log("activity.close called");
             }
-
-            callback(null);
         }
 
         bus.sendMessage("activity.close", [], onResponseReceived);
