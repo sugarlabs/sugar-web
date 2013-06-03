@@ -58,8 +58,8 @@ body {
   color: black;
   background-color: #c0c0c0;
 }
-/* Canvas button */
-#canvas button {
+/* Button */
+button {
   background-color: #808080;
   color: white;
   border: 2px solid transparent;
@@ -69,21 +69,20 @@ body {
   -moz-user-select: none;
   -webkit-user-select: none;
 }
-#canvas button:hover {
+button:hover {
   background-color: #a2a2a2;
   border-color: #a2a2a2;
 }
-#canvas button:active {
+button:active {
   background-color: white;
   color: black;
   border-color: #808080;
 }
-#canvas button:focus {
+button:focus {
   border-color: white;
 }
 /* Button with icon */
-button.icon,
-#canvas button.icon {
+button.icon {
   position: relative;
   padding-left: 24px;
 }
@@ -142,27 +141,25 @@ input[type='text']:disabled {
   width: 162px;
   padding-right: 32px;
 }
-#canvas .icon-input button,
-.toolbar .icon-input button {
+.icon-input button {
   width: 32px;
   height: 32px;
   padding: 0;
   position: absolute;
   background-size: 20px 20px;
 }
-#canvas .icon-input button.right,
-.toolbar .icon-input button.right {
+.icon-input button.right {
   margin: 0 0 0 -32px;
   border-radius: 0 5000px 5000px 0;
   right: 0;
 }
-#canvas .icon-input button {
+.icon-input button {
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
   border: 0;
 }
-#canvas .icon-input button {
+.icon-input button {
   top: 2px;
 }
 .toolbar .icon-input button:hover {

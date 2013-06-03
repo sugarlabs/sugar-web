@@ -92,9 +92,9 @@ body {
   background-color: @panel-grey;
 }
 
-/* Canvas button */
+/* Button */
 
-#canvas button {
+button {
   background-color: @button-grey;
   color: white;
   border: @line-width solid transparent;
@@ -104,24 +104,24 @@ body {
   .unselectable;
 }
 
-#canvas button:hover {
+button:hover {
   background-color: @button-grey + #222;
   border-color: @button-grey + #222;
 }
 
-#canvas button:active {
+button:active {
   background-color: white;
   color: black;
   border-color: @button-grey;
 }
 
-#canvas button:focus {
+button:focus {
   border-color: white;
 }
 
 /* Button with icon */
 
-button.icon, #canvas button.icon {
+button.icon {
   position: relative;
   padding-left: @icon-small-size + (2 * @line-width);
 }
@@ -195,7 +195,7 @@ input[type='text']:disabled {
   padding-right: @button-small-size;
 }
 
-#canvas .icon-input button, .toolbar .icon-input button {
+.icon-input button {
   width: @button-small-size;
   height: @button-small-size;
   padding: 0;
@@ -203,20 +203,20 @@ input[type='text']:disabled {
   background-size: @icon-small-size @icon-small-size;
 }
 
-#canvas .icon-input button.right, .toolbar .icon-input button.right {
+.icon-input button.right {
   margin: 0 0 0 -@button-small-size;
   border-radius: 0 5000px 5000px 0;
   right: 0;
 }
 
-#canvas .icon-input button {
+.icon-input button {
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
   border: 0;
 }
 
-#canvas .icon-input button {
+.icon-input button {
   top: @line-width;
 }
 
