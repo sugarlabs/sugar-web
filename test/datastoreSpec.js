@@ -24,10 +24,12 @@ define(function (require) {
                 saved = false;
 
                 datastoreObject = new datastore.DatastoreObject();
-                datastoreObject.setMetadata({title: testTitle});
+                datastoreObject.setMetadata({
+                    title: testTitle
+                });
                 datastoreObject.setDataAsText("");
 
-                datastoreObject.save(function() {
+                datastoreObject.save(function () {
                     saved = true;
                     objectId = datastoreObject.objectId;
                 });
@@ -133,8 +135,10 @@ define(function (require) {
                 function onCreated(error, createdObjectId) {
                     objectId = createdObjectId;
 
-                    var metadata = {title: testTitle};
-                    datastore.setMetadata(objectId,  metadata, onMetadataSet);
+                    var metadata = {
+                        title: testTitle
+                    };
+                    datastore.setMetadata(objectId, metadata, onMetadataSet);
                 }
 
                 metadataSet = false;

@@ -13,8 +13,9 @@ define(function (require) {
         var me = this;
 
         env.getEnvironment(function (error, environment) {
-            var socket = new WebSocket("ws://localhost:" +
-                                       environment.apiSocketPort);
+            var port = environment.apiSocketPort;
+            var socket = new WebSocket("ws://localhost:" + port);
+
             socket.binaryType = "arraybuffer";
 
             socket.onopen = function () {

@@ -9,17 +9,17 @@ define(function (require) {
 
         var me = this;
 
-        this.textToArrayBuffer = function(text, callback) {
+        this.textToArrayBuffer = function (text, callback) {
             var blob = new Blob([text]);
 
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 callback(e.target.result);
             };
             reader.readAsArrayBuffer(blob);
         };
 
-        this.saveDataAndMetadata = function(metadata, callback) {
+        this.saveDataAndMetadata = function (metadata, callback) {
             var me = this;
 
             function onGotOutputStream(outputStream) {
@@ -100,8 +100,8 @@ define(function (require) {
             }
         }
 
-        bus.sendMessage("datastore.set_metadata",
-                        [objectId, metadata], onResponseReceived);
+        var params = [objectId, metadata];
+        bus.sendMessage("datastore.set_metadata", params, onResponseReceived);
     };
 
     datastore.getMetadata = function (objectId, callback) {
@@ -113,8 +113,8 @@ define(function (require) {
             }
         }
 
-        bus.sendMessage("datastore.get_metadata",
-                        [objectId], onResponseReceived);
+        var params = [objectId];
+        bus.sendMessage("datastore.get_metadata", params, onResponseReceived);
     };
 
     datastore.loadData = function (objectId, callback) {
@@ -129,9 +129,8 @@ define(function (require) {
                 }
             }
 
-            bus.sendMessage("datastore.load_data",
-                            [objectId, inputStream.streamId],
-                            onResponseReceived);
+            var params = [objectId, inputStream.streamId];
+            bus.sendMessage("datastore.load_data", params, onResponseReceived);
         });
     };
 
@@ -147,9 +146,8 @@ define(function (require) {
                 }
             }
 
-            bus.sendMessage("datastore.create",
-                            [metadata, outputStream.streamId],
-                            onResponseReceived);
+            var params = [metadata, outputStream.streamId];
+            bus.sendMessage("datastore.create", params, onResponseReceived);
         });
     };
 
@@ -165,9 +163,8 @@ define(function (require) {
                 }
             }
 
-            bus.sendMessage("datastore.update",
-                            [objectId, metadata, outputStream.streamId],
-                            onResponseReceived);
+            var params = [objectId, metadata, outputStream.streamId];
+            bus.sendMessage("datastore.update", params, onResponseReceived);
         });
     };
 

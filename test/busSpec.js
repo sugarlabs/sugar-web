@@ -15,16 +15,19 @@ define(function (require) {
             setTimeout(function () {
                 parsed = JSON.parse(data);
 
-                message = {data: JSON.stringify({result: me.result,
-                                                 error: me.error,
-                                                 id: parsed.id})};
+                message = {
+                    data: JSON.stringify({
+                        result: me.result,
+                        error: me.error,
+                        id: parsed.id
+                    })
+                };
 
                 me.onMessage(message);
             }, 0);
         };
 
-        MockClient.prototype.close = function () {
-        };
+        MockClient.prototype.close = function () {};
 
         beforeEach(function () {
             client = new MockClient();
