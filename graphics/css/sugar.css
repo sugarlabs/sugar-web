@@ -20,8 +20,8 @@ body {
 .toolbar {
   color: white;
   background-color: #282828;
-  padding: 0 56px;
-  height: 54px;
+  padding: 0 57px;
+  height: 55px;
   -moz-user-select: none;
   -webkit-user-select: none;
 }
@@ -36,8 +36,8 @@ body {
   border: 0;
   border-radius: 5px;
   margin: 4px 2px;
-  width: 46px;
-  height: 46px;
+  width: 47px;
+  height: 47px;
 }
 .toolbar .toolbutton:hover {
   background-color: black;
@@ -82,7 +82,7 @@ button:focus {
   border-color: white;
 }
 .toolbar button {
-  margin-top: 13px;
+  margin-top: 13.5px;
 }
 /* Button with icon */
 button.icon {
@@ -133,7 +133,7 @@ input[type='text']:disabled {
   background-color: #808080;
 }
 .toolbar input[type='text'] {
-  margin-top: 11px;
+  margin-top: 11.5px;
 }
 /* One line text input with buttons inside */
 .icon-input {
@@ -169,7 +169,7 @@ input[type='text']:disabled {
   background-color: transparent;
 }
 .toolbar .icon-input button {
-  top: 11px;
+  top: 11.5px;
 }
 button.cancel {
   background-image: url(../icons/actions/entry-cancel.svg);
@@ -202,7 +202,7 @@ input[type='range']::-webkit-slider-thumb:hover {
   border-color: #a2a2a2;
 }
 .toolbar input[type='range'] {
-  margin-top: 22px;
+  margin-top: 22.5px;
 }
 /* Label */
 label {
