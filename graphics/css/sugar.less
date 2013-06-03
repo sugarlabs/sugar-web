@@ -4,10 +4,12 @@
 @text-field-grey: #E5E5E5;
 
 @line-width: 2px;
+@toolbar-height: 54px;
+@icon-small-size: 20px;
 
-@toolbutton-size: 46px;
-@toolbutton-margin: @line-width;
-@toolbar-height: @toolbutton-size + (4 * @toolbutton-margin);
+@toolbutton-size: @toolbar-height - (4 * @line-width);
+@toolbar-button-margin-top: (@toolbar-height / 2) - (2 * @line-width) -
+                            (@icon-small-size / 2);
 
 @input-text-padding: (2 * @line-width);
 @input-text-line-height: 20px;
@@ -15,7 +17,6 @@
 @toolbar-input-height: (@toolbar-height / 2) - (@input-text-line-height / 2) -
                        (@input-text-padding + @line-width);
 
-@icon-small-size: 20px;
 @button-small-size: @input-text-line-height + (2 * @input-text-padding) +
                     (2 * @line-width);
 
@@ -44,17 +45,17 @@ body {
 
 /* Toolbar */
 
-#toolbar {
+.toolbar {
   color: white;
   background-color: @toolbar-grey;
-  padding: 0 @toolbutton-size + (5 * @toolbutton-margin);
+  padding: 0 @toolbutton-size + (5 * @line-width);
   height: @toolbar-height;
   .unselectable;
 }
 
-/* Toolbar button */
+/* Toolbar toolbutton */
 
-#toolbar button {
+.toolbar .toolbutton {
   background-color: transparent;
   background-position: center;
   background-size: contain;
@@ -63,25 +64,25 @@ body {
   color: transparent;
   border: 0;
   border-radius: 5px;
-  margin: (2 * @toolbutton-margin) @toolbutton-margin;
+  margin: (2 * @line-width) @line-width;
   width: @toolbutton-size;
   height: @toolbutton-size;
 }
 
-#toolbar button:hover {
+.toolbar .toolbutton:hover {
   background-color: black;
 }
 
-#toolbar button:active, #toolbar button.active {
+.toolbar .toolbutton:active, .toolbar .toolbutton.active {
   background-color: @button-grey;
 }
 
-#toolbar button img {
+.toolbar .toolbutton img {
   width: 100%;
   height: 100%;
 }
 
-#toolbar #stop-button {
+.toolbar #stop-button {
   background-image: url('../icons/actions/activity-stop.svg');
 }
 
@@ -92,9 +93,9 @@ body {
   background-color: @panel-grey;
 }
 
-/* Canvas button */
+/* Button */
 
-#canvas button {
+button {
   background-color: @button-grey;
   color: white;
   border: @line-width solid transparent;
@@ -104,24 +105,28 @@ body {
   .unselectable;
 }
 
-#canvas button:hover {
+button:hover {
   background-color: @button-grey + #222;
   border-color: @button-grey + #222;
 }
 
-#canvas button:active {
+button:active {
   background-color: white;
   color: black;
   border-color: @button-grey;
 }
 
-#canvas button:focus {
+button:focus {
   border-color: white;
+}
+
+.toolbar button {
+  margin-top: @toolbar-button-margin-top;
 }
 
 /* Button with icon */
 
-button.icon, #canvas button.icon {
+button.icon {
   position: relative;
   padding-left: @icon-small-size + (2 * @line-width);
 }
@@ -179,7 +184,7 @@ input[type='text']:disabled {
   background-color: @button-grey;
 }
 
-#toolbar input[type='text'] {
+.toolbar input[type='text'] {
   margin-top: @toolbar-input-height;
 }
 
@@ -195,7 +200,7 @@ input[type='text']:disabled {
   padding-right: @button-small-size;
 }
 
-#canvas .icon-input button, #toolbar .icon-input button {
+.icon-input button {
   width: @button-small-size;
   height: @button-small-size;
   padding: 0;
@@ -203,28 +208,28 @@ input[type='text']:disabled {
   background-size: @icon-small-size @icon-small-size;
 }
 
-#canvas .icon-input button.right, #toolbar .icon-input button.right {
+.icon-input button.right {
   margin: 0 0 0 -@button-small-size;
   border-radius: 0 5000px 5000px 0;
   right: 0;
 }
 
-#canvas .icon-input button {
+.icon-input button {
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
   border: 0;
 }
 
-#canvas .icon-input button {
+.icon-input button {
   top: @line-width;
 }
 
-#toolbar .icon-input button:hover {
+.toolbar .icon-input button:hover {
   background-color: transparent;
 }
 
-#toolbar .icon-input button {
+.toolbar .icon-input button {
   top: @toolbar-input-height;
 }
 
