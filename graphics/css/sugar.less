@@ -38,6 +38,12 @@ body {
   -webkit-user-select: none;
 }
 
+.pull-right {
+  float: right;
+}
+
+/* Toolbar */
+
 #toolbar {
   color: white;
   background-color: @toolbar-grey;
@@ -45,6 +51,8 @@ body {
   height: @toolbar-height;
   .unselectable;
 }
+
+/* Toolbar button */
 
 #toolbar button {
   background-color: transparent;
@@ -73,20 +81,26 @@ body {
   height: 100%;
 }
 
-.pull-right {
-  float: right;
+#toolbar #stop-button {
+  background-image: url('../icons/actions/activity-stop.svg');
 }
+
+/* Canvas */
 
 #canvas {
   color: black;
   background-color: @panel-grey;
 }
 
+/* Canvas button */
+
 #canvas button {
   background-color: @button-grey;
   color: white;
   border: @line-width solid transparent;
   border-radius: 500px;
+  line-height: @icon-small-size;
+  padding: @line-width (2 * @line-width);
   .unselectable;
 }
 
@@ -100,6 +114,51 @@ body {
   color: black;
   border-color: @button-grey;
 }
+
+#canvas button:focus {
+  border-color: white;
+}
+
+/* Button with icon */
+
+button.icon, #canvas button.icon {
+  position: relative;
+  padding-left: @icon-small-size + (2 * @line-width);
+}
+
+button.icon span.ok {
+  background-image: url(../icons/actions/dialog-ok.svg);
+}
+
+button.icon:active span.ok {
+  background-image: url(../icons/actions/dialog-ok-active.svg);
+}
+
+button.icon span.cancel {
+  background-image: url(../icons/actions/dialog-cancel.svg);
+}
+
+button.icon:active span.cancel {
+  background-image: url(../icons/actions/dialog-cancel-active.svg);
+}
+
+button.icon span {
+  display: inline-block;
+  width: @icon-small-size;
+  height: @icon-small-size;
+  background-color: transparent;
+  background-position: center;
+  background-size: @icon-small-size @icon-small-size;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
+button.icon span  {
+  top: @line-width;
+  left: @line-width;
+}
+
+/* One line text input */
 
 input[type='text'] {
   background-color: @text-field-grey;
@@ -123,6 +182,8 @@ input[type='text']:disabled {
 #toolbar input[type='text'] {
   margin-top: @toolbar-input-height;
 }
+
+/* One line text input with buttons inside */
 
 .icon-input {
   display: inline-block;
@@ -179,6 +240,8 @@ button.cancel:disabled {
   background-image: url(../icons/actions/entry-cancel-disabled.svg);
 }
 
+/* Slider */
+
 input[type='range'] {
   -webkit-appearance: none !important;
   background-color: @button-grey;
@@ -201,13 +264,13 @@ input[type='range']::-webkit-slider-thumb:hover {
   border-color: @button-grey + #222;
 }
 
+/* Label */
+
 label {
   .unselectable;
 }
 
-#toolbar #stop-button {
-  background-image: url('../icons/actions/activity-stop.svg');
-}
+/* Palettes */
 
 .palette {
   color: white;
