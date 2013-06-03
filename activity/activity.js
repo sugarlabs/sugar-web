@@ -8,6 +8,8 @@ define(function (require) {
     var activity = {};
 
     activity.setup = function () {
+        bus.listen();
+
         shortcut.add("Ctrl", "Q", this.close);
 
         datastoreObject = new datastore.DatastoreObject();
