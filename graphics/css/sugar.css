@@ -57,6 +57,7 @@ body {
 #canvas {
   color: black;
   background-color: #c0c0c0;
+  margin: 11px;
 }
 /* Button */
 button {
