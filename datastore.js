@@ -1,5 +1,6 @@
 define(function (require) {
     var bus = require("sugar-web/bus");
+    var env = require("sugar-web/env");
 
     var datastore = {};
 
@@ -7,7 +8,16 @@ define(function (require) {
         this.objectId = objectId;
         this.newMetadata = {};
 
-        var that = this;
+        this.ensureObjectId = function (callback) {
+            var that = this;
+
+            env.getEnvironment(function (error, environment) {
+                if (environment.objectId !== null) {
+                    that.objectId = environment.objectId;
+                }
+                callback();
+            });
+        };
 
         this.blobToText = function (blob, callback) {
             var reader = new FileReader();
@@ -37,7 +47,7 @@ define(function (require) {
                 });
             }
 
-            datastore.save(that.objectId, metadata, onSaved);
+            datastore.save(this.objectId, metadata, onSaved);
         };
 
         this.applyChanges = function (metadata, callback) {
@@ -54,7 +64,11 @@ define(function (require) {
     }
 
     DatastoreObject.prototype.getMetadata = function (callback) {
-        datastore.getMetadata(this.objectId, callback);
+        var that = this;
+
+        this.ensureObjectId(function () {
+            datastore.getMetadata(that.objectId, callback);
+        });
     };
 
     DatastoreObject.prototype.loadAsText = function (callback) {
@@ -88,7 +102,9 @@ define(function (require) {
             inputStream.read(8192, onRead);
         }
 
-        datastore.load(this.objectId, onLoad);
+        this.ensureObjectId(function () {
+            datastore.load(that.objectId, onLoad);
+        });
     };
 
     DatastoreObject.prototype.setMetadata = function (metadata) {
@@ -104,16 +120,22 @@ define(function (require) {
     DatastoreObject.prototype.save = function (callback) {
         var that = this;
 
-        if (this.objectId === undefined) {
-            datastore.create(this.newMetadata, function (error, objectId) {
-                that.objectId = objectId;
-                that.applyChanges({}, callback);
-            });
-        } else {
-            datastore.getMetadata(this.objectId, function (error, metadata) {
-                that.applyChanges(metadata, callback);
-            });
+        function onCreated(error, objectId) {
+            that.objectId = objectId;
+            that.applyChanges({}, callback);
         }
+
+        function onGotMetadata(error, metadata) {
+            that.applyChanges(metadata, callback);
+        }
+
+        this.ensureObjectId(function () {
+            if (that.objectId === undefined) {
+                datastore.create(that.newMetadata, onCreated);
+            } else {
+                datastore.getMetadata(that.objectId, onGotMetadata);
+            }
+        });
     };
 
     datastore.DatastoreObject = DatastoreObject;
@@ -121,10 +143,12 @@ define(function (require) {
 
     datastore.setMetadata = function (objectId, metadata, callback) {
         function onResponseReceived(error, result) {
-            if (error === null) {
-                callback(null);
-            } else {
-                callback(error);
+            if (callback) {
+                if (error === null) {
+                    callback(null);
+                } else {
+                    callback(error);
+                }
             }
         }
 

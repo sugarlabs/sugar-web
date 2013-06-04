@@ -57,7 +57,7 @@ define(function (require) {
 
     function InputStream() {
         this.streamId = null;
-        this._readCallback = null;
+        this.readCallback = null;
     }
 
     InputStream.prototype.open = function (callback) {
@@ -70,11 +70,11 @@ define(function (require) {
     };
 
     InputStream.prototype.read = function (count, callback) {
-        if (this._readCallback) {
+        if (this.readCallback) {
             throw Error("Read already in progress");
         }
 
-        this._readCallback = callback;
+        this.readCallback = callback;
 
         var buffer = new ArrayBuffer(8);
 
@@ -88,9 +88,9 @@ define(function (require) {
     };
 
     InputStream.prototype.gotData = function (buffer) {
-        var callback = this._readCallback;
+        var callback = this.readCallback;
 
-        this._readCallback = null;
+        this.readCallback = null;
 
         callback(null, buffer);
     };
