@@ -64,7 +64,7 @@ define(function (require) {
         var metadata = null;
 
         function onRead(error, data) {
-            if (data.byteLength == 0) {
+            if (data.byteLength === 0) {
                 var blob = new Blob(arrayBuffers);
 
                 that.blobToText(blob, function (text) {
