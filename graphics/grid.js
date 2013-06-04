@@ -18,7 +18,7 @@ define(function () {
 
             var subcellsVertical = window.innerHeight / subcellSize;
             for (i = 0; i < subcellsVertical; i++) {
-                if ((i + 1) % 5 == 0) {
+                if ((i + 1) % 5 === 0) {
                     ctx.lineWidth = 1;
                 } else {
                     ctx.lineWidth = 0.5;
@@ -31,7 +31,7 @@ define(function () {
 
             var subcellsHorizontal = window.innerWidth / subcellSize;
             for (i = 0; i < subcellsHorizontal; i++) {
-                if ((i + 1) % 5 == 0) {
+                if ((i + 1) % 5 === 0) {
                     ctx.lineWidth = 1;
                 } else {
                     ctx.lineWidth = 0.5;
@@ -41,7 +41,8 @@ define(function () {
                 ctx.lineTo(subcellSize * (i + 1), canvas.height);
                 ctx.stroke();
             }
-        }
+        };
+
         updateGrid();
 
         window.onresize = function (event) {
