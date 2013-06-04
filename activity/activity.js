@@ -26,8 +26,7 @@ define(function (require) {
                     stroke: result[0][0],
                     fill: result[0][1]
                 });
-            }
-            else {
+            } else {
                 callback(null, {
                     stroke: "#00A0FF",
                     fill: "#8BFF7A"
@@ -42,8 +41,7 @@ define(function (require) {
         function onResponseReceived(error, result) {
             if (error === null) {
                 callback(null);
-            }
-            else {
+            } else {
                 console.log("activity.close called");
             }
         }
