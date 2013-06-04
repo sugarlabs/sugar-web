@@ -13,7 +13,7 @@ define(function (require) {
             bus.close();
         });
 
-        it("should be able to get metadata", function () {
+        it("should be able to set and get metadata", function () {
             var saved;
             var gotMetadata;
             var datastoreObject;
@@ -46,6 +46,46 @@ define(function (require) {
                     expect(metadata.title).toEqual(testTitle);
                     gotMetadata = true;
                 });
+            });
+
+            waitsFor(function () {
+                return gotMetadata;
+            }, "should have got the object metadata");
+        });
+
+        it("should be able to save and load text", function () {
+            var saved;
+            var gotMetadata;
+            var datastoreObject;
+            var objectId;
+            var testText = "hello";
+
+            runs(function () {
+                saved = false;
+
+                datastoreObject = new datastore.DatastoreObject();
+                datastoreObject.setDataAsText(testText);
+
+                datastoreObject.save(function () {
+                    saved = true;
+                    objectId = datastoreObject.objectId;
+                });
+            });
+
+            waitsFor(function () {
+                return saved;
+            }, "should have saved the object");
+
+            runs(function () {
+                gotMetadata = false;
+
+                function onLoaded(error, metadata, text) {
+                    expect(text).toEqual(testText);
+                    gotMetadata = true;
+                }
+
+                datastoreObject = new datastore.DatastoreObject(objectId);
+                datastoreObject.loadAsText(onLoaded);
             });
 
             waitsFor(function () {

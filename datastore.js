@@ -9,9 +9,15 @@ define(function (require) {
 
         var that = this;
 
-        this.textToArrayBuffer = function (text, callback) {
-            var blob = new Blob([text]);
+        this.blobToText = function (blob, callback) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                callback(e.target.result);
+            };
+            reader.readAsText(blob);
+        };
 
+        this.blobToArrayBuffer = function (blob, callback) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 callback(e.target.result);
@@ -20,10 +26,12 @@ define(function (require) {
         };
 
         this.saveText = function (metadata, callback) {
-            function onSaved(error, outputStream) {
-                var data = this.newDataAsText;
+            var that = this;
 
-                that.textToArrayBuffer(data, function (buffer) {
+            function onSaved(error, outputStream) {
+                var blob = new Blob([that.newDataAsText]);
+
+                that.blobToArrayBuffer(blob, function (buffer) {
                     outputStream.write(buffer);
                     outputStream.close(callback);
                 });
@@ -49,8 +57,38 @@ define(function (require) {
         datastore.getMetadata(this.objectId, callback);
     };
 
-    DatastoreObject.prototype.loadData = function (callback) {
-        datastore.loadData(this.objectId, callback);
+    DatastoreObject.prototype.loadAsText = function (callback) {
+        var that = this;
+        var inputStream = null;
+        var arrayBuffers = [];
+        var metadata = null;
+
+        function onRead(error, data) {
+            if (data.byteLength == 0) {
+                var blob = new Blob(arrayBuffers);
+
+                that.blobToText(blob, function (text) {
+                    callback(null, metadata, text);
+                });
+
+                inputStream.close();
+
+                return;
+            }
+
+            arrayBuffers.push(data);
+
+            inputStream.read(8192, onRead);
+        }
+
+        function onLoad(error, loadedMetadata, loadedInputStream) {
+            metadata = loadedMetadata;
+            inputStream = loadedInputStream;
+
+            inputStream.read(8192, onRead);
+        }
+
+        datastore.load(this.objectId, onLoad);
     };
 
     DatastoreObject.prototype.setMetadata = function (metadata) {

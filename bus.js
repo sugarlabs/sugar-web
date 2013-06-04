@@ -88,15 +88,20 @@ define(function (require) {
     };
 
     InputStream.prototype.gotData = function (buffer) {
-        this._readCallback(null, buffer);
+        var callback = this._readCallback;
+
         this._readCallback = null;
+
+        callback(null, buffer);
     };
 
     InputStream.prototype.close = function (callback) {
         var that = this;
 
         function onStreamClosed(error, result) {
-            callback(error);
+            if (callback) {
+                callback(error);
+            }
             delete inputStreams[that.streamId];
         }
 
