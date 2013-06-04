@@ -19,10 +19,8 @@ define(function (require) {
             reader.readAsArrayBuffer(blob);
         };
 
-        this.saveDataAndMetadata = function (metadata, callback) {
-            var that = this;
-
-            function onGotOutputStream(outputStream) {
+        this.saveText = function (metadata, callback) {
+            function onSaved(error, outputStream) {
                 var data = this.newDataAsText;
 
                 that.textToArrayBuffer(data, function (buffer) {
@@ -31,29 +29,16 @@ define(function (require) {
                 });
             }
 
-            function onCreated(error, objectId, outputStream) {
-                that.objectId = objectId;
-                onGotOutputStream(outputStream);
-            }
-
-            function onUpdated(error, outputStream) {
-                onGotOutputStream(outputStream);
-            }
-
-            if (that.objectId === undefined) {
-                datastore.create(metadata, onCreated);
-            } else {
-                datastore.update(that.objectId, metadata, onUpdated);
-            }
+            datastore.save(that.objectId, metadata, onSaved);
         };
 
-        this.saveWithMetadata = function (metadata, callback) {
+        this.applyChanges = function (metadata, callback) {
             for (var key in this.newMetadata) {
                 metadata[key] = this.newMetadata[key];
             }
 
             if (this.newDataAsText !== undefined) {
-                this.saveDataAndMetadata(metadata, callback);
+                this.saveText(metadata, callback);
             } else {
                 datastore.setMetadata(metadata, callback);
             }
@@ -79,11 +64,16 @@ define(function (require) {
     };
 
     DatastoreObject.prototype.save = function (callback) {
+        var that = this;
+
         if (this.objectId === undefined) {
-            this.saveWithMetadata({}, callback);
+            datastore.create(this.newMetadata, function (error, objectId) {
+                that.objectId = objectId;
+                that.applyChanges({}, callback);
+            });
         } else {
             datastore.getMetadata(this.objectId, function (error, metadata) {
-                this.saveWithMetadata(metadata, callback);
+                that.applyChanges(metadata, callback);
             });
         }
     };
@@ -117,54 +107,50 @@ define(function (require) {
         bus.sendMessage("datastore.get_metadata", params, onResponseReceived);
     };
 
-    datastore.loadData = function (objectId, callback) {
+    datastore.load = function (objectId, callback) {
         inputStream = bus.createInputStream();
 
         inputStream.open(function (error) {
             function onResponseReceived(responseError, result) {
                 if (responseError === null) {
-                    callback(null, inputStream);
+                    callback(null, result[0], inputStream);
+                } else {
+                    callback(responseError, null, null);
+                }
+            }
+
+            var params = [objectId, inputStream.streamId];
+            bus.sendMessage("datastore.load", params, onResponseReceived);
+        });
+    };
+
+    datastore.create = function (metadata, callback) {
+        function onResponseReceived(responseError, result) {
+            if (responseError === null) {
+                callback(null, result[0]);
+            } else {
+                callback(responseError, null);
+            }
+        }
+
+        var params = [metadata];
+        bus.sendMessage("datastore.create", params, onResponseReceived);
+    };
+
+    datastore.save = function (objectId, metadata, callback) {
+        outputStream = bus.createOutputStream();
+
+        outputStream.open(function (error) {
+            function onResponseReceived(responseError, result) {
+                if (responseError === null) {
+                    callback(null, outputStream);
                 } else {
                     callback(responseError, null);
                 }
             }
 
-            var params = [objectId, inputStream.streamId];
-            bus.sendMessage("datastore.load_data", params, onResponseReceived);
-        });
-    };
-
-    datastore.create = function (metadata, callback) {
-        outputStream = bus.createOutputStream();
-
-        outputStream.open(function (error) {
-            function onResponseReceived(responseError, result) {
-                if (responseError === null) {
-                    callback(null, result[0], outputStream);
-                } else {
-                    callback(responseError, null, null);
-                }
-            }
-
-            var params = [metadata, outputStream.streamId];
-            bus.sendMessage("datastore.create", params, onResponseReceived);
-        });
-    };
-
-    datastore.update = function (objectId, metadata, callback) {
-        outputStream = bus.createOutputStream();
-
-        outputStream.open(function (error) {
-            function onResponseReceived(responseError, result) {
-                if (responseError === null) {
-                    callback(null, result[0], outputStream);
-                } else {
-                    callback(responseError, null, null);
-                }
-            }
-
             var params = [objectId, metadata, outputStream.streamId];
-            bus.sendMessage("datastore.update", params, onResponseReceived);
+            bus.sendMessage("datastore.save", params, onResponseReceived);
         });
     };
 

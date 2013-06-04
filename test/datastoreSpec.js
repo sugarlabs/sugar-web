@@ -58,41 +58,6 @@ define(function (require) {
 
     describe("datastore", function () {
 
-        function loadData(objectId, callback) {
-            var objectData;
-
-            function onStreamClose(error, result) {
-                callback(error, objectData);
-            }
-
-            function onStreamRead(data) {
-                objectData = data;
-            }
-
-            function onLoaded(error, inputStream) {
-                inputStream.read(8192, onStreamRead);
-                inputStream.close(onStreamClose);
-            }
-
-            datastore.loadData(objectId, onLoaded);
-        }
-
-        function createObject(metadata, data, callback) {
-            var createdObjectId;
-
-            function onStreamClose(error) {
-                callback(error, createdObjectId);
-            }
-
-            function onCreated(error, objectId, outputStream) {
-                createdObjectId = objectId;
-                outputStream.write(data);
-                outputStream.close(onStreamClose);
-            }
-
-            datastore.create(metadata, onCreated);
-        }
-
         beforeEach(function () {
             bus.listen();
         });
@@ -112,7 +77,7 @@ define(function (require) {
                     wasCreated = true;
                 }
 
-                createObject({}, new Uint8Array([1, 2, 3, 4]), onCreated);
+                datastore.create({}, onCreated);
             });
 
             waitsFor(function () {
@@ -143,7 +108,7 @@ define(function (require) {
 
                 metadataSet = false;
 
-                createObject({}, new Uint8Array(), onCreated);
+                datastore.create({}, onCreated);
             });
 
             waitsFor(function () {
@@ -168,8 +133,6 @@ define(function (require) {
 
         it("should be able to get object metadata", function () {
             var gotMetadata = false;
-
-            var testData = new Uint8Array([1]);
             var testTitle = "hello";
 
             runs(function () {
@@ -182,9 +145,9 @@ define(function (require) {
                     datastore.getMetadata(objectId, onGotMetadata);
                 }
 
-                createObject({
-                    "title": testTitle
-                }, testData, onCreated);
+                datastore.create({
+                    title: testTitle
+                }, onCreated);
             });
 
             waitsFor(function () {
@@ -194,21 +157,41 @@ define(function (require) {
 
         it("should be able to load an object", function () {
             var wasLoaded = false;
-
+            var objectId = null;
+            var inputStream = null;
             var testData = new Uint8Array([1, 2, 3, 4]);
 
             runs(function () {
-                function onLoaded(error, data) {
-                    expect(data).toEqual(testData.buffer);
-
+                function onStreamClose(error) {
+                    expect(objectData).toEqual(testData.buffer);
                     wasLoaded = true;
                 }
 
-                function onCreated(error, objectId) {
-                    loadData(objectId, onLoaded);
+                function onStreamRead(error, data) {
+                    objectData = data;
                 }
 
-                createObject({}, testData, onCreated);
+                function onLoaded(error, metadata, loadedInputStream) {
+                    inputStream = loadedInputStream;
+                    inputStream.read(8192, onStreamRead);
+                    inputStream.close(onStreamClose);
+                }
+
+                function onClosed(error) {
+                    datastore.load(objectId, onLoaded);
+                }
+
+                function onSaved(error, outputStream) {
+                    outputStream.write(testData);
+                    outputStream.close(onClosed);
+                }
+
+                function onCreated(error, createdObjectId) {
+                    objectId = createdObjectId;
+                    datastore.save(objectId, {}, onSaved);
+                }
+
+                datastore.create({}, onCreated);
             });
 
             waitsFor(function () {

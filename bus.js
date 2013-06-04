@@ -88,7 +88,7 @@ define(function (require) {
     };
 
     InputStream.prototype.gotData = function (buffer) {
-        this._readCallback(buffer);
+        this._readCallback(null, buffer);
         this._readCallback = null;
     };
 
