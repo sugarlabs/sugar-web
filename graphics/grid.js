@@ -20,8 +20,7 @@ define(function () {
             for (i = 0; i < subcellsVertical; i++) {
                 if ((i + 1) % 5 == 0) {
                     ctx.lineWidth = 1;
-                }
-                else {
+                } else {
                     ctx.lineWidth = 0.5;
                 }
                 ctx.beginPath();
@@ -34,8 +33,7 @@ define(function () {
             for (i = 0; i < subcellsHorizontal; i++) {
                 if ((i + 1) % 5 == 0) {
                     ctx.lineWidth = 1;
-                }
-                else {
+                } else {
                     ctx.lineWidth = 0.5;
                 }
                 ctx.beginPath();
