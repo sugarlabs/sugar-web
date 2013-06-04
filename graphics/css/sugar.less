@@ -5,16 +5,18 @@
 
 @line-width: 2px;
 @subcell-size: 11px;
-@toolbar-height: 5 * @subcell-size;
-@icon-small-size: 20px;
+@cell-size: 5 * @subcell-size;
+
+@toolbar-height: @cell-size;
+@icon-small-size: 2 * @subcell-size;
 
 @toolbutton-size: @toolbar-height - (4 * @line-width);
 @toolbar-button-margin-top: (@toolbar-height / 2) - (2 * @line-width) -
                             (@icon-small-size / 2);
 
 @input-text-padding: (2 * @line-width);
-@input-text-line-height: 20px;
-@input-text-width: 190px;
+@input-text-line-height: 2 * @subcell-size;
+@input-text-width: 3 * @cell-size;
 @toolbar-input-height: (@toolbar-height / 2) - (@input-text-line-height / 2) -
                        (@input-text-padding + @line-width);
 
@@ -64,7 +66,7 @@ body {
   color: white;
   color: transparent;
   border: 0;
-  border-radius: 5px;
+  border-radius: @subcell-size / 2;
   margin: (2 * @line-width) @line-width;
   width: @toolbutton-size;
   height: @toolbutton-size;
@@ -101,7 +103,7 @@ button {
   background-color: @button-grey;
   color: white;
   border: @line-width solid transparent;
-  border-radius: 500px;
+  border-radius: 2 * @subcell-size;
   line-height: @icon-small-size;
   padding: @line-width (2 * @line-width);
   .unselectable;
@@ -170,7 +172,7 @@ button.icon span  {
 input[type='text'] {
   background-color: @text-field-grey;
   border: @line-width solid @text-field-grey;
-  border-radius: 500px;
+  border-radius: 2 * @subcell-size;
   padding: @input-text-padding;
   width: @input-text-width;
   line-height: @input-text-line-height;
@@ -212,7 +214,7 @@ input[type='text']:disabled {
 
 .icon-input button.right {
   margin: 0 0 0 -@button-small-size;
-  border-radius: 0 5000px 5000px 0;
+  border-radius: 0 (2 * @subcell-size) (2 * @subcell-size) 0;
   right: 0;
 }
 
@@ -253,18 +255,18 @@ button.cancel:disabled {
 input[type='range'] {
   -webkit-appearance: none !important;
   background-color: @button-grey;
-  border-radius: 500px;
-  height: 7px;
+  border-radius: 2 * @subcell-size;
+  height: @subcell-size;
   cursor: pointer;
 }
 
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none !important;
   background-color: @panel-grey;
-  border: 4px solid @button-grey;
-  border-radius: 500px;
-  height: 20px;
-  width: 20px;
+  border: (2 * @line-width) solid @button-grey;
+  border-radius: @subcell-size;
+  height: @icon-small-size;
+  width: @icon-small-size;
 }
 
 input[type='range']::-webkit-slider-thumb:hover {
@@ -273,7 +275,7 @@ input[type='range']::-webkit-slider-thumb:hover {
 }
 
 .toolbar input[type='range'] {
-  margin-top: (@toolbar-height / 2) - 5px;
+  margin-top: (@toolbar-height / 2) - (@subcell-size / 2);
 }
 
 /* Label */
