@@ -27,7 +27,6 @@ define(function (require) {
                 datastoreObject.setMetadata({
                     title: testTitle
                 });
-                datastoreObject.setDataAsText("");
 
                 datastoreObject.save(function () {
                     saved = true;

@@ -40,7 +40,7 @@ define(function (require) {
             if (this.newDataAsText !== undefined) {
                 this.saveText(metadata, callback);
             } else {
-                datastore.setMetadata(metadata, callback);
+                datastore.setMetadata(this.objectId, metadata, callback);
             }
         };
     }
