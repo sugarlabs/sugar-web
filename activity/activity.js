@@ -1,6 +1,7 @@
 define(function (require) {
     var shortcut = require("sugar-web/activity/shortcut");
     var bus = require("sugar-web/bus");
+    var env = require("sugar-web/env");
     var datastore = require("sugar-web/datastore");
 
     var datastoreObject = null;
@@ -13,6 +14,14 @@ define(function (require) {
         shortcut.add("Ctrl", "Q", this.close);
 
         datastoreObject = new datastore.DatastoreObject();
+
+        env.getEnvironment(function (error, environment) {
+            datastoreObject.setMetadata({
+                "activity": environment.bundleId,
+                "activity_id": environment.activityId
+            });
+            datastoreObject.save(function () {});
+        });
     };
 
     activity.getDatastoreObject = function () {
