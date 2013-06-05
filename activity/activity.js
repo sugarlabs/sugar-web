@@ -1,4 +1,5 @@
 define(function (require) {
+    var l10n = require("webL10n");
     var shortcut = require("sugar-web/activity/shortcut");
     var bus = require("sugar-web/bus");
     var env = require("sugar-web/env");
@@ -10,6 +11,8 @@ define(function (require) {
 
     activity.setup = function () {
         bus.listen();
+
+        l10n.start();
 
         shortcut.add("Ctrl", "Q", this.close);
 
