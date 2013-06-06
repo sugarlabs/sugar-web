@@ -1,3 +1,7 @@
 {
-    "volo": {}
+  "volo": {
+    "dependencies": {
+      "webL10n": "github:sugarlabs/webL10n"
+    }
+  }
 }
