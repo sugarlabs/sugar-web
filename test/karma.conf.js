@@ -16,6 +16,9 @@ files = [
         pattern: 'test/**/*Spec.js',
         included: false
     }, {
+        pattern: 'lib/**/*.js',
+        included: false
+    }, {
         pattern: '**/*js',
         exclude: 'test/**/*js',
         included: false

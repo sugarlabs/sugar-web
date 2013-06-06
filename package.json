@@ -1,5 +1,6 @@
 {
   "volo": {
+    "baseUrl": "lib",
     "dependencies": {
       "webL10n": "github:sugarlabs/webL10n"
     }
