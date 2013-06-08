@@ -1,6 +1,4 @@
-define(function (require) {
-    var palette = require("sugar-web/graphics/palette");
-
+define(["sugar-web/graphics/palette"], function (palette) {
     describe("palette", function () {
         it("should start down", function () {
             var myPalette = new palette.Palette('false invoker');

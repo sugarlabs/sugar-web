@@ -1,6 +1,4 @@
-define(function (require) {
-
-    var bus = require("sugar-web/bus");
+define(["sugar-web/bus"], function (bus) {
 
     describe("datastore", function () {
         var client;

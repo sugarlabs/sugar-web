@@ -1,6 +1,4 @@
-define(function () {
-    var util = require("sugar-web/graphics/util");
-
+define(["sugar-web/graphics/util"], function (util) {
     var radioButtonsGroup = {};
 
     // ## RadioButtonsGroup
