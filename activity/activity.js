@@ -20,9 +20,9 @@ define(["webL10N",
 
         env.getEnvironment(function (error, environment) {
             datastoreObject.setMetadata({
-                    "activity": environment.bundleId,
-                    "activity_id": environment.activityId
-                });
+                "activity": environment.bundleId,
+                "activity_id": environment.activityId
+            });
             datastoreObject.save(function () {});
         });
     };
@@ -35,14 +35,14 @@ define(["webL10N",
         function onResponseReceived(error, result) {
             if (error === null) {
                 callback(null, {
-                        stroke: result[0][0],
-                        fill: result[0][1]
-                    });
+                    stroke: result[0][0],
+                    fill: result[0][1]
+                });
             } else {
                 callback(null, {
-                        stroke: "#00A0FF",
-                        fill: "#8BFF7A"
-                    });
+                    stroke: "#00A0FF",
+                    fill: "#8BFF7A"
+                });
             }
         }
 
