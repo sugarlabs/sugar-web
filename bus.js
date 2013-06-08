@@ -1,6 +1,4 @@
-define(function (require) {
-    var env = require("sugar-web/env");
-
+define(["sugar-web/env"], function (env) {
     var lastId = 0;
     var callbacks = {};
     var client = null;

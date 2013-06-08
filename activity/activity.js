@@ -1,9 +1,9 @@
-define(function (require) {
-    var l10n = require("webL10n");
-    var shortcut = require("sugar-web/activity/shortcut");
-    var bus = require("sugar-web/bus");
-    var env = require("sugar-web/env");
-    var datastore = require("sugar-web/datastore");
+define(["webL10N",
+        "sugar-web/activity/shortcut",
+        "sugar-web/bus",
+        "sugar-web/env",
+        "sugar-web/datastore"], function (
+    l10n, shortcut, bus, env, datastore) {
 
     var datastoreObject = null;
 
@@ -20,9 +20,9 @@ define(function (require) {
 
         env.getEnvironment(function (error, environment) {
             datastoreObject.setMetadata({
-                "activity": environment.bundleId,
-                "activity_id": environment.activityId
-            });
+                    "activity": environment.bundleId,
+                    "activity_id": environment.activityId
+                });
             datastoreObject.save(function () {});
         });
     };
@@ -35,14 +35,14 @@ define(function (require) {
         function onResponseReceived(error, result) {
             if (error === null) {
                 callback(null, {
-                    stroke: result[0][0],
-                    fill: result[0][1]
-                });
+                        stroke: result[0][0],
+                        fill: result[0][1]
+                    });
             } else {
                 callback(null, {
-                    stroke: "#00A0FF",
-                    fill: "#8BFF7A"
-                });
+                        stroke: "#00A0FF",
+                        fill: "#8BFF7A"
+                    });
             }
         }
 

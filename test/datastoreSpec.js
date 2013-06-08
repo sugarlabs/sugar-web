@@ -1,7 +1,4 @@
-define(function (require) {
-
-    var bus = require("sugar-web/bus");
-    var datastore = require("sugar-web/datastore");
+define(["sugar-web/bus", "sugar-web/datastore"], function (bus, datastore) {
 
     describe("datastore object", function () {
 

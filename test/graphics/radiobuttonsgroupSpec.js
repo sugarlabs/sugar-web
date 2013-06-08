@@ -1,6 +1,6 @@
-define(function (require) {
-    var util = require("sugar-web/graphics/util");
-    var radioButtonsGroup = require("sugar-web/graphics/radiobuttonsgroup");
+define(["sugar-web/graphics/util",
+        "sugar-web/graphics/radiobuttonsgroup"], function (
+    util, radioButtonsGroup) {
 
     beforeEach(function () {
         elem1 = document.createElement('button');
