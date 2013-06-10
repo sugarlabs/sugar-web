@@ -1,4 +1,4 @@
-define(["sugar-web/graphics/util"], function (util) {
+define(function () {
     var radioButtonsGroup = {};
 
     // ## RadioButtonsGroup
@@ -22,7 +22,7 @@ define(["sugar-web/graphics/util"], function (util) {
 
             // The first element that has 'active' CSS class is made
             // the active of the group on startup.
-            if (active === undefined && util.hasClass(elem, 'active')) {
+            if (active === undefined && elem.classList.contains('active')) {
                 active = elem;
             }
         }
@@ -42,9 +42,9 @@ define(["sugar-web/graphics/util"], function (util) {
         function updateClasses() {
             for (i = 0; i < elems.length; i++) {
                 var elem = elems[i];
-                util.removeClass(elem, 'active');
+                elem.classList.remove('active');
             }
-            util.addClass(active, 'active');
+            active.classList.add('active');
         }
 
         // Get the active element.
