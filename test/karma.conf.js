@@ -22,6 +22,9 @@ files = [
         pattern: '**/*js',
         exclude: 'test/**/*js',
         included: false
+    }, {
+        pattern: 'graphics/icons/actions/*svg',
+        included: false
     }
 ];
 
