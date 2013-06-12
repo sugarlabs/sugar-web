@@ -1,4 +1,4 @@
-define(["webL10N",
+define(["webL10n",
         "sugar-web/activity/shortcut",
         "sugar-web/bus",
         "sugar-web/env",
