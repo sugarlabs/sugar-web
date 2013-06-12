@@ -8,6 +8,7 @@ body {
   margin: 0;
   height: 100%;
   background-color: #c0c0c0;
+  position: relative;
 }
 .unselectable {
   -moz-user-select: none;
@@ -57,7 +58,11 @@ body {
 #canvas {
   color: black;
   background-color: #c0c0c0;
-  margin: 11px;
+  position: absolute;
+  bottom: 0;
+  top: 55px;
+  overflow-y: auto;
+  width: 100%;
 }
 /* Button */
 button {

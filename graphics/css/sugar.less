@@ -35,6 +35,7 @@ body {
   margin: 0;
   height: 100%;
   background-color: @panel-grey;
+  position: relative;
 }
 
 .unselectable {
@@ -94,7 +95,11 @@ body {
 #canvas {
   color: black;
   background-color: @panel-grey;
-  margin: @subcell-size;
+  position: absolute;
+  bottom: 0;
+  top: @toolbar-height;
+  overflow-y: auto;
+  width: 100%;
 }
 
 /* Button */
