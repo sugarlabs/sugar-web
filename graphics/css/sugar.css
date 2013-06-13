@@ -250,3 +250,33 @@ label {
   top: 0;
   left: 0;
 }
+/* checkboxes in sugar */
+input[type='checkbox'] {
+  -webkit-appearance: none;
+  background-image: url(../icons/actions/checkbox-unchecked.svg);
+  padding: 13px;
+}
+input[type='checkbox']:active {
+  background-image: url(../icons/actions/checkbox-checked-selected.svg);
+}
+input[type='checkbox']:checked:active {
+  background-image: url(../icons/actions/checkbox-checked-selected.svg);
+}
+input[type='checkbox']:checked {
+  background-image: url(../icons/actions/checkbox-checked.svg);
+}
+/* radio buttons in sugar */
+input[type='radio'] {
+  -webkit-appearance: none;
+  background-image: url(../icons/actions/radio.svg);
+  padding: 13px;
+}
+input[type='radio']:active {
+  background-image: url(../icons/actions/radio-selected.svg);
+}
+input[type='radio']:checked:active {
+  background-image: url(../icons/actions/radio-active-selected.svg);
+}
+input[type='radio']:checked {
+  background-image: url(../icons/actions/radio-active.svg);
+}
