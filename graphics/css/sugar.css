@@ -9,6 +9,8 @@ body {
   height: 100%;
   background-color: #c0c0c0;
   position: relative;
+  font-family: sans-serif;
+  font-size: 10pt;
 }
 .unselectable {
   -moz-user-select: none;
