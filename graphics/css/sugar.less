@@ -197,6 +197,10 @@ input[type='text']:disabled {
   margin-top: @toolbar-input-height;
 }
 
+input[type='text'].expand {
+  width: calc(~"100%" - (2 * @input-text-padding + 2 * @line-width));
+}
+
 /* One line text input with buttons inside */
 
 .icon-input {
@@ -207,6 +211,15 @@ input[type='text']:disabled {
 .icon-input input[type='text'] {
   width: @input-text-width + @input-text-padding - @button-small-size;
   padding-right: @button-small-size;
+}
+
+.icon-input.expand {
+ width: 100%;
+}
+
+.icon-input.expand  input[type='text'] {
+  width: calc(~"100%" - (@input-text-padding + 2 * @line-width +
+              @button-small-size));
 }
 
 .icon-input button {

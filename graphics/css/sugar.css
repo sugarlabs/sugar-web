@@ -141,6 +141,9 @@ input[type='text']:disabled {
 .toolbar input[type='text'] {
   margin-top: 10.5px;
 }
+input[type='text'].expand {
+  width: calc(100% - 12px);
+}
 /* One line text input with buttons inside */
 .icon-input {
   display: inline-block;
@@ -149,6 +152,12 @@ input[type='text']:disabled {
 .icon-input input[type='text'] {
   width: 135px;
   padding-right: 34px;
+}
+.icon-input.expand {
+  width: 100%;
+}
+.icon-input.expand input[type='text'] {
+  width: calc(100% - 42px);
 }
 .icon-input button {
   width: 34px;
