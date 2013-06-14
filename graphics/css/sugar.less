@@ -336,11 +336,17 @@ label {
   left: 0;
 }
 
-/* checkboxes in sugar */
-input[type='checkbox'] {
+.unselect {
+  -moz-appearance: value;
+  appearance: value;
   -webkit-appearance: none;
+}
+  
+/* Checkbox */
+input[type='checkbox'] {
   background-image: url(../icons/actions/checkbox-unchecked.svg);
-  padding: 13px;
+  padding: @subcell-size+2;
+  .unselect;
 }
 
 input[type='checkbox']:active {
@@ -355,11 +361,11 @@ input[type='checkbox']:checked {
   background-image: url(../icons/actions/checkbox-checked.svg);
 }
 
-/* radio buttons in sugar */
+/* Radio button */
 input[type='radio'] {
-  -webkit-appearance: none;
   background-image: url(../icons/actions/radio.svg);
-  padding: 13px;
+  padding: @subcell-size+2;
+  .unselect;
 }
 
 input[type='radio']:active {
