@@ -368,15 +368,15 @@ label {
 }
 
 .unselect {
-  -moz-appearance: value;
-  appearance: value;
+  -moz-appearance: none;
+  appearance: none;
   -webkit-appearance: none;
 }
   
 /* Checkbox */
 input[type='checkbox'] {
   background-image: url(../icons/actions/checkbox-unchecked.svg);
-  padding: @subcell-size+2;
+  padding: @subcell-size+@line-width;
   .unselect;
 }
 
@@ -395,7 +395,7 @@ input[type='checkbox']:checked {
 /* Radio button */
 input[type='radio'] {
   background-image: url(../icons/actions/radio.svg);
-  padding: @subcell-size+2;
+  padding: @subcell-size+@line-width;
   .unselect;
 }
 
