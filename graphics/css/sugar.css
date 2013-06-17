@@ -229,9 +229,37 @@ label {
 /* Palettes */
 .palette {
   color: white;
+  background-color: transparent;
+  position: absolute;
+  pointer-events: none;
+}
+.palette-invoker {
+  width: 51px;
+  height: 53px;
+  background-color: black;
+  border: 2px solid #808080;
+  border-bottom: 0;
+  background-position: 2px 2px;
+  background-size: 47px;
+  background-repeat: no-repeat;
+}
+.palette-container {
+  width: 51px;
+  height: 51px;
+  background-color: black;
+  border: 2px solid #808080;
+  min-width: 165px;
+  pointer-events: auto;
+}
+.palette-invoker:before {
+  content: "";
   background-color: black;
   position: absolute;
-  border: 2px solid #808080;
+  display: block;
+  top: 55px;
+  width: 51px;
+  left: 2px;
+  height: 2px;
 }
 /* Scrollbar */
 ::-webkit-scrollbar {
