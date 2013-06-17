@@ -309,9 +309,40 @@ label {
 
 .palette {
   color: white;
+  background-color: transparent;
+  position: absolute;
+  pointer-events: none;
+}
+
+.palette-invoker {
+  width: @cell-size - 2 * @line-width;
+  height: @cell-size - @line-width;
+  background-color: black;
+  border: @line-width solid @button-grey;
+  border-bottom: 0;
+  background-position: @line-width @line-width;
+  background-size: @toolbutton-size;
+  background-repeat: no-repeat;
+}
+
+.palette-container {
+  width: @cell-size - 2 * @line-width;
+  height: @cell-size - 2 * @line-width;
+  background-color: black;
+  border: @line-width solid @button-grey;
+  min-width: 3 * @cell-size;
+  pointer-events: auto;
+}
+
+.palette-invoker:before {
+  content: "";
   background-color: black;
   position: absolute;
-  border: @line-width solid @button-grey;
+  display: block;
+  top: @cell-size;
+  width: @cell-size - 2 * @line-width;
+  left: @line-width;
+  height: @line-width;
 }
 
 /* Scrollbar */
