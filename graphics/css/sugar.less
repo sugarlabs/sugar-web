@@ -373,12 +373,27 @@ label {
   -webkit-appearance: @value;
 }
 
-/* Checkbox */
+/* Checkbox and radio */
+
+input[type='checkbox'],
+input[type='radio'] {
+  background-position: center;
+  background-size: contain;
+  width: @icon-small-size;
+  height: @icon-small-size;
+  margin: @line-width @line-width (2 * @line-width) @line-width;
+  vertical-align: middle;
+  .appearance(none);
+}
+
+.toolbar input[type='checkbox'],
+.toolbar input[type='radio'] {
+  margin-top: (@toolbar-height - @icon-small-size) / 2 - @line-width;
+  margin-bottom: (@toolbar-height - @icon-small-size) / 2 + @line-width;
+}
 
 input[type='checkbox'] {
   background-image: url(../icons/actions/checkbox-unchecked.svg);
-  padding: @subcell-size + @line-width;
-  .appearance(none);
 }
 
 input[type='checkbox']:active {
@@ -393,12 +408,8 @@ input[type='checkbox']:checked {
   background-image: url(../icons/actions/checkbox-checked.svg);
 }
 
-/* Radio button */
-
 input[type='radio'] {
   background-image: url(../icons/actions/radio.svg);
-  padding: @subcell-size + @line-width;
-  .appearance(none);
 }
 
 input[type='radio']:active {
