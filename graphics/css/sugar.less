@@ -217,7 +217,7 @@ input[type='text'].expand {
 }
 
 .icon-input.expand {
- width: 100%;
+  width: 100%;
 }
 
 .icon-input.expand  input[type='text'] {
@@ -422,4 +422,15 @@ input[type='radio']:checked:active {
 
 input[type='radio']:checked {
   background-image: url(../icons/actions/radio-active.svg);
+}
+
+/* Textarea */
+
+textarea {
+  border: @line-width solid @button-grey;
+  margin: @line-width;
+}
+
+textarea.expand {
+  width: calc(~"100%" - (6 * (@line-width)));
 }

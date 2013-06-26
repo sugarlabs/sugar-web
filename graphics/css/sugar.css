@@ -320,3 +320,11 @@ input[type='radio']:checked:active {
 input[type='radio']:checked {
   background-image: url(../icons/actions/radio-active.svg);
 }
+/* Textarea */
+textarea {
+  border: 2px solid #808080;
+  margin: 2px;
+}
+textarea.expand {
+  width: calc(100% - 12px);
+}
