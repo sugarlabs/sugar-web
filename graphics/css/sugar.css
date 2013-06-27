@@ -19,6 +19,10 @@ body {
 .pull-right {
   float: right;
 }
+a {
+  color: #0076c3;
+  text-decoration: none;
+}
 /* Toolbar */
 .toolbar {
   color: white;
