@@ -17,5 +17,10 @@
        transform="translate(0,-10)"
        id="path3002"
        style="color:#000000;fill:&stroke_color;;fill-opacity:1;stroke:none;stroke-width:0.82332432;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       d="m 11.276603,5.8201666 a 5.3516083,5.3516083 0 1 1 -10.70321633,0 5.3516083,5.3516083 0 1 1 10.70321633,0 z"
+       transform="matrix(2.2423166,0,0,2.2423166,-0.28571452,-10.050656)"
+       id="path4079"
+       style="color:#000000;fill:&fill_color;;fill-opacity:1;stroke:none;stroke-width:0.82325572;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
 </svg>
