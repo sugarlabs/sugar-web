@@ -332,3 +332,25 @@ textarea {
 textarea.expand {
   width: calc(100% - 12px);
 }
+/* Lists */
+ul.flat-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ul.flat-list li {
+  border-bottom: 2px dotted #c0c0c0;
+  background-color: white;
+  height: 31px;
+  line-height: 31px;
+}
+ul.flat-list li:nth-last-child(1) {
+  border-bottom: none;
+}
+ul.flat-list.big li {
+  height: 42px;
+  line-height: 42px;
+}
+ul.flat-list.striped li:nth-child(odd) {
+  background-color: #e5e5e5;
+}

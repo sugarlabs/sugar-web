@@ -440,3 +440,31 @@ textarea {
 textarea.expand {
   width: calc(~"100%" - (6 * (@line-width)));
 }
+
+/* Lists */
+
+ul.flat-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.flat-list li {
+  border-bottom: @line-width dotted @panel-grey;
+  background-color: white;
+  height: 3 * @subcell-size - @line-width;
+  line-height: 3 * @subcell-size - @line-width;
+}
+
+ul.flat-list li:nth-last-child(1) {
+  border-bottom: none;
+}
+
+ul.flat-list.big li {
+  height: 4 * @subcell-size - @line-width;
+  line-height: 4 * @subcell-size - @line-width;
+}
+
+ul.flat-list.striped li:nth-child(odd) {
+  background-color: @text-field-grey;
+}
