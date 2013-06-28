@@ -17,3 +17,23 @@ To compile the CSS do:
     lessc graphics/css/sugar.less graphics/css/sugar.css
 
 Be sure to compile it before commit.
+
+The grid helper
+---------------
+
+The grid is a visual debug tool that allows you to check if the
+elements have the correct size. To activate the grid, open the
+inspector console and paste the following.
+
+If RequireJS is not in the page head (ie. in the sugar-web-samples),
+load it:
+
+    var script = document.createElement('script');
+    script.src = 'lib/require.js';
+    document.head.appendChild(script);
+
+    requirejs.config({ baseUrl: "lib" });
+
+Then do:
+
+    require(["sugar-web/graphics/grid"], function (grid) { grid.addGrid(11) });
