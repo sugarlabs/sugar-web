@@ -66,6 +66,15 @@ a {
   .unselectable;
 }
 
+/* Toolbar separator */
+
+.toolbar hr {
+  display: inline-block;
+  height: 3 * @subcell-size;
+  border: (@line-width / 2) solid white;
+  margin: (@subcell-size - (@line-width * 3)) / 2;
+}
+
 /* Toolbar toolbutton */
 
 .toolbar .toolbutton {

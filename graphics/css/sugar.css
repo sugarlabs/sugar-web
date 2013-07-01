@@ -32,6 +32,13 @@ a {
   -moz-user-select: none;
   -webkit-user-select: none;
 }
+/* Toolbar separator */
+.toolbar hr {
+  display: inline-block;
+  height: 33px;
+  border: 1px solid #ffffff;
+  margin: 2.5px;
+}
 /* Toolbar toolbutton */
 .toolbar .toolbutton {
   background-color: transparent;
