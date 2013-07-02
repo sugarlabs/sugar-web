@@ -148,7 +148,9 @@ input[type='text']:disabled {
   margin-top: 10.5px;
 }
 input[type='text'].expand {
-  width: calc(100% - 12px);
+  width: calc(100% - 25px);
+  margin-left: 6px;
+  margin-top: 7px;
 }
 /* One line text input with buttons inside */
 .icon-input {
@@ -229,6 +231,9 @@ input[type='range']::-webkit-slider-thumb:hover {
 label {
   -moz-user-select: none;
   -webkit-user-select: none;
+  font-size: 16px;
+  margin-left: 8px;
+  font-weight: bold;
 }
 /* Palettes */
 .palette {
@@ -249,10 +254,10 @@ label {
 }
 .palette-container {
   width: 51px;
-  height: 51px;
+  height: 160px;
   background-color: black;
   border: 2px solid #808080;
-  min-width: 165px;
+  min-width: 190px;
   pointer-events: auto;
 }
 .palette-invoker:before {
@@ -327,7 +332,8 @@ input[type='radio']:checked {
 /* Textarea */
 textarea {
   border: 2px solid #808080;
-  margin: 2px;
+  margin-top: 7px;
+  margin-left: 7px;
 }
 textarea.expand {
   width: calc(100% - 12px);
