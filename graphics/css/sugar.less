@@ -216,7 +216,9 @@ input[type='text']:disabled {
 }
 
 input[type='text'].expand {
-  width: calc(~"100%" - (2 * @input-text-padding + 2 * @line-width));
+  width: calc(~"100%" - (@input-text-line-height + @line-width + (@line-width / 2)));
+  margin-left: @input-text-padding + @line-width;
+  margin-top: @input-text-padding + @line-width + (@line-width / 2);
 }
 
 /* One line text input with buttons inside */
@@ -318,6 +320,9 @@ input[type='range']::-webkit-slider-thumb:hover {
 
 label {
   .unselectable;
+  font-size: @subcell-size + @input-text-padding + (@line-width / 2);
+  margin-left: (2 * @input-text-padding);
+  font-weight: bold;
 }
 
 /* Palettes */
@@ -342,10 +347,10 @@ label {
 
 .palette-container {
   width: @cell-size - 2 * @line-width;
-  height: @cell-size - 2 * @line-width;
+  height: @input-text-width - @input-text-padding - (@line-width / 2);
   background-color: black;
   border: @line-width solid @button-grey;
-  min-width: 3 * @cell-size;
+  min-width: @input-text-width + @input-text-line-height + @line-width + (@line-width / 2); 
   pointer-events: auto;
 }
 
@@ -443,7 +448,8 @@ input[type='radio']:checked {
 
 textarea {
   border: @line-width solid @button-grey;
-  margin: @line-width;
+  margin-top: @input-text-padding + @line-width + (@line-width / 2);
+  margin-left: @input-text-padding + @line-width + (@line-width / 2);
 }
 
 textarea.expand {
