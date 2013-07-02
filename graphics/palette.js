@@ -135,6 +135,32 @@ define(function () {
         }
     };
 
+    // Creating the activity palette
+    var activityButton = document.getElementById("activity-button");
+
+    
+    var activityPalette = new palette.Palette(activityButton);
+    var sampleText;
+    sampleText = document.createElement('input');
+    sampleText.type="text";
+    sampleText.id="aname";
+    sampleText.className="expand";
+    var activityContainer = activityPalette.getContainer();
+
+    descriplabel=document.createElement('label');
+    descriplabel.innerHTML="Description :"
+    descripbox=document.createElement('textarea');
+    descripbox.rows="5";
+    descripbox.cols="19";
+    descripbox.id="descrip";
+    descripbox.className="expand";
+    
+    activityContainer.appendChild(sampleText);
+    activityContainer.appendChild(descriplabel);
+    activityContainer.appendChild(descripbox);
+    
+    
+
     return palette;
 
 });

@@ -155,7 +155,10 @@ input[type='text']:disabled {
   margin-top: 10.5px;
 }
 input[type='text'].expand {
-  width: calc(100% - 12px);
+  width: calc(100% - 20px);
+  margin-left: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 /* One line text input with buttons inside */
 .icon-input {
@@ -236,6 +239,9 @@ input[type='range']::-webkit-slider-thumb:hover {
 label {
   -moz-user-select: none;
   -webkit-user-select: none;
+  font-size: 10pt;
+  margin-left: 4px;
+  font-weight: bold;
 }
 /* Palettes */
 .palette {
@@ -256,11 +262,11 @@ label {
 }
 .palette-container {
   width: 51px;
-  height: 51px;
   background-color: black;
   border: 2px solid #808080;
-  min-width: 165px;
+  min-width: 220px;
   pointer-events: auto;
+  padding: 4px;
 }
 .palette-invoker:before {
   content: "";
@@ -338,6 +344,7 @@ textarea {
 }
 textarea.expand {
   width: calc(100% - 12px);
+  margin-top: 5px;
 }
 /* Lists */
 ul.flat-list {

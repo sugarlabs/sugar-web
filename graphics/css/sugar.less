@@ -216,7 +216,10 @@ input[type='text']:disabled {
 }
 
 input[type='text'].expand {
-  width: calc(~"100%" - (2 * @input-text-padding + 2 * @line-width));
+  width: calc(~"100%" - (@icon-small-size - @line-width));
+  margin-left: @input-text-padding;
+  margin-top: @input-text-padding;
+  margin-bottom: @input-text-padding;
 }
 
 /* One line text input with buttons inside */
@@ -318,6 +321,9 @@ input[type='range']::-webkit-slider-thumb:hover {
 
 label {
   .unselectable;
+  font-size: @font-size;
+  margin-left: @input-text-padding;
+  font-weight: bold;
 }
 
 /* Palettes */
@@ -342,11 +348,11 @@ label {
 
 .palette-container {
   width: @cell-size - 2 * @line-width;
-  height: @cell-size - 2 * @line-width;
   background-color: black;
   border: @line-width solid @button-grey;
-  min-width: 3 * @cell-size;
+  min-width: 4 * @cell-size;
   pointer-events: auto;
+  padding: 4px;
 }
 
 .palette-invoker:before {
@@ -448,6 +454,7 @@ textarea {
 
 textarea.expand {
   width: calc(~"100%" - (6 * (@line-width)));
+  margin-top: @input-text-padding + (@line-width / 2);
 }
 
 /* Lists */
