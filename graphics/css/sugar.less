@@ -71,7 +71,7 @@ a {
 .toolbar hr {
   display: inline-block;
   height: 3 * @subcell-size;
-  border: (@line-width / 2) solid white;
+  border: (@line-width / 2) solid @button-grey;
   margin: (@subcell-size - (@line-width * 3)) / 2;
 }
 
@@ -89,6 +89,7 @@ a {
   margin: (2 * @line-width) @line-width;
   width: @toolbutton-size;
   height: @toolbutton-size;
+  position: relative;
 }
 
 .toolbar .toolbutton:hover {
@@ -102,6 +103,18 @@ a {
 .toolbar .toolbutton img {
   width: 100%;
   height: 100%;
+}
+
+.toolbar .toolbutton.invoker:before {
+  content: "";
+  background-color: transparent;
+  position: absolute;
+  display: block;
+  width: @cell-size;
+  height: @subcell-size;
+  bottom: -2 * @line-width;
+  right: -2 * @line-width;
+  background-image: url('../icons/emblems/arrow-down.svg');
 }
 
 .toolbar #stop-button {
@@ -338,6 +351,18 @@ label {
   background-position: @line-width @line-width;
   background-size: @toolbutton-size;
   background-repeat: no-repeat;
+}
+
+.palette-invoker:after {
+  content: "";
+  background-color: transparent;
+  position: absolute;
+  display: block;
+  width: @cell-size;
+  height: @subcell-size;
+  top: 4 * @subcell-size;
+  left: 0;
+  background-image: url('../icons/emblems/arrow-up.svg');
 }
 
 .palette-invoker:before {

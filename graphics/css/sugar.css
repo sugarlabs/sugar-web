@@ -36,7 +36,7 @@ a {
 .toolbar hr {
   display: inline-block;
   height: 33px;
-  border: 1px solid #ffffff;
+  border: 1px solid #808080;
   margin: 2.5px;
 }
 /* Toolbar toolbutton */
@@ -52,6 +52,7 @@ a {
   margin: 4px 2px;
   width: 47px;
   height: 47px;
+  position: relative;
 }
 .toolbar .toolbutton:hover {
   background-color: black;
@@ -63,6 +64,17 @@ a {
 .toolbar .toolbutton img {
   width: 100%;
   height: 100%;
+}
+.toolbar .toolbutton.invoker:before {
+  content: "";
+  background-color: transparent;
+  position: absolute;
+  display: block;
+  width: 55px;
+  height: 11px;
+  bottom: -4px;
+  right: -4px;
+  background-image: url('../icons/emblems/arrow-down.svg');
 }
 .toolbar #stop-button {
   background-image: url('../icons/actions/activity-stop.svg');
@@ -253,6 +265,17 @@ label {
   background-position: 2px 2px;
   background-size: 47px;
   background-repeat: no-repeat;
+}
+.palette-invoker:after {
+  content: "";
+  background-color: transparent;
+  position: absolute;
+  display: block;
+  width: 55px;
+  height: 11px;
+  top: 44px;
+  left: 0;
+  background-image: url('../icons/emblems/arrow-up.svg');
 }
 .palette-invoker:before {
   content: "";
