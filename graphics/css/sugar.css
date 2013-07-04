@@ -237,7 +237,7 @@ label {
   -moz-user-select: none;
   -webkit-user-select: none;
 }
-/* Palettes */
+/* Palette */
 .palette {
   color: white;
   background-color: transparent;
@@ -254,14 +254,6 @@ label {
   background-size: 47px;
   background-repeat: no-repeat;
 }
-.palette-container {
-  width: 51px;
-  height: 51px;
-  background-color: black;
-  border: 2px solid #808080;
-  min-width: 165px;
-  pointer-events: auto;
-}
 .palette-invoker:before {
   content: "";
   background-color: black;
@@ -271,6 +263,28 @@ label {
   width: 51px;
   left: 2px;
   height: 2px;
+}
+.palette .wrapper {
+  width: 51px;
+  min-height: 51px;
+  background-color: black;
+  border: 2px solid #808080;
+  min-width: 165px;
+  pointer-events: auto;
+}
+.palette .header {
+  height: 51px;
+  line-height: 51px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  margin: 0 5.5px;
+  font-weight: bold;
+}
+.palette hr {
+  border: 1px solid #808080;
+}
+.palette hr.header-separator {
+  margin-top: 0;
 }
 /* Scrollbar */
 ::-webkit-scrollbar {

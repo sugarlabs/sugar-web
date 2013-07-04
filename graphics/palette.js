@@ -9,26 +9,26 @@ define(function () {
         var x = -2 * style.marginLeft.slice(0, -2);
         var y = -1 * style.marginTop.slice(0, -2);
 
-        var width = elem.offsetWidth;
-        var height = elem.offsetHeight;
-        while (elem) {
-            x += elem.offsetLeft - elem.scrollLeft + elem.clientLeft;
-            y += elem.offsetTop - elem.scrollTop + elem.clientTop;
-            elem = elem.offsetParent;
-        }
+        var rect = elem.getBoundingClientRect();
+        x += rect.left;
+        y += rect.top;
         return {
             top: y,
             left: x,
-            width: width,
-            height: height
+            width: rect.width,
+            height: rect.height
         };
     }
 
     palette = {};
 
-    palette.Palette = function (invoker) {
+    palette.Palette = function (invoker, primaryText) {
         this.invoker = invoker;
+        this.primaryText = primaryText;
         var paletteElem;
+        var wrapperElem;
+        var headerElem;
+        var headerSeparatorElem;
         var containerElem;
         var that = this;
         palettesGroup.push(this);
@@ -58,10 +58,9 @@ define(function () {
             paletteElem.style.top = paletteY + "px";
         }
 
-        // create a new palette element with a container, removing the
-        // previous content if it had any
+        // A palette element can have a header, content, one or both.
 
-        function createPalette() {
+        function createPaletteElement() {
             if (paletteElem !== undefined) {
                 return;
             }
@@ -85,25 +84,62 @@ define(function () {
 
             }
 
+            wrapperElem = document.createElement('div');
+            wrapperElem.className = "wrapper";
+            paletteElem.appendChild(wrapperElem);
+
+            if (that.primaryText !== undefined) {
+                headerElem = document.createElement('div');
+                headerElem.className = "header";
+                headerElem.innerText = that.primaryText;
+                wrapperElem.appendChild(headerElem);
+            }
+
+            headerSeparatorElem = document.createElement('hr');
+            headerSeparatorElem.className = "header-separator";
+            headerSeparatorElem.style.display = "none";
+            wrapperElem.appendChild(headerSeparatorElem);
+
             containerElem = document.createElement('div');
-            containerElem.className = "palette-container";
-            paletteElem.appendChild(containerElem);
+            containerElem.className = "container";
+            wrapperElem.appendChild(containerElem);
 
             updatePosition();
         }
 
         this.getPalette = function () {
             if (paletteElem === undefined) {
-                createPalette();
+                createPaletteElement();
             }
             return paletteElem;
         };
 
-        this.getContainer = function () {
+        this.setContent = function (elementsList) {
             if (paletteElem === undefined) {
-                createPalette();
+                createPaletteElement();
             }
-            return containerElem;
+
+            (function removePreviousContent() {
+                for (var i = 0; i < containerElem.children.length; i++) {
+                    var child = containerElem.children[i];
+                    containerElem.removeChild(child);
+                }
+            }());
+
+            (function addNewContent() {
+                for (var i = 0; i < elementsList.length; i++) {
+                    var child = elementsList[i];
+                    containerElem.appendChild(child);
+                }
+            }());
+
+            // The header separator will be visible only if there are
+            // both, header and content.
+            if (elementsList.length > 0 && this.primaryText !== undefined) {
+                headerSeparatorElem.style.display = "block";
+            } else {
+                headerSeparatorElem.style.display = "none";
+            }
         };
 
         this.isDown = function () {
