@@ -24,6 +24,9 @@ define(function () {
 
     palette.Palette = function (invoker, primaryText) {
         this.invoker = invoker;
+        if (this.invoker.classList.contains("toolbutton")) {
+            this.invoker.classList.add("invoker");
+        }
         this.primaryText = primaryText;
         var paletteElem;
         var wrapperElem;
