@@ -2,8 +2,9 @@ define(["webL10n",
         "sugar-web/activity/shortcut",
         "sugar-web/bus",
         "sugar-web/env",
-        "sugar-web/datastore"], function (
-    l10n, shortcut, bus, env, datastore) {
+        "sugar-web/datastore",
+        "sugar-web/graphics/activitypalette"], function (
+    l10n, shortcut, bus, env, datastore, activityPalette) {
 
     var datastoreObject = null;
 
@@ -17,6 +18,8 @@ define(["webL10n",
         shortcut.add("Ctrl", "Q", this.close);
 
         datastoreObject = new datastore.DatastoreObject();
+
+        activityPalette.createActivityPalette();
 
         env.getEnvironment(function (error, environment) {
             datastoreObject.setMetadata({
