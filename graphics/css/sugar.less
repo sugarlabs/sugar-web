@@ -320,7 +320,7 @@ label {
   .unselectable;
 }
 
-/* Palettes */
+/* Palette */
 
 .palette {
   color: white;
@@ -340,15 +340,6 @@ label {
   background-repeat: no-repeat;
 }
 
-.palette-container {
-  width: @cell-size - 2 * @line-width;
-  height: @cell-size - 2 * @line-width;
-  background-color: black;
-  border: @line-width solid @button-grey;
-  min-width: 3 * @cell-size;
-  pointer-events: auto;
-}
-
 .palette-invoker:before {
   content: "";
   background-color: black;
@@ -358,6 +349,31 @@ label {
   width: @cell-size - 2 * @line-width;
   left: @line-width;
   height: @line-width;
+}
+
+.palette .wrapper {
+  width: @cell-size - 2 * @line-width;
+  min-height: @cell-size - 2 * @line-width;
+  background-color: black;
+  border: @line-width solid @button-grey;
+  min-width: 3 * @cell-size;
+  pointer-events: auto;
+}
+
+.palette .header {
+  height: @cell-size - 2 * @line-width;
+  line-height: @cell-size - 2 * @line-width;
+  .unselectable;
+  margin: 0 (@subcell-size / 2);
+  font-weight: bold;
+}
+
+.palette hr {
+  border: (@line-width / 2) solid @button-grey;
+}
+
+.palette hr.header-separator {
+  margin-top: 0;
 }
 
 /* Scrollbar */
