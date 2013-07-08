@@ -21,10 +21,8 @@ define(["sugar-web/graphics/palette",
         activityTitle.type = "text";
         activityTitle.id = "title";
         activityTitle.className = "expand";
-
         descriptionLabel = document.createElement('label');
-        descriptionLabel.innerHTML = "Description :"
-
+        descriptionLabel.innerHTML = "Description :";
         descriptionBox = document.createElement('textarea');
         descriptionBox.rows = "5";
         descriptionBox.id = "description";
@@ -36,10 +34,10 @@ define(["sugar-web/graphics/palette",
         var activityDescription = document.getElementById("description");
         var datastoreObject = new datastore.DatastoreObject();
         var mdata;
-        var Title;
-        
+        var title;
+
         bus.listen();
-        
+
         datastoreObject.getMetadata(function (error, metadata) {
             mdata = metadata;
             setTitleDescription();
@@ -48,19 +46,19 @@ define(["sugar-web/graphics/palette",
         setTitleDescription();
 
         function setTitleDescription() {
-            if ((mdata === undefined) || (mdata.title == undefined)) {
+            if ((mdata === undefined) || (mdata.title === undefined)) {
                 env.getEnvironment(function (error, environment) {
-                    Title = environment.activityName;
+                    title = environment.activityName;
                     datastoreObject.setMetadata({
                         "activity": environment.bundleId,
                         "activity_id": environment.activityId,
-                        "title": Title
+                        "title": title
                     });
                     datastoreObject.save(function () {});
-                    aTitle.value = Title;
+                    aTitle.value = title;
                 });
             } else {
-                if (mdata.title != null) {
+                if (mdata.title !== undefined) {
                     aTitle.value = mdata.title;
                     datastoreObject.setMetadata({
                         "activity": environment.bundleId,
@@ -70,9 +68,8 @@ define(["sugar-web/graphics/palette",
                     datastoreObject.save(function () {});
                 }
 
-                if (mdata.description != null)
+                if (mdata.description !== undefined)
                     activityDescription.value = mdata.description;
-
             }
         }
 
@@ -89,6 +86,6 @@ define(["sugar-web/graphics/palette",
             });
             datastoreObject.save(function () {});
         };
-    
+    };
     return Activitypalette;
 });
