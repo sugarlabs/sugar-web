@@ -3,9 +3,8 @@ define(["webL10n",
         "sugar-web/bus",
         "sugar-web/env",
         "sugar-web/datastore",
-        "sugar-web/graphics/palette",
         "sugar-web/graphics/activitypalette"], function (
-    l10n, shortcut, bus, env, datastore, palette, activitypalette) {
+    l10n, shortcut, bus, env, datastore, activitypalette) {
 
     var datastoreObject = null;
 
