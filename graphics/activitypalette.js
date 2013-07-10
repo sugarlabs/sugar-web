@@ -22,7 +22,7 @@ define(["sugar-web/graphics/palette",
         activityTitle.id = "title";
         activityTitle.className = "expand";
         descriptionLabel = document.createElement('label');
-        descriptionLabel.innerHTML = "Description :";
+        descriptionLabel.innerHTML = "Description:";
         descriptionBox = document.createElement('textarea');
         descriptionBox.rows = "5";
         descriptionBox.id = "description";
