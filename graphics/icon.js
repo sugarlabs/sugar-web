@@ -64,8 +64,8 @@ define(function () {
     icon.colorize = function (elem, colors, callback) {
         var iconInfo = {
             "uri": getBackgroundURL(elem),
-            "strokeColor": colors[0],
-            "fillColor": colors[1]
+            "strokeColor": colors.stroke,
+            "fillColor": colors.fill
         };
 
         icon.load(iconInfo, function (url) {
