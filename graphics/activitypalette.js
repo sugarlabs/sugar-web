@@ -17,6 +17,8 @@ define(["sugar-web/graphics/palette",
         var descriptionLabel;
         var descriptionBox;
 
+        this.getPalette().id = "activity-palette";
+
         activityTitle = document.createElement('input');
         activityTitle.type = "text";
         activityTitle.id = "title";
