@@ -16,11 +16,11 @@ define(["webL10n",
 
         l10n.start();
 
-        var activityPalette = new activitypalette();
-        activityPalette.ActivityPalette();
+        var activityButton = document.getElementById("activity-button");
+
+        var activityPalette = new activitypalette.ActivityPalette();
 
         // Colorize the activity icon.
-        var activityButton = document.getElementById("activity-button");
         activity.getXOColor(function (error, colors) {
             icon.colorize(activityButton, colors);
             invokerElem =

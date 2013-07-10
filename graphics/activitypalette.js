@@ -3,15 +3,9 @@ define(["sugar-web/graphics/palette",
         "sugar-web/env",
         "sugar-web/bus"], function (palette, datastore, env, bus) {
 
-    var activityButton = document.getElementById("activity-button");
+    var activitypalette = {};
 
-    function Activitypalette(button) {
-        this.button = button;
-    }
-
-    Activitypalette.prototype = new palette.Palette(activityButton);
-
-    Activitypalette.prototype.ActivityPalette = function () {
+    activitypalette.ActivityPalette = function () {
 
         var activityTitle;
         var descriptionLabel;
@@ -89,5 +83,11 @@ define(["sugar-web/graphics/palette",
             datastoreObject.save(function () {});
         };
     };
-    return Activitypalette;
+
+    var activityButton = document.getElementById("activity-button");
+
+    activitypalette.ActivityPalette.prototype =
+        new palette.Palette(activityButton);
+
+    return activitypalette;
 });
