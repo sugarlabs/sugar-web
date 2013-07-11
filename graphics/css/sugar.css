@@ -163,8 +163,12 @@ input[type='text']:disabled {
   border-color: #808080;
   background-color: #808080;
 }
-.toolbar input[type='text'] {
+.toolbar input[type='text'],
+.palette .row input[type='text'] {
   margin-top: 10.5px;
+}
+.palette .row input[type='text']:nth-last-child(1) {
+  margin-top: 8.5px;
 }
 input[type='text'].expand {
   width: calc(100% - 12px);
@@ -309,6 +313,19 @@ label {
 .palette hr.header-separator {
   margin-top: 0;
 }
+.palette .row {
+  height: 55px;
+  margin: 0 5.5px;
+}
+.palette .row:nth-last-child(1) {
+  height: 51px;
+}
+.palette .row.small {
+  height: 22px;
+}
+.palette .row.expand {
+  height: auto;
+}
 /* Scrollbar */
 ::-webkit-scrollbar {
   background-color: #808080;
@@ -397,4 +414,8 @@ ul.flat-list.big li {
 }
 ul.flat-list.striped li:nth-child(odd) {
   background-color: #e5e5e5;
+}
+/* ActivityPalette */
+#activity-palette .wrapper {
+  width: 271px;
 }

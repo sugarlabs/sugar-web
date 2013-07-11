@@ -13,18 +13,30 @@ define(["sugar-web/graphics/palette",
 
         this.getPalette().id = "activity-palette";
 
+        var titleContainer = document.createElement('div');
+        titleContainer.className = "row";
         activityTitle = document.createElement('input');
         activityTitle.type = "text";
         activityTitle.id = "title";
         activityTitle.className = "expand";
+        titleContainer.appendChild(activityTitle);
+
+        var descLabelContainer = document.createElement('div');
+        descLabelContainer.className = "row small";
         descriptionLabel = document.createElement('label');
         descriptionLabel.innerHTML = "Description:";
+        descLabelContainer.appendChild(descriptionLabel);
+
+        var descriptionContainer = document.createElement('div');
+        descriptionContainer.className = "row expand";
         descriptionBox = document.createElement('textarea');
-        descriptionBox.rows = "5";
+        descriptionBox.rows = "8";
         descriptionBox.id = "description";
         descriptionBox.className = "expand";
+        descriptionContainer.appendChild(descriptionBox);
 
-        this.setContent([activityTitle, descriptionLabel, descriptionBox]);
+        this.setContent([titleContainer, descLabelContainer,
+                         descriptionContainer]);
 
         var titleElem = document.getElementById("title");
         var descriptionElem = document.getElementById("description");

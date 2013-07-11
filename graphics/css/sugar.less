@@ -224,8 +224,12 @@ input[type='text']:disabled {
   background-color: @button-grey;
 }
 
-.toolbar input[type='text'] {
+.toolbar input[type='text'], .palette .row input[type='text'] {
   margin-top: @toolbar-input-height;
+}
+
+.palette .row input[type='text']:nth-last-child(1) {
+  margin-top: @toolbar-input-height - @line-width;
 }
 
 input[type='text'].expand {
@@ -401,6 +405,23 @@ label {
   margin-top: 0;
 }
 
+.palette .row {
+  height: @cell-size;
+  margin: 0 (@subcell-size / 2);
+}
+
+.palette .row:nth-last-child(1) {
+  height: @cell-size - 2 * @line-width;
+}
+
+.palette .row.small {
+  height: 2 * @subcell-size;
+}
+
+.palette .row.expand {
+  height: auto;
+}
+
 /* Scrollbar */
 
 ::-webkit-scrollbar {
@@ -517,4 +538,10 @@ ul.flat-list.big li {
 
 ul.flat-list.striped li:nth-child(odd) {
   background-color: @text-field-grey;
+}
+
+/* ActivityPalette */
+
+#activity-palette .wrapper {
+  width: 5 * @cell-size - 2 * @line-width;
 }
