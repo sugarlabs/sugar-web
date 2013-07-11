@@ -377,11 +377,11 @@ label {
 }
 
 .palette .wrapper {
-  width: @cell-size - 2 * @line-width;
-  min-height: @cell-size - 2 * @line-width;
   background-color: black;
   border: @line-width solid @button-grey;
-  min-width: 3 * @cell-size;
+  max-width: 5 * @cell-size - 2 * @line-width;
+  min-width: 3 * @cell-size - 2 * @line-width;
+  min-height: @cell-size - 2 * @line-width;
   pointer-events: auto;
 }
 
