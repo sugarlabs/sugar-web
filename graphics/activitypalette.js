@@ -3,32 +3,40 @@ define(["sugar-web/graphics/palette",
         "sugar-web/env",
         "sugar-web/bus"], function (palette, datastore, env, bus) {
 
-    var activityButton = document.getElementById("activity-button");
+    var activitypalette = {};
 
-    function Activitypalette(button) {
-        this.button = button;
-    }
-
-    Activitypalette.prototype = new palette.Palette(activityButton);
-
-    Activitypalette.prototype.ActivityPalette = function () {
+    activitypalette.ActivityPalette = function () {
 
         var activityTitle;
         var descriptionLabel;
         var descriptionBox;
 
+        this.getPalette().id = "activity-palette";
+
+        var titleContainer = document.createElement('div');
+        titleContainer.className = "row";
         activityTitle = document.createElement('input');
         activityTitle.type = "text";
         activityTitle.id = "title";
         activityTitle.className = "expand";
+        titleContainer.appendChild(activityTitle);
+
+        var descLabelContainer = document.createElement('div');
+        descLabelContainer.className = "row small";
         descriptionLabel = document.createElement('label');
-        descriptionLabel.innerHTML = "Description :";
+        descriptionLabel.innerHTML = "Description:";
+        descLabelContainer.appendChild(descriptionLabel);
+
+        var descriptionContainer = document.createElement('div');
+        descriptionContainer.className = "row expand";
         descriptionBox = document.createElement('textarea');
-        descriptionBox.rows = "5";
+        descriptionBox.rows = "8";
         descriptionBox.id = "description";
         descriptionBox.className = "expand";
+        descriptionContainer.appendChild(descriptionBox);
 
-        this.setContent([activityTitle, descriptionLabel, descriptionBox]);
+        this.setContent([titleContainer, descLabelContainer,
+                         descriptionContainer]);
 
         var titleElem = document.getElementById("title");
         var descriptionElem = document.getElementById("description");
@@ -87,5 +95,11 @@ define(["sugar-web/graphics/palette",
             datastoreObject.save(function () {});
         };
     };
-    return Activitypalette;
+
+    var activityButton = document.getElementById("activity-button");
+
+    activitypalette.ActivityPalette.prototype =
+        new palette.Palette(activityButton);
+
+    return activitypalette;
 });

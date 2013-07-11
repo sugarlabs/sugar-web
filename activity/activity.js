@@ -3,8 +3,9 @@ define(["webL10n",
         "sugar-web/bus",
         "sugar-web/env",
         "sugar-web/datastore",
+        "sugar-web/graphics/icon",
         "sugar-web/graphics/activitypalette"], function (
-    l10n, shortcut, bus, env, datastore, activitypalette) {
+    l10n, shortcut, bus, env, datastore, icon, activitypalette) {
 
     var datastoreObject = null;
 
@@ -15,12 +16,27 @@ define(["webL10n",
 
         l10n.start();
 
+        var activityButton = document.getElementById("activity-button");
+
+        var activityPalette = new activitypalette.ActivityPalette();
+
+        // Colorize the activity icon.
+        activity.getXOColor(function (error, colors) {
+            icon.colorize(activityButton, colors);
+            invokerElem =
+                document.querySelector("#activity-palette .palette-invoker");
+            icon.colorize(invokerElem, colors);
+        });
+
+        // Make the activity stop with the stop button.
+        var stopButton = document.getElementById("stop-button");
+        stopButton.addEventListener('click', function (e) {
+            activity.close();
+        });
+
         shortcut.add("Ctrl", "Q", this.close);
 
         datastoreObject = new datastore.DatastoreObject();
-
-        var activityPalette = new activitypalette();
-        activityPalette.ActivityPalette();
 
         env.getEnvironment(function (error, environment) {
             datastoreObject.setMetadata({

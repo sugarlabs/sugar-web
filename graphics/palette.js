@@ -20,7 +20,7 @@ define(function () {
         };
     }
 
-    palette = {};
+    var palette = {};
 
     palette.Palette = function (invoker, primaryText) {
         this.invoker = invoker;
