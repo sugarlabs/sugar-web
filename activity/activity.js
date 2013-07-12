@@ -51,6 +51,9 @@ define(["webL10n",
         return datastoreObject;
     };
 
+    // Activities that want to store something should override this.
+    activity.write = function () {};
+
     activity.getXOColor = function (callback) {
         function onResponseReceived(error, result) {
             if (error === null) {
@@ -78,7 +81,10 @@ define(["webL10n",
             }
         }
 
-        bus.sendMessage("activity.close", [], onResponseReceived);
+        this.write();
+        this.getDatastoreObject().save(function () {
+            bus.sendMessage("activity.close", [], onResponseReceived);
+        });
     };
 
     return activity;
