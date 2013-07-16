@@ -38,6 +38,7 @@ a {
   height: 33px;
   border: 1px solid #808080;
   margin: 2.5px;
+  margin-bottom: -17px;
 }
 /* Toolbar toolbutton */
 .toolbar .toolbutton {
