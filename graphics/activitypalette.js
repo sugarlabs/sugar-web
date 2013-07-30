@@ -36,14 +36,14 @@ define(["sugar-web/graphics/palette",
             datastoreObject.setMetadata({
                 "title": this.value
             });
-            datastoreObject.save(function () {});
+            datastoreObject.save();
         };
 
         this.descriptionElem.onblur = function () {
             datastoreObject.setMetadata({
                 "description": this.value
             });
-            datastoreObject.save(function () {});
+            datastoreObject.save();
         };
     };
 
