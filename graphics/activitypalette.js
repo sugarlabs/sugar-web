@@ -1,11 +1,12 @@
 define(["sugar-web/graphics/palette",
-        "sugar-web/datastore",
-        "sugar-web/env",
-        "sugar-web/bus"], function (palette, datastore, env, bus) {
+        "sugar-web/env"], function (palette, env) {
 
     var activitypalette = {};
 
-    activitypalette.ActivityPalette = function () {
+    activitypalette.ActivityPalette = function (activityButton,
+        datastoreObject) {
+
+        palette.Palette.call(this, activityButton);
 
         var activityTitle;
         var descriptionLabel;
@@ -38,57 +39,17 @@ define(["sugar-web/graphics/palette",
         this.setContent([titleContainer, descLabelContainer,
                          descriptionContainer]);
 
-        var titleElem = document.getElementById("title");
-        var descriptionElem = document.getElementById("description");
-        var datastoreObject = new datastore.DatastoreObject();
-        var mdata;
-        var title;
+        this.titleElem = document.getElementById("title");
+        this.descriptionElem = document.getElementById("description");
 
-        bus.listen();
-
-        datastoreObject.getMetadata(function (error, metadata) {
-            mdata = metadata;
-            setTitleDescription();
-        });
-
-        setTitleDescription();
-
-        function setTitleDescription() {
-            if ((mdata === undefined) || (mdata.title === undefined)) {
-                env.getEnvironment(function (error, environment) {
-                    title = environment.activityName;
-                    datastoreObject.setMetadata({
-                        "activity": environment.bundleId,
-                        "activity_id": environment.activityId,
-                        "title": title
-                    });
-                    datastoreObject.save(function () {});
-                    titleElem.value = title;
-                });
-            } else {
-                if (mdata.title !== undefined) {
-                    titleElem.value = mdata.title;
-                    datastoreObject.setMetadata({
-                        "activity": environment.bundleId,
-                        "activity_id": environment.activityId,
-                        "title": mdata.title
-                    });
-                    datastoreObject.save(function () {});
-                }
-
-                if (mdata.description !== undefined)
-                    descriptionElem.value = mdata.description;
-            }
-        }
-
-        titleElem.onblur = function () {
+        this.titleElem.onblur = function () {
             datastoreObject.setMetadata({
                 "title": this.value
             });
             datastoreObject.save(function () {});
         };
 
-        descriptionElem.onblur = function () {
+        this.descriptionElem.onblur = function () {
             datastoreObject.setMetadata({
                 "description": this.value
             });
@@ -96,10 +57,31 @@ define(["sugar-web/graphics/palette",
         };
     };
 
-    var activityButton = document.getElementById("activity-button");
+    // Fill the text inputs with the received metadata.
+    var setTitleDescription = function (metadata) {
+        var that = this;
+        if (metadata.title === undefined) {
+            env.getEnvironment(function (error, environment) {
+                that.titleElem.value = environment.activityName;
+            });
+        } else {
+            this.titleElem.value = metadata.title;
+        }
+
+        if (metadata.description !== undefined) {
+            this.descriptionElem.value = metadata.description;
+        }
+    }
 
     activitypalette.ActivityPalette.prototype =
-        new palette.Palette(activityButton);
+        Object.create(palette.Palette.prototype, {
+        setTitleDescription: {
+            value: setTitleDescription,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        }
+    });
 
     return activitypalette;
 });

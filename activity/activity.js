@@ -16,9 +16,12 @@ define(["webL10n",
 
         l10n.start();
 
+        datastoreObject = new datastore.DatastoreObject();
+
         var activityButton = document.getElementById("activity-button");
 
-        var activityPalette = new activitypalette.ActivityPalette();
+        var activityPalette = new activitypalette.ActivityPalette(
+            activityButton, datastoreObject);
 
         // Colorize the activity icon.
         activity.getXOColor(function (error, colors) {
@@ -36,14 +39,16 @@ define(["webL10n",
 
         shortcut.add("Ctrl", "Q", this.close);
 
-        datastoreObject = new datastore.DatastoreObject();
-
         env.getEnvironment(function (error, environment) {
             datastoreObject.setMetadata({
                 "activity": environment.bundleId,
                 "activity_id": environment.activityId
             });
-            datastoreObject.save(function () {});
+            datastoreObject.save(function () {
+                datastoreObject.getMetadata(function (error, metadata) {
+                    activityPalette.setTitleDescription(metadata);
+                });
+            });
         });
     };
 
