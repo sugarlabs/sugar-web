@@ -71,7 +71,7 @@ define(["sugar-web/graphics/palette",
         if (metadata.description !== undefined) {
             this.descriptionElem.value = metadata.description;
         }
-    }
+    };
 
     activitypalette.ActivityPalette.prototype =
         Object.create(palette.Palette.prototype, {
