@@ -115,6 +115,9 @@ define(["sugar-web/bus", "sugar-web/env"], function (bus, env) {
     };
 
     DatastoreObject.prototype.save = function (callback) {
+        if (callback === undefined) {
+            callback = function () {};
+        }
         var that = this;
 
         function onCreated(error, objectId) {

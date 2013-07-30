@@ -14,46 +14,36 @@ define(["sugar-web/graphics/palette",
 
         this.getPalette().id = "activity-palette";
 
-        var titleContainer = document.createElement('div');
-        titleContainer.className = "row";
-        activityTitle = document.createElement('input');
-        activityTitle.type = "text";
-        activityTitle.id = "title";
-        activityTitle.className = "expand";
-        titleContainer.appendChild(activityTitle);
+        this.template =
+            '<div class="row">' +
+            '<input type="text" id="title" class="expand">' +
+            '</div>' +
+            '<div class="row small">' +
+            '<label>Description:</label>' +
+            '</div>' +
+            '<div class="row expand">' +
+            '<textarea rows="8" id="description" class="expand"></textarea>' +
+            '</div>';
 
-        var descLabelContainer = document.createElement('div');
-        descLabelContainer.className = "row small";
-        descriptionLabel = document.createElement('label');
-        descriptionLabel.innerHTML = "Description:";
-        descLabelContainer.appendChild(descriptionLabel);
+        var containerElem = document.createElement('div');
+        containerElem.innerHTML = this.template;
+        this.setContent([containerElem]);
 
-        var descriptionContainer = document.createElement('div');
-        descriptionContainer.className = "row expand";
-        descriptionBox = document.createElement('textarea');
-        descriptionBox.rows = "8";
-        descriptionBox.id = "description";
-        descriptionBox.className = "expand";
-        descriptionContainer.appendChild(descriptionBox);
-
-        this.setContent([titleContainer, descLabelContainer,
-                         descriptionContainer]);
-
-        this.titleElem = document.getElementById("title");
-        this.descriptionElem = document.getElementById("description");
+        this.titleElem = containerElem.querySelector('#title');
+        this.descriptionElem = containerElem.querySelector('#description');
 
         this.titleElem.onblur = function () {
             datastoreObject.setMetadata({
                 "title": this.value
             });
-            datastoreObject.save(function () {});
+            datastoreObject.save();
         };
 
         this.descriptionElem.onblur = function () {
             datastoreObject.setMetadata({
                 "description": this.value
             });
-            datastoreObject.save(function () {});
+            datastoreObject.save();
         };
     };
 
