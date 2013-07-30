@@ -1,11 +1,10 @@
 define(["webL10n",
         "sugar-web/activity/shortcut",
         "sugar-web/bus",
-        "sugar-web/env",
         "sugar-web/datastore",
         "sugar-web/graphics/icon",
         "sugar-web/graphics/activitypalette"], function (
-    l10n, shortcut, bus, env, datastore, icon, activitypalette) {
+    l10n, shortcut, bus, datastore, icon, activitypalette) {
 
     var datastoreObject = null;
 
@@ -37,14 +36,6 @@ define(["webL10n",
         shortcut.add("Ctrl", "Q", this.close);
 
         datastoreObject = new datastore.DatastoreObject();
-
-        env.getEnvironment(function (error, environment) {
-            datastoreObject.setMetadata({
-                "activity": environment.bundleId,
-                "activity_id": environment.activityId
-            });
-            datastoreObject.save(function () {});
-        });
     };
 
     activity.getDatastoreObject = function () {
