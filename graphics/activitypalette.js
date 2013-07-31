@@ -1,5 +1,4 @@
-define(["sugar-web/graphics/palette",
-        "sugar-web/env"], function (palette, env) {
+define(["sugar-web/graphics/palette"], function (palette) {
 
     var activitypalette = {};
 
