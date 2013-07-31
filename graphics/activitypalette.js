@@ -1,5 +1,4 @@
-define(["sugar-web/graphics/palette",
-        "sugar-web/env"], function (palette, env) {
+define(["sugar-web/graphics/palette"], function (palette) {
 
     var activitypalette = {};
 
@@ -34,7 +33,8 @@ define(["sugar-web/graphics/palette",
 
         this.titleElem.onblur = function () {
             datastoreObject.setMetadata({
-                "title": this.value
+                "title": this.value,
+                "title_set_by_user": "1"
             });
             datastoreObject.save();
         };
@@ -49,14 +49,7 @@ define(["sugar-web/graphics/palette",
 
     // Fill the text inputs with the received metadata.
     var setTitleDescription = function (metadata) {
-        var that = this;
-        if (metadata.title === undefined) {
-            env.getEnvironment(function (error, environment) {
-                that.titleElem.value = environment.activityName;
-            });
-        } else {
-            this.titleElem.value = metadata.title;
-        }
+        this.titleElem.value = metadata.title;
 
         if (metadata.description !== undefined) {
             this.descriptionElem.value = metadata.description;

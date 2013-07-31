@@ -41,6 +41,8 @@ define(["webL10n",
 
         env.getEnvironment(function (error, environment) {
             datastoreObject.setMetadata({
+                "title": environment.activityName + " Activity",
+                "title_set_by_user": "0",
                 "activity": environment.bundleId,
                 "activity_id": environment.activityId
             });
