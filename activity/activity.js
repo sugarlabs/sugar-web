@@ -40,10 +40,14 @@ define(["webL10n",
         shortcut.add("Ctrl", "Q", this.close);
 
         env.getEnvironment(function (error, environment) {
-            datastoreObject.setMetadata({
-                "activity": environment.bundleId,
-                "activity_id": environment.activityId
-            });
+            if (!environment.objectId) {
+                datastoreObject.setMetadata({
+                    "title": environment.activityName + " Activity",
+                    "title_set_by_user": "0",
+                    "activity": environment.bundleId,
+                    "activity_id": environment.activityId
+                });
+            }
             datastoreObject.save(function () {
                 datastoreObject.getMetadata(function (error, metadata) {
                     activityPalette.setTitleDescription(metadata);
