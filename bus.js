@@ -1,6 +1,7 @@
 define(["sugar-web/env"], function (env) {
     var lastId = 0;
     var callbacks = {};
+    var notificationCallbacks = {};
     var client = null;
     var inputStreams = [];
 
@@ -156,6 +157,10 @@ define(["sugar-web/env"], function (env) {
         lastId++;
     };
 
+    bus.onNotification = function (method, callback) {
+        notificationCallbacks[method] = callback;
+    };
+
     bus.sendBinary = function (buffer, callback) {
         client.send(buffer);
     };
@@ -182,6 +187,15 @@ define(["sugar-web/env"], function (env) {
 
             var parsed = JSON.parse(message.data);
             var responseId = parsed.id;
+
+            if (parsed.method) {
+                var notificationCallback = notificationCallbacks[parsed.method];
+                if (notificationCallback !== undefined) {
+                    notificationCallback(parsed.params);
+                }
+                return;
+            }
+
             if (responseId in callbacks) {
                 var callback = callbacks[responseId];
 
