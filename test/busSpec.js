@@ -1,6 +1,6 @@
 define(["sugar-web/bus"], function (bus) {
 
-    describe("datastore", function () {
+    describe("bus requests", function () {
         var client;
 
         function MockClient() {
@@ -83,5 +83,72 @@ define(["sugar-web/bus"], function (bus) {
             }, "an error should be received");
         });
 
+    });
+
+    describe("bus notifications", function () {
+        var client;
+
+        function MockClient() {
+            this.params = null;
+        }
+
+        MockClient.prototype.send_notification = function (method, params) {
+            var that = this;
+
+            setTimeout(function () {
+                message = {
+                    data: JSON.stringify({
+                        method: method,
+                        params: that.params
+                    })
+                };
+
+                that.onMessage(message);
+            }, 0);
+        };
+
+        MockClient.prototype.close = function () {};
+
+        beforeEach(function () {
+            client = new MockClient();
+            bus.listen(client);
+        });
+
+        afterEach(function () {
+            bus.close();
+            client = null;
+        });
+
+        it("should receive a notification", function () {
+            var notificationReceived;
+            var notificationParams;
+            var originalParams = {
+                param1: true,
+                param2: "foo"
+            };
+
+            runs(function () {
+                notificationReceived = false;
+                notificationParams = null;
+
+                function onNotificationReceived(params) {
+                    notificationReceived = true;
+                    notificationParams = params;
+                }
+
+                bus.onNotification("hey.there", onNotificationReceived);
+
+                client.params = originalParams;
+                client.send_notification("hey.there");
+            });
+
+            waitsFor(function () {
+                return notificationReceived;
+            }, "a notification should be received");
+
+            runs(function () {
+                expect(notificationParams).toEqual(originalParams);
+            });
+        });
     });
 });
