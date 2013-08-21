@@ -1,4 +1,5 @@
-define(["sugar-web/graphics/palette", "mustache"], function (palette, mustache) {
+define(["sugar-web/graphics/palette",
+        "text!sugar-web/graphics/menupalette.html", "mustache"], function (palette, template, mustache) {
 
     var menupalette = {};
 
@@ -14,19 +15,9 @@ define(["sugar-web/graphics/palette", "mustache"], function (palette, mustache) 
             cancelable: true
         });
 
-        this.template =
-            '{{#.}}' +
-            '<li><button' +
-            ' {{ #icon }}class="icon"{{ /icon }}' +
-            ' {{ #id }}id="{{ id }}"{{ /id }}' +
-            '>' +
-            '{{ #icon }}<span></span>{{ /icon }}' +
-            '{{ label }}</button></li>' +
-            '{{/.}}';
-
         var menuElem = document.createElement('ul');
         menuElem.className = "menu";
-        menuElem.innerHTML = mustache.render(this.template, menuData);
+        menuElem.innerHTML = mustache.render(template, menuData);
         this.setContent([menuElem]);
 
         // Pop-down the palette when a item in the menu is clicked.
