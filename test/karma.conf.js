@@ -19,11 +19,17 @@ files = [
         pattern: 'lib/**/*.js',
         included: false
     }, {
-        pattern: '**/*js',
-        exclude: 'test/**/*js',
+        pattern: '**/*.js',
+        exclude: 'test/**/*.js',
         included: false
     }, {
-        pattern: 'graphics/icons/actions/*svg',
+        pattern: 'graphics/**/*.html',
+        included: false
+    }, {
+        pattern: 'graphics/**/*.css',
+        included: false
+    }, {
+        pattern: 'graphics/icons/**/*.svg',
         included: false
     }
 ];
