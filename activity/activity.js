@@ -90,5 +90,17 @@ define(["webL10n",
         bus.sendMessage("activity.close", [], onResponseReceived);
     };
 
+    activity.displayObjectChooser = function (callback) {
+        function onResponseReceived(error, result) {
+            if (error === null) {
+                callback(null, result);
+            } else {
+                console.log("datastore.choose_object. called");
+            }
+        }
+
+        bus.sendMessage("datastore.choose_object", [], onResponseReceived);
+    };
+
     return activity;
 });
