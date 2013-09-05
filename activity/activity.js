@@ -101,6 +101,6 @@ define(["webL10n",
 
         bus.sendMessage("activity.show_object_chooser", [], onResponseReceived);
     };
-    
+
     return activity;
 });
