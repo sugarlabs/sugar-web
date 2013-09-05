@@ -93,14 +93,14 @@ define(["webL10n",
     activity.showObjectChooser = function (callback) {
         function onResponseReceived(error, result) {
             if (error === null) {
-                callback(null, result);
+                callback(null, result[0]);
             } else {
-                console.log("activity.show_object_chooser called");
+                callback(error, null);
             }
         }
 
         bus.sendMessage("activity.show_object_chooser", [], onResponseReceived);
     };
-    
+
     return activity;
 });
