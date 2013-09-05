@@ -9,7 +9,7 @@ define(["sugar-web/bus", "sugar-web/env"], function (bus, env) {
             var that = this;
 
             env.getEnvironment(function (error, environment) {
-                if (environment.objectId !== null) {
+                if (environment.objectId !== null && that.objectId === undefined) {
                     that.objectId = environment.objectId;
                 }
                 callback();
