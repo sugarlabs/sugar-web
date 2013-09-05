@@ -83,7 +83,7 @@ define(["webL10n",
             if (error === null) {
                 callback(null);
             } else {
-                console.log("activity.close called");
+                callback(error, null);
             }
         }
 
