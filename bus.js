@@ -144,7 +144,8 @@ define(["sugar-web/env"], function (env) {
         var message = {
             "method": method,
             "id": lastId,
-            "params": params
+            "params": params,
+            "jsonrpc": "2.0"
         };
 
         if (callback) {
