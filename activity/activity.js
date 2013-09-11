@@ -16,6 +16,27 @@ define(["webL10n",
 
         l10n.start();
 
+        function sendPause() {
+            var pauseEvent = new CustomEvent(
+                "activityPause", {
+                cancelable: true
+            });
+            window.dispatchEvent(pauseEvent);
+        }
+        bus.onNotification("activity.pause", sendPause);
+
+        function sendStop() {
+            var stopEvent = new CustomEvent(
+                "activityStop", {
+                cancelable: true
+            });
+            var result = window.dispatchEvent(stopEvent);
+            if (result) {
+                activity.close();
+            }
+        }
+        bus.onNotification("activity.stop", sendStop);
+
         datastoreObject = new datastore.DatastoreObject();
 
         var activityButton = document.getElementById("activity-button");
@@ -34,7 +55,7 @@ define(["webL10n",
         // Make the activity stop with the stop button.
         var stopButton = document.getElementById("stop-button");
         stopButton.addEventListener('click', function (e) {
-            activity.close();
+            sendStop();
         });
 
         shortcut.add("Ctrl", "Q", this.close);
