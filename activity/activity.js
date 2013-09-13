@@ -59,7 +59,7 @@ define(["webL10n",
         // Make the activity stop with the stop button.
         var stopButton = document.getElementById("stop-button");
         stopButton.addEventListener('click', function (e) {
-            sendStop();
+            sendStopEvent();
         });
 
         shortcut.add("Ctrl", "Q", this.close);
