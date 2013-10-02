@@ -14,8 +14,8 @@ screen resolutions.
 
 To compile the CSS files do:
 
-    lessc graphics/css/sugar-72.less graphics/css/sugar-72.css
-    lessc graphics/css/sugar-100.less graphics/css/sugar-100.css
+    lessc graphics/css/sugar-96dpi.less graphics/css/sugar-96dpi.css
+    lessc graphics/css/sugar-200dpi.less graphics/css/sugar-200dpi.css
 
 Be sure to compile them before commit.
 
