@@ -48,12 +48,17 @@ define(["sugar-web/activity/activity"], function (activity) {
             callback = function () {};
         }
 
-        var datastoreObject = activity.getDatastoreObject();
-        var jsonData = JSON.stringify(localStorage);
-        datastoreObject.setDataAsText(jsonData);
-        datastoreObject.save(function (error) {
-            callback(error);
-        });
+        if (window.sugar.environment === undefined) {
+            // In standalone mode, use localStorage as is.
+            callback();
+        } else {
+            var datastoreObject = activity.getDatastoreObject();
+            var jsonData = JSON.stringify(localStorage);
+            datastoreObject.setDataAsText(jsonData);
+            datastoreObject.save(function (error) {
+                callback(error);
+            });
+        }
     };
 
     return dictstore;
