@@ -1,6 +1,8 @@
 define(["sugar-web/graphics/palette",
         "text!sugar-web/graphics/menupalette.html", "mustache"], function (palette, template, mustache) {
 
+    'use strict';
+
     var menupalette = {};
 
     menupalette.MenuPalette = function (invoker, primaryText, menuData) {

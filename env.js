@@ -1,5 +1,7 @@
 define(function () {
 
+    'use strict';
+
     var env = {};
 
     env.getEnvironment = function (callback) {

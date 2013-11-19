@@ -1,5 +1,7 @@
 define(["sugar-web/bus", "sugar-web/datastore"], function (bus, datastore) {
 
+    'use strict';
+
     describe("datastore object", function () {
 
         beforeEach(function () {

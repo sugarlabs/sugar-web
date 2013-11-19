@@ -1,4 +1,7 @@
 define(["sugar-web/env"], function (env) {
+
+    'use strict';
+
     var lastId = 0;
     var callbacks = {};
     var notificationCallbacks = {};
@@ -70,7 +73,7 @@ define(["sugar-web/env"], function (env) {
 
     InputStream.prototype.read = function (count, callback) {
         if (this.readCallback) {
-            throw Error("Read already in progress");
+            throw new Error("Read already in progress");
         }
 
         this.readCallback = callback;

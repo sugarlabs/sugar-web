@@ -1,4 +1,7 @@
 define(["sugar-web/graphics/icon"], function (icon) {
+
+    'use strict';
+
     describe("icon", function () {
         var wasLoaded;
         var iconUrlResult;

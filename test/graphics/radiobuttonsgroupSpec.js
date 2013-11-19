@@ -1,6 +1,8 @@
 define(["sugar-web/graphics/radiobuttonsgroup"], function (
     radioButtonsGroup) {
 
+    'use strict';
+
     beforeEach(function () {
         elem1 = document.createElement('button');
         elem2 = document.createElement('button');
