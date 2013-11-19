@@ -13,7 +13,7 @@ define(["sugar-web/bus"], function (bus) {
         MockClient.prototype.send = function (data) {
             var that = this;
             setTimeout(function () {
-                parsed = JSON.parse(data);
+                var parsed = JSON.parse(data);
 
                 message = {
                     data: JSON.stringify({
