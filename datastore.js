@@ -1,4 +1,7 @@
 define(["sugar-web/bus", "sugar-web/env"], function (bus, env) {
+
+    'use strict';
+
     var datastore = {};
 
     function DatastoreObject(objectId) {
@@ -171,7 +174,7 @@ define(["sugar-web/bus", "sugar-web/env"], function (bus, env) {
     };
 
     datastore.load = function (objectId, callback) {
-        inputStream = bus.createInputStream();
+        var inputStream = bus.createInputStream();
 
         inputStream.open(function (error) {
             function onResponseReceived(responseError, result) {
@@ -201,7 +204,7 @@ define(["sugar-web/bus", "sugar-web/env"], function (bus, env) {
     };
 
     datastore.save = function (objectId, metadata, callback) {
-        outputStream = bus.createOutputStream();
+        var outputStream = bus.createOutputStream();
 
         outputStream.open(function (error) {
             function onResponseReceived(responseError, result) {

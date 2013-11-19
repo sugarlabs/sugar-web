@@ -1,5 +1,7 @@
 define(["sugar-web/activity/activity"], function (activity) {
 
+    'use strict';
+
     // This is a helper module that allows to persist key/value data
     // using the standard localStorage object.
     //

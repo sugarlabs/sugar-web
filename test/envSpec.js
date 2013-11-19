@@ -1,5 +1,7 @@
 define(["sugar-web/env"], function (env) {
 
+    'use strict';
+
     describe("environment", function () {
 
         it("should not return undefined", function () {

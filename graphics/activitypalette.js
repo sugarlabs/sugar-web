@@ -1,6 +1,8 @@
 define(["sugar-web/graphics/palette",
         "text!sugar-web/graphics/activitypalette.html"], function (palette, template) {
 
+    'use strict';
+
     var activitypalette = {};
 
     activitypalette.ActivityPalette = function (activityButton,

@@ -1,5 +1,7 @@
 define(["sugar-web/bus"], function (bus) {
 
+    'use strict';
+
     describe("bus requests", function () {
         var client;
 
