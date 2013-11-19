@@ -19,7 +19,7 @@ define(function () {
         this.elems = elems;
         var active;
 
-        for (i = 0; i < elems.length; i++) {
+        for (var i = 0; i < elems.length; i++) {
             var elem = elems[i];
             elem.addEventListener("click", clickHandler);
 

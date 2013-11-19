@@ -197,6 +197,7 @@ define(["sugar-web/bus", "sugar-web/datastore"], function (bus, datastore) {
             var wasLoaded = false;
             var objectId = null;
             var inputStream = null;
+            var objectData = null;
             var testData = new Uint8Array([1, 2, 3, 4]);
 
             runs(function () {

@@ -15,7 +15,7 @@ define(["sugar-web/bus"], function (bus) {
             setTimeout(function () {
                 var parsed = JSON.parse(data);
 
-                message = {
+                var message = {
                     data: JSON.stringify({
                         result: that.result,
                         error: that.error,
@@ -98,7 +98,7 @@ define(["sugar-web/bus"], function (bus) {
             var that = this;
 
             setTimeout(function () {
-                message = {
+                var message = {
                     data: JSON.stringify({
                         method: method,
                         params: that.params

@@ -3,6 +3,10 @@ define(["sugar-web/graphics/radiobuttonsgroup"], function (
 
     'use strict';
 
+    var elem1;
+    var elem2;
+    var elem3;
+
     beforeEach(function () {
         elem1 = document.createElement('button');
         elem2 = document.createElement('button');
