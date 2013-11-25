@@ -4,23 +4,27 @@ define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
 
     describe("dictstore on standalone mode", function () {
 
-      it("init should execute callback", function () {
+      describe("init method", function () {
 
-        spyOn(env, 'isStandalone').andReturn(true);
-        var callback = jasmine.createSpy();
+        it("should execute callback", function () {
 
-        dictstore.init(callback);
-        expect(callback).toHaveBeenCalled();
+          spyOn(env, 'isStandalone').andReturn(true);
+          var callback = jasmine.createSpy();
 
-      });
+          dictstore.init(callback);
+          expect(callback).toHaveBeenCalled();
 
-      it("init should maintain localStorage", function () {
+        });
 
-        spyOn(env, 'isStandalone').andReturn(true);
-        localStorage.test_key = "test";
+        it("should maintain localStorage", function () {
 
-        dictstore.init(function () {});
-        expect(localStorage.test_key).toBe("test");
+          spyOn(env, 'isStandalone').andReturn(true);
+          localStorage.test_key = "test";
+
+          dictstore.init(function () {});
+          expect(localStorage.test_key).toBe("test");
+
+        });
 
       });
 
