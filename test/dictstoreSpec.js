@@ -4,11 +4,14 @@ define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
 
     describe("dictstore on standalone mode", function () {
 
+      beforeEach(function() {
+        spyOn(env, 'isStandalone').andReturn(true);
+      });
+
       describe("init method", function () {
 
         it("should execute callback", function () {
 
-          spyOn(env, 'isStandalone').andReturn(true);
           var callback = jasmine.createSpy();
 
           dictstore.init(callback);
@@ -18,7 +21,6 @@ define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
 
         it("should maintain localStorage", function () {
 
-          spyOn(env, 'isStandalone').andReturn(true);
           localStorage.test_key = "test";
 
           dictstore.init(function () {});
@@ -32,7 +34,6 @@ define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
 
         it("should execute callback", function () {
 
-          spyOn(env, 'isStandalone').andReturn(true);
           var callback = jasmine.createSpy();
 
           dictstore.save(callback);
@@ -42,7 +43,6 @@ define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
 
         it("should saves on localStorage", function () {
 
-          spyOn(env, 'isStandalone').andReturn(true);
           localStorage.test_key = "test";
 
           dictstore.save();
