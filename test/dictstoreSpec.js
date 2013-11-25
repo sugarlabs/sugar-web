@@ -1,0 +1,33 @@
+define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
+
+    'use strict';
+
+    describe("dictstore on standalone mode", function () {
+
+      describe("init method", function () {
+
+        it("should execute callback", function () {
+
+          spyOn(env, 'isStandalone').andReturn(true);
+          var callback = jasmine.createSpy();
+
+          dictstore.init(callback);
+          expect(callback).toHaveBeenCalled();
+
+        });
+
+        it("should maintain localStorage", function () {
+
+          spyOn(env, 'isStandalone').andReturn(true);
+          localStorage.testKey = "test";
+
+          dictstore.init(function () {});
+          expect(localStorage.testKey).toBe("test");
+
+        });
+
+      });
+
+    });
+
+});
