@@ -4,6 +4,11 @@ define(function () {
 
     var env = {};
 
+    Object.defineProperty(env, "ACTIVITY_PROTOCOL", {
+        writable: false,
+        value: "activity:"
+    });
+
     env.getEnvironment = function (callback) {
         var sugar;
 
@@ -30,7 +35,7 @@ define(function () {
     };
 
     env.isStandalone = function () {
-        var activity_protocol = "activity:";
+        var activity_protocol = env.ACTIVITY_PROTOCOL;
         var current_protocol = env.get_current_protocol();
 
         return current_protocol !== activity_protocol;

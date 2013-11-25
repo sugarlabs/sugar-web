@@ -28,7 +28,7 @@ define(["sugar-web/env"], function (env) {
 
         it("should return false when location is activity's protocol", function () {
 
-          var activity_protocol = "activity:";
+          var activity_protocol = env.ACTIVITY_PROTOCOL;
           spyOn(env, 'get_current_protocol').andReturn(activity_protocol);
 
           var is_standalone_mode = env.isStandalone();
