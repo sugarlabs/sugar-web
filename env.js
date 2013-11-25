@@ -25,5 +25,16 @@ define(function () {
         }
     };
 
+    env.get_current_protocol = function () {
+        return window.location.protocol;
+    };
+
+    env.isStandalone = function () {
+        var activity_protocol = "activity:";
+        var current_protocol = env.get_current_protocol();
+
+        return current_protocol !== activity_protocol;
+    };
+
     return env;
 });
