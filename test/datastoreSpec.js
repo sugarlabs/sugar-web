@@ -1,6 +1,35 @@
-define(["sugar-web/bus", "sugar-web/datastore"], function (bus, datastore) {
+define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function (bus, env, datastore) {
 
     'use strict';
+
+    describe("Ensuring objectId to datastore object", function () {
+
+        // require: datastore is not used in standalone mode
+        it("should have objectId", function () {
+
+            var objectId = "objectId";
+            spyOn(env, "getObjectId").andCallFake(function (callback){
+                setTimeout(function () {
+                    callback(objectId);
+                }, 5000);
+            });
+            var callback = jasmine.createSpy();
+
+            var datastoreObject = new datastore.DatastoreObject();
+
+            runs(function () {
+                datastoreObject.ensureObjectId(callback);
+            });
+
+            waitsFor(function () {
+                return datastoreObject.objectId !== undefined;
+            }, "should have objectId received from the environment");
+
+            runs(function () {
+                expect(callback).toHaveBeenCalled();
+            });
+        });
+    });
 
     describe("datastore object", function () {
 
