@@ -11,9 +11,9 @@ define(["sugar-web/bus", "sugar-web/env"], function (bus, env) {
         this.ensureObjectId = function (callback) {
             var that = this;
 
-            env.getEnvironment(function (error, environment) {
-                if (environment.objectId !== null && that.objectId === undefined) {
-                    that.objectId = environment.objectId;
+            env.getObjectId(function (objectId) {
+                if (objectId !== null && that.objectId === undefined) {
+                    that.objectId = objectId;
                 }
                 callback();
             });
