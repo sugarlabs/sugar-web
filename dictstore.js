@@ -50,7 +50,7 @@ define(["sugar-web/activity/activity", "sugar-web/env"], function (activity, env
             callback = function () {};
         }
 
-        if (window.sugar.environment === undefined) {
+        if (env.isStandalone()) {
             // In standalone mode, use localStorage as is.
             callback();
         } else {
