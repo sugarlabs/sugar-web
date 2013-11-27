@@ -25,5 +25,16 @@ define(function () {
         }
     };
 
+    env.getURLScheme = function () {
+        return window.location.protocol;
+    };
+
+    env.isStandalone = function () {
+        var webActivityURLScheme = "activity:";
+        var currentURLScheme = env.getURLScheme();
+
+        return currentURLScheme !== webActivityURLScheme;
+    };
+
     return env;
 });

@@ -1,4 +1,4 @@
-define(["sugar-web/activity/activity"], function (activity) {
+define(["sugar-web/activity/activity", "sugar-web/env"], function (activity, env) {
 
     'use strict';
 
@@ -22,7 +22,7 @@ define(["sugar-web/activity/activity"], function (activity) {
 
     dictstore.init = function (callback) {
 
-        if (window.sugar.environment === undefined) {
+        if (env.isStandalone()) {
             // In standalone mode, use localStorage as is.
             callback();
 
@@ -50,7 +50,7 @@ define(["sugar-web/activity/activity"], function (activity) {
             callback = function () {};
         }
 
-        if (window.sugar.environment === undefined) {
+        if (env.isStandalone()) {
             // In standalone mode, use localStorage as is.
             callback();
         } else {
