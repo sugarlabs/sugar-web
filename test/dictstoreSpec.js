@@ -1,4 +1,4 @@
-define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
+define(["sugar-web/dictstore", "sugar-web/env", "sugar-web/activity/activity"], function (dictstore, env, activity) {
 
     'use strict';
 
@@ -50,5 +50,44 @@ define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
         });
       });
 
+    });
+
+    describe("dictstore on sugar mode", function () {
+
+      beforeEach(function() {
+        spyOn(env, 'isStandalone').andReturn(false);
+      });
+
+      describe("init method", function () {
+
+        function MockDatastoreObject(jsonData) {
+          this.loadAsText = function (callback) {
+            setTimeout(function () {
+              callback(null, [], jsonData);
+            }, 1000);
+          };
+        }
+
+        it("should populate localStorage", function () {
+          var initiated = false;
+          var jsonData = '{"key": "value"}';
+          var datastore_obj = new MockDatastoreObject(jsonData);
+          spyOn(activity, "getDatastoreObject").andReturn(datastore_obj);
+
+          runs(function () {
+            dictstore.init(function () {
+              initiated = true;
+            });
+          });
+
+          waitsFor(function () {
+            return initiated;
+          }, "callback should be executed");
+
+          runs(function () {
+            expect(localStorage.key).toBe("value");
+          });
+        });
+      });
     });
 });
