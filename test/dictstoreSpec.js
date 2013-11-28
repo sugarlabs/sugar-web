@@ -4,51 +4,51 @@ define(["sugar-web/dictstore", "sugar-web/env"], function (dictstore, env) {
 
     describe("dictstore on standalone mode", function () {
 
-      beforeEach(function() {
-        spyOn(env, 'isStandalone').andReturn(true);
-      });
-
-      describe("init method", function () {
-
-        it("should execute callback", function () {
-          var callback = jasmine.createSpy();
-
-          dictstore.init(callback);
-          expect(callback).toHaveBeenCalled();
+        beforeEach(function () {
+            spyOn(env, 'isStandalone').andReturn(true);
         });
 
-        it("should maintain localStorage", function () {
-          localStorage.testKey = "test";
+        describe("init method", function () {
 
-          dictstore.init(function () {});
-          expect(localStorage.testKey).toBe("test");
-        });
-      });
+            it("should execute callback", function () {
+                var callback = jasmine.createSpy();
 
-      describe("save method", function () {
-
-        it("should just execute the callback", function () {
-          var callbackExecuted;
-
-          localStorage.test_key = "test";
-
-          runs(function () {
-            callbackExecuted = false;
-
-            dictstore.save(function () {
-              callbackExecuted = true;
+                dictstore.init(callback);
+                expect(callback).toHaveBeenCalled();
             });
-          });
 
-          waitsFor(function () {
-            return callbackExecuted === true;
-          }, "The callback should executed");
+            it("should maintain localStorage", function () {
+                localStorage.testKey = "test";
 
-          runs(function () {
-            expect(localStorage.test_key).toBe("test");
-          });
+                dictstore.init(function () {});
+                expect(localStorage.testKey).toBe("test");
+            });
         });
-      });
+
+        describe("save method", function () {
+
+            it("should just execute the callback", function () {
+                var callbackExecuted;
+
+                localStorage.test_key = "test";
+
+                runs(function () {
+                    callbackExecuted = false;
+
+                    dictstore.save(function () {
+                        callbackExecuted = true;
+                    });
+                });
+
+                waitsFor(function () {
+                    return callbackExecuted === true;
+                }, "The callback should executed");
+
+                runs(function () {
+                    expect(localStorage.test_key).toBe("test");
+                });
+            });
+        });
 
     });
 });

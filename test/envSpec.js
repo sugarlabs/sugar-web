@@ -14,16 +14,18 @@ define(["sugar-web/env"], function (env) {
         });
 
         it("should return objectId provided from the sugar's environment", function () {
-            var environment = {objectId: "objectId"};
-            spyOn(env, "getEnvironment").andCallFake(function (callback){
+            var environment = {
+                objectId: "objectId"
+            };
+            spyOn(env, "getEnvironment").andCallFake(function (callback) {
                 setTimeout(function () {
                     callback(null, environment);
                 }, 5000);
             });
             var expected_objectId;
 
-            runs(function() {
-                env.getObjectId(function (objectId){
+            runs(function () {
+                env.getObjectId(function (objectId) {
                     expected_objectId = objectId;
                 });
             });
@@ -37,19 +39,19 @@ define(["sugar-web/env"], function (env) {
     describe("standalone mode", function () {
 
         it("should return true if in standalone mode", function () {
-          var noWebActivityURLScheme = "http:";
-          spyOn(env, 'getURLScheme').andReturn(noWebActivityURLScheme);
+            var noWebActivityURLScheme = "http:";
+            spyOn(env, 'getURLScheme').andReturn(noWebActivityURLScheme);
 
-          var isStandaloneMode = env.isStandalone();
-          expect(isStandaloneMode).toBe(true);
+            var isStandaloneMode = env.isStandalone();
+            expect(isStandaloneMode).toBe(true);
         });
 
         it("should return false if not in standalone mode", function () {
-          var webActivityURLScheme = "activity:";
-          spyOn(env, 'getURLScheme').andReturn(webActivityURLScheme);
+            var webActivityURLScheme = "activity:";
+            spyOn(env, 'getURLScheme').andReturn(webActivityURLScheme);
 
-          var isStandaloneMode = env.isStandalone();
-          expect(isStandaloneMode).toBe(false);
+            var isStandaloneMode = env.isStandalone();
+            expect(isStandaloneMode).toBe(false);
         });
     });
 });
