@@ -1,14 +1,14 @@
-define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function(bus, env, datastore) {
+define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function (bus, env, datastore) {
 
     'use strict';
 
-    describe("Ensure the datastore object has an objectId", function() {
+    describe("Ensure the datastore object has an objectId", function () {
 
         // FIXME does not work in standalone mode
-        it("should have objectId", function() {
+        it("should have objectId", function () {
             var objectId = "objectId";
-            spyOn(env, "getObjectId").andCallFake(function(callback) {
-                setTimeout(function() {
+            spyOn(env, "getObjectId").andCallFake(function (callback) {
+                setTimeout(function () {
                     callback(objectId);
                 }, 5000);
             });
@@ -16,15 +16,15 @@ define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function(bus, 
 
             var datastoreObject = new datastore.DatastoreObject();
 
-            runs(function() {
+            runs(function () {
                 datastoreObject.ensureObjectId(callback);
             });
 
-            waitsFor(function() {
+            waitsFor(function () {
                 return datastoreObject.objectId !== undefined;
             }, "should have objectId received from the environment");
 
-            runs(function() {
+            runs(function () {
                 expect(callback).toHaveBeenCalled();
             });
         });
