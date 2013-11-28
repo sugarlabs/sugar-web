@@ -54,4 +54,32 @@ define(["sugar-web/env"], function (env) {
             expect(isStandaloneMode).toBe(false);
         });
     });
+
+    describe("getEnvironment", function () {
+            
+        describe("on sugar mode when env was already set", function() {
+
+            it("should run callback with null error and env", function() {
+                var sugarOrig = JSON.parse(JSON.stringify(window.top.sugar));
+                var environment = {};
+                window.top.sugar = {
+                    environment: environment
+                };
+                var callback = jasmine.createSpy();
+
+                runs(function() {
+                    env.getEnvironment(callback);
+                });
+
+                waitsFor(function() {
+                    return callback.wasCalled;
+                }, "callback should be executed");
+
+                runs(function() {
+                    expect(callback).toHaveBeenCalledWith(null, environment);
+                    window.top.sugar = sugarOrig;
+                });
+            });
+        });
+    });
 });
