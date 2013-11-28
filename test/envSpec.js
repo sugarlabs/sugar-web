@@ -81,5 +81,20 @@ define(["sugar-web/env"], function (env) {
                 });
             });
         });
+
+        describe("on sugar mode when env was not set, yet", function () {
+
+            it("should set onEnvironmentSet handler", function () {
+                var sugarOrig = JSON.parse(JSON.stringify(window.top.sugar));
+                window.top.sugar = {};
+                var sugar = window.top.sugar;
+                expect(sugar.environment).toBeUndefined();
+
+                env.getEnvironment(function () {});
+                expect(sugar.onEnvironmentSet).not.toBeUndefined();
+
+                window.top.sugar = sugarOrig;
+            });
+        });
     });
 });
