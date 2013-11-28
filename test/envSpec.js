@@ -58,12 +58,20 @@ define(["sugar-web/env"], function (env) {
     describe("getEnvironment", function () {
 
         describe("in sugar mode", function () {
+            var sugarOrig;
+
+            beforeEach(function () {
+                sugarOrig = JSON.parse(JSON.stringify(window.top.sugar));
+                window.top.sugar = {};
+            });
+
+            afterEach(function () {
+                window.top.sugar = sugarOrig;
+            });
 
             describe("when env was already set", function () {
 
                 it("should run callback with null error and env", function () {
-                    var sugarOrig = JSON.parse(
-                        JSON.stringify(window.top.sugar));
                     var environment = {};
                     window.top.sugar = {
                         environment: environment
@@ -81,7 +89,6 @@ define(["sugar-web/env"], function (env) {
                     runs(function () {
                         expect(callback).toHaveBeenCalledWith(
                             null, environment);
-                        window.top.sugar = sugarOrig;
                     });
                 });
             });
@@ -89,16 +96,11 @@ define(["sugar-web/env"], function (env) {
             describe("when env was not set, yet", function () {
 
                 it("should set onEnvironmentSet handler", function () {
-                    var sugarOrig = JSON.parse(
-                        JSON.stringify(window.top.sugar));
-                    window.top.sugar = {};
                     var sugar = window.top.sugar;
                     expect(sugar.environment).toBeUndefined();
 
                     env.getEnvironment(function () {});
                     expect(sugar.onEnvironmentSet).not.toBeUndefined();
-
-                    window.top.sugar = sugarOrig;
                 });
             });
         });
