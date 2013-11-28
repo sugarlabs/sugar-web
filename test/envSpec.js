@@ -57,43 +57,49 @@ define(["sugar-web/env"], function (env) {
 
     describe("getEnvironment", function () {
 
-        describe("in sugar mode when env was already set", function () {
+        describe("in sugar mode", function () {
 
-            it("should run callback with null error and env", function () {
-                var sugarOrig = JSON.parse(JSON.stringify(window.top.sugar));
-                var environment = {};
-                window.top.sugar = {
-                    environment: environment
-                };
-                var callback = jasmine.createSpy();
+            describe("when env was already set", function () {
 
-                runs(function () {
-                    env.getEnvironment(callback);
-                });
+                it("should run callback with null error and env", function () {
+                    var sugarOrig = JSON.parse(
+                        JSON.stringify(window.top.sugar));
+                    var environment = {};
+                    window.top.sugar = {
+                        environment: environment
+                    };
+                    var callback = jasmine.createSpy();
 
-                waitsFor(function () {
-                    return callback.wasCalled;
-                }, "callback should be executed");
+                    runs(function () {
+                        env.getEnvironment(callback);
+                    });
 
-                runs(function () {
-                    expect(callback).toHaveBeenCalledWith(null, environment);
-                    window.top.sugar = sugarOrig;
+                    waitsFor(function () {
+                        return callback.wasCalled;
+                    }, "callback should be executed");
+
+                    runs(function () {
+                        expect(callback).toHaveBeenCalledWith(
+                            null, environment);
+                        window.top.sugar = sugarOrig;
+                    });
                 });
             });
-        });
 
-        describe("on sugar mode when env was not set, yet", function () {
+            describe("when env was not set, yet", function () {
 
-            it("should set onEnvironmentSet handler", function () {
-                var sugarOrig = JSON.parse(JSON.stringify(window.top.sugar));
-                window.top.sugar = {};
-                var sugar = window.top.sugar;
-                expect(sugar.environment).toBeUndefined();
+                it("should set onEnvironmentSet handler", function () {
+                    var sugarOrig = JSON.parse(
+                        JSON.stringify(window.top.sugar));
+                    window.top.sugar = {};
+                    var sugar = window.top.sugar;
+                    expect(sugar.environment).toBeUndefined();
 
-                env.getEnvironment(function () {});
-                expect(sugar.onEnvironmentSet).not.toBeUndefined();
+                    env.getEnvironment(function () {});
+                    expect(sugar.onEnvironmentSet).not.toBeUndefined();
 
-                window.top.sugar = sugarOrig;
+                    window.top.sugar = sugarOrig;
+                });
             });
         });
     });
