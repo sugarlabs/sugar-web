@@ -103,6 +103,21 @@ define(["sugar-web/env"], function (env) {
                     env.getEnvironment(function () {});
                     expect(sugar.onEnvironmentSet).not.toBeUndefined();
                 });
+
+                it("should run callback on EnvironmentSet event", function () {
+                    var sugar = window.top.sugar;
+                    sugar.environment = undefined;
+                    expect(sugar.environment).toBeUndefined();
+                    expect(sugar.onEnvironmentSet).toBeUndefined();
+                    var callback = jasmine.createSpy();
+                    var expectedEnv = "env";
+
+                    env.getEnvironment(callback);
+                    sugar.environment = expectedEnv;
+                    sugar.onEnvironmentSet();
+
+                    expect(callback).toHaveBeenCalledWith(null, expectedEnv);
+                });
             });
         });
     });
