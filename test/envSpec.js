@@ -103,6 +103,7 @@ define(["sugar-web/env"], function (env) {
 
                 it("should set environment setter", function () {
                     expect(sugar.environment).toBeUndefined();
+                    expect(sugar.onEnvironmentSet).toBeUndefined();
                     env.getEnvironment(function () {});
                     expect(sugar.onEnvironmentSet).not.toBeUndefined();
                 });
