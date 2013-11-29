@@ -98,6 +98,7 @@ define(["sugar-web/env"], function (env) {
                     var sugar = window.top.sugar;
                     sugar.environment = undefined;
                     expect(sugar.environment).toBeUndefined();
+                    expect(sugar.onEnvironmentSet).toBeUndefined();
 
                     env.getEnvironment(function () {});
                     expect(sugar.onEnvironmentSet).not.toBeUndefined();
