@@ -62,6 +62,7 @@ define(["sugar-web/env"], function (env) {
 
             beforeEach(function () {
                 sugarOrig = JSON.parse(JSON.stringify(window.top.sugar));
+                window.top.sugar = {};
             });
 
             afterEach(function () {
