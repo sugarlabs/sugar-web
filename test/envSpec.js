@@ -56,17 +56,20 @@ define(["sugar-web/env"], function (env) {
     });
 
     describe("getEnvironment", function () {
+        var sugarOrig;
+
+        beforeEach(function () {
+            sugarOrig = JSON.parse(JSON.stringify(window.top.sugar));
+        });
+
+        afterEach(function () {
+            window.top.sugar = sugarOrig;
+        });
 
         describe("on sugar mode", function () {
-            var sugarOrig;
 
             beforeEach(function () {
-                sugarOrig = JSON.parse(JSON.stringify(window.top.sugar));
                 window.top.sugar = {};
-            });
-
-            afterEach(function () {
-                window.top.sugar = sugarOrig;
             });
 
             describe("when env was already set", function () {
@@ -119,6 +122,17 @@ define(["sugar-web/env"], function (env) {
                     expect(callback).toHaveBeenCalledWith(null, expectedEnv);
                 });
             });
+        });
+
+        describe("on standalone mode", function () {
+
+            //FIXME: Why do I need to set sugar on standalone mode???
+            it("should set global sugar", function () {
+                window.top.sugar = undefined;
+                env.getEnvironment();
+                expect(window.top.sugar).not.toBeUndefined();
+            });
+
         });
     });
 });
