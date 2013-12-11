@@ -124,15 +124,9 @@ define(["sugar-web/env"], function (env) {
             });
         });
 
-        describe("in standalone mode", function () {
-
-            //FIXME: Why do I need to set sugar on standalone mode???
-            it("should set global sugar", function () {
-                window.top.sugar = undefined;
-                env.getEnvironment();
-                expect(window.top.sugar).not.toBeUndefined();
-            });
-
+        it("should run in standalone mode", function () {
+            window.top.sugar = undefined;
+            expect(env.getEnvironment).not.toThrow();
         });
     });
 });
