@@ -38,6 +38,7 @@ define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function (bus,
             // FIXME: due to db initialization,
             // the very first save() call may take a while
             jasmine.getEnv().defaultTimeoutInterval = 10000;
+            spyOn(env, 'isStandalone').andReturn(false);
             bus.listen();
         });
 
