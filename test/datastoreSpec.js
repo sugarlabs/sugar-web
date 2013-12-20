@@ -33,6 +33,7 @@ define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function (bus,
     describe("datastore object", function () {
 
         beforeEach(function () {
+            spyOn(env, 'isStandalone').andReturn(false);
             bus.listen();
         });
 
