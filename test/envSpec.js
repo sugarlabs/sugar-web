@@ -59,6 +59,10 @@ define(["sugar-web/env"], function (env) {
 
         describe("in sugar mode", function () {
 
+            beforeEach(function () {
+                spyOn(env, 'isStandalone').andReturn(false);
+            });
+
             describe("when env was already set", function () {
 
                 it("should run callback with null error and env", function () {
