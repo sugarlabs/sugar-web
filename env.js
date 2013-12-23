@@ -10,22 +10,18 @@ define(function () {
                 callback(null, {});
             }, 0);
         } else {
-            var sugar;
+            var environmentCallback = function () {
+                callback(null, window.top.sugar.environment);
+            };
 
             if (window.top.sugar) {
-                sugar = window.top.sugar;
-            } else {
-                sugar = {};
-                window.top.sugar = sugar;
-            }
-
-            if (sugar.environment) {
                 setTimeout(function () {
-                    callback(null, sugar.environment);
+                    environmentCallback();
                 }, 0);
             } else {
-                sugar.onEnvironmentSet = function () {
-                    callback(null, sugar.environment);
+                window.top.sugar = {};
+                window.top.sugar.onEnvironmentSet = function () {
+                    environmentCallback();
                 };
             }
         }
