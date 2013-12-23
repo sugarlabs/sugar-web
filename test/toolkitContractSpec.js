@@ -5,6 +5,10 @@ define(["sugar-web/env"], function (env) {
     describe("Environment object", function () {
 
         it("should have valid properties", function () {
+            //FIXME: we shouldn't stub this here.
+            //current implementation of isStandalone fails with sugar-web-test
+            spyOn(env, 'isStandalone').andReturn(false);
+
             var expectedEnv;
 
             runs(function () {

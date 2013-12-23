@@ -59,6 +59,10 @@ define(["sugar-web/env"], function (env) {
 
         describe("in sugar mode", function () {
 
+            beforeEach(function () {
+                spyOn(env, 'isStandalone').andReturn(false);
+            });
+
             describe("when env was already set", function () {
 
                 it("should run callback with null error and env", function () {
@@ -109,9 +113,26 @@ define(["sugar-web/env"], function (env) {
             });
         });
 
-        it("should run in standalone mode", function () {
+        it("should return {} in standalone mode", function () {
             window.top.sugar = undefined;
-            expect(env.getEnvironment).not.toThrow();
+            spyOn(env, 'isStandalone').andReturn(true);
+            var expectedEnv = {};
+            var actualEnv;
+
+            runs(function () {
+                env.getEnvironment(function (error, environment) {
+                    actualEnv = environment;
+                });
+            });
+
+            waitsFor(function () {
+                return actualEnv !== undefined;
+            }, "environment not to be undefined");
+
+            runs(function () {
+                expect(actualEnv).toEqual({});
+            });
+
         });
     });
 });

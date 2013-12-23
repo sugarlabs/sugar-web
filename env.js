@@ -5,23 +5,22 @@ define(function () {
     var env = {};
 
     env.getEnvironment = function (callback) {
-        var sugar;
-
-        if (window.top.sugar) {
-            sugar = window.top.sugar;
+        if (env.isStandalone()) {
+            callback(null, {});
         } else {
-            sugar = {};
-            window.top.sugar = sugar;
-        }
-
-        if (sugar.environment) {
-            setTimeout(function () {
-                callback(null, sugar.environment);
-            }, 0);
-        } else {
-            sugar.onEnvironmentSet = function () {
-                callback(null, sugar.environment);
+            var environmentCallback = function () {
+                callback(null, window.top.sugar.environment);
             };
+            if (window.top.sugar) {
+                setTimeout(function () {
+                    environmentCallback();
+                }, 0);
+            } else {
+                window.top.sugar = {};
+                window.top.sugar.onEnvironmentSet = function () {
+                    environmentCallback();
+                };
+            }
         }
     };
 
