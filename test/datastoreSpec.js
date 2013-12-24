@@ -2,6 +2,8 @@ define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function (bus,
 
     'use strict';
 
+    var defaultTimeoutInterval = jasmine.getEnv().defaultTimeoutInterval;
+
     describe("Ensure the datastore object has an objectId", function () {
 
         // FIXME does not work in standalone mode
@@ -33,10 +35,12 @@ define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function (bus,
     describe("datastore object", function () {
 
         beforeEach(function () {
+            jasmine.getEnv().defaultTimeoutInterval = 10000;
             bus.listen();
         });
 
         afterEach(function () {
+            jasmine.getEnv().defaultTimeoutInterval = defaultTimeoutInterval;
             bus.close();
         });
 
@@ -125,10 +129,12 @@ define(["sugar-web/bus", "sugar-web/env", "sugar-web/datastore"], function (bus,
     describe("datastore", function () {
 
         beforeEach(function () {
+            jasmine.getEnv().defaultTimeoutInterval = 10000;
             bus.listen();
         });
 
         afterEach(function () {
+            jasmine.getEnv().defaultTimeoutInterval = defaultTimeoutInterval;
             bus.close();
         });
 
