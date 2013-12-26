@@ -5,6 +5,9 @@ define(function () {
     var env = {};
 
     env.getEnvironment = function (callback) {
+        // FIXME: we assume this code runs on the same thread as the
+        // javascript executed from sugar-toolkit-gtk3 (python)
+
         if (env.isStandalone()) {
             setTimeout(function () {
                 callback(null, {});
