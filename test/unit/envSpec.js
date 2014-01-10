@@ -2,28 +2,19 @@ define(["sugar-web/env"], function (env) {
 
     'use strict';
 
-    describe("environment", function () {
+    describe("getObjectId", function () {
 
-        it("should return objectId provided from the sugar's environment", function () {
+        it("should return objectId from the sugar's environment", function () {
             var environment = {
                 objectId: "objectId"
             };
             spyOn(env, "getEnvironment").andCallFake(function (callback) {
-                setTimeout(function () {
-                    callback(null, environment);
-                }, 5000);
-            });
-            var expected_objectId;
-
-            runs(function () {
-                env.getObjectId(function (objectId) {
-                    expected_objectId = objectId;
-                });
+                callback(null, environment);
             });
 
-            waitsFor(function () {
-                return expected_objectId !== undefined;
-            }, "should return objectId");
+            env.getObjectId(function (objectId) {
+                expect(objectId).toBe(environment.objectId);
+            });
         });
     });
 
