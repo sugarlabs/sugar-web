@@ -31,10 +31,8 @@ define(function () {
     };
 
     env.getObjectId = function (callback) {
-        var objectId;
         env.getEnvironment(function (error, environment) {
-            objectId = environment.objectId;
-            callback(objectId);
+            callback(environment.objectId);
         });
     };
 
