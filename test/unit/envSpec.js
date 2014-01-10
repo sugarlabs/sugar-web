@@ -9,21 +9,12 @@ define(["sugar-web/env"], function (env) {
                 objectId: "objectId"
             };
             spyOn(env, "getEnvironment").andCallFake(function (callback) {
-                setTimeout(function () {
-                    callback(null, environment);
-                }, 5000);
-            });
-            var expected_objectId;
-
-            runs(function () {
-                env.getObjectId(function (objectId) {
-                    expected_objectId = objectId;
-                });
+                callback(null, environment);
             });
 
-            waitsFor(function () {
-                return expected_objectId !== undefined;
-            }, "should return objectId");
+            env.getObjectId(function (objectId) {
+                expect(objectId).toBe(environment.objectId);
+            });
         });
     });
 
