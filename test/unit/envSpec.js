@@ -2,9 +2,9 @@ define(["sugar-web/env"], function (env) {
 
     'use strict';
 
-    describe("environment", function () {
+    describe("getObjectId", function () {
 
-        it("should return objectId provided from the sugar's environment", function () {
+        it("should return objectId from the sugar's environment", function () {
             var environment = {
                 objectId: "objectId"
             };
