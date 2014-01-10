@@ -10,7 +10,7 @@ define(["sugar-web/env", "sugar-web/datastore"], function (env, datastore) {
             spyOn(env, "getObjectId").andCallFake(function (callback) {
                 setTimeout(function () {
                     callback(objectId);
-                }, 5000);
+                }, 0);
             });
             var callback = jasmine.createSpy();
 
