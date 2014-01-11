@@ -11,7 +11,7 @@ define(["sugar-web/env"], function (env) {
             spyOn(env, "getEnvironment").andCallFake(function (callback) {
                 setTimeout(function () {
                     callback(null, environment);
-                }, 5000);
+                }, 0);
             });
             var expected_objectId;
 
