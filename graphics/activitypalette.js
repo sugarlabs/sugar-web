@@ -50,13 +50,13 @@ define(["sugar-web/graphics/palette",
 
     activitypalette.ActivityPalette.prototype =
         Object.create(palette.Palette.prototype, {
-        setTitleDescription: {
-            value: setTitleDescription,
-            enumerable: true,
-            configurable: true,
-            writable: true
-        }
-    });
+            setTitleDescription: {
+                value: setTitleDescription,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            }
+        });
 
     return activitypalette;
 });

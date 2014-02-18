@@ -21,8 +21,8 @@ define(["webL10n",
         function sendPauseEvent() {
             var pauseEvent = new CustomEvent(
                 "activityPause", {
-                cancelable: true
-            });
+                    cancelable: true
+                });
             window.dispatchEvent(pauseEvent);
         }
         bus.onNotification("activity.pause", sendPauseEvent);
@@ -34,8 +34,8 @@ define(["webL10n",
         function sendStopEvent() {
             var stopEvent = new CustomEvent(
                 "activityStop", {
-                cancelable: true
-            });
+                    cancelable: true
+                });
             var result = window.dispatchEvent(stopEvent);
             if (result) {
                 activity.close();

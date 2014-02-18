@@ -10,12 +10,12 @@ define(["sugar-web/graphics/palette",
 
         this.selectItemEvent = new CustomEvent(
             "selectItem", {
-            detail: {
-                item: undefined
-            },
-            bubbles: true,
-            cancelable: true
-        });
+                detail: {
+                    item: undefined
+                },
+                bubbles: true,
+                cancelable: true
+            });
 
         var menuElem = document.createElement('ul');
         menuElem.className = "menu";
@@ -45,13 +45,13 @@ define(["sugar-web/graphics/palette",
 
     menupalette.MenuPalette.prototype =
         Object.create(palette.Palette.prototype, {
-        addEventListener: {
-            value: addEventListener,
-            enumerable: true,
-            configurable: true,
-            writable: true
-        }
-    });
+            addEventListener: {
+                value: addEventListener,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            }
+        });
 
     return menupalette;
 });
