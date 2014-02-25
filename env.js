@@ -36,15 +36,15 @@ define(function () {
         });
     };
 
-    env.getURLScheme = function () {
-        return window.location.protocol;
+    env.getHost = function() {
+        return window.location.hostname;
     };
 
     env.isStandalone = function () {
-        var webActivityURLScheme = "activity:";
-        var currentURLScheme = env.getURLScheme();
+        var webActivityHost = "0.0.0.0";
+        var currentHost = env.getHost();
 
-        return currentURLScheme !== webActivityURLScheme;
+        return currentHost !== webActivityHost;
     };
 
     return env;
