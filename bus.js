@@ -15,8 +15,6 @@ define(["sugar-web/env"], function (env) {
         var that = this;
 
         env.getEnvironment(function (error, environment) {
-            if (env.isSugarizer())
-                return;
             var port = environment.apiSocketPort;
             var socket = new WebSocket("ws://localhost:" + port);
 
@@ -147,23 +145,6 @@ define(["sugar-web/env"], function (env) {
     };
 
     bus.sendMessage = function (method, params, callback) {
-        if (env.isSugarizer()) {
-            if (method == "activity.close") {
-                window.location = "../../index.html";
-            } else if (method == "activity.get_xo_color") {
-                var color = {stroke: "#FF2B34", fill: "#005FE4"};
-                if (typeof(Storage)!=="undefined" && typeof(window.localStorage)!=="undefined") {
-                    try {
-                         color = JSON.parse(window.localStorage.getItem("sugar_settings")).colorvalue;
-                    } catch(err) {}
-                }
-                callback(null, [[color.fill, color.stroke]]);
-            } else if (method == "open_stream" || method == "datastore.save" || method == "close_stream") {
-                callback(null, [[]]);
-            }
-            return;
-        }
-
         var message = {
             "method": method,
             "id": lastId,
