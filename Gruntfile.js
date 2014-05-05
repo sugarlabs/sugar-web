@@ -1,3 +1,5 @@
+var which = require('which');
+
 module.exports = function (grunt) {
 
     grunt.initConfig({
@@ -39,8 +41,9 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', 'run automated tests', function () {
         if (process.env.SUGAR_DEVELOPER) {
-            grunt.config('karma.unit.browsers', ['sugar-web-test']);
-            grunt.config('karma.functional.browsers', ['sugar-web-test']);
+            var browserPath = which.sync('sugar-web-test');
+            grunt.config('karma.unit.browsers', browserPath);
+            grunt.config('karma.functional.browsers', browserPath);
         }
 
         grunt.task.run('karma:unit');
