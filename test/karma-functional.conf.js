@@ -5,7 +5,7 @@ sharedConfig = require("./karma-shared.conf.js");
 module.exports = function (config) {
     var testFiles = [
         {
-            pattern: 'test/**/*Spec.js',
+            pattern: 'test/functional/**/*.js',
             included: false
         }
     ];
