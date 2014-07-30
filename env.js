@@ -44,7 +44,10 @@ define(function () {
         var webActivityURLScheme = "activity:";
         var currentURLScheme = env.getURLScheme();
 
-        return currentURLScheme !== webActivityURLScheme;
+        // the control of hostname !== '0.0.0.0' is used
+        // for compatibility with F18 and webkit1
+        return currentURLScheme !== webActivityURLScheme &&
+            window.location.hostname !== '0.0.0.0';
     };
 
     return env;
