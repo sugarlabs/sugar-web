@@ -5,8 +5,7 @@ define(["sugar-web/graphics/palette",
 
     var activitypalette = {};
 
-    activitypalette.ActivityPalette = function (activityButton,
-        datastoreObject) {
+    activitypalette.ActivityPalette = function (activityButton, datastoreObject) {
 
         palette.Palette.call(this, activityButton);
 
