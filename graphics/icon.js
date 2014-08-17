@@ -44,9 +44,9 @@ define(function () {
 
         var client;
         
-        if(window.XMLHttpRequest){
+        if (window.XMLHttpRequest) {
             client = new XMLHttpRequest();
-        }else{
+        } else {
             client = new ActiveXObject("Microsoft.XMLHTTP");
         }
 
