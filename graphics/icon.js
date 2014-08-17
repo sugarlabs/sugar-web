@@ -42,7 +42,13 @@ define(function () {
             return;
         }
 
-        var client = new XMLHttpRequest();
+        var client;
+        
+        if(window.XMLHttpRequest){
+            client = new XMLHttpRequest();
+        }else{
+            client = new ActiveXObject("Microsoft.XMLHTTP");
+        }
 
         client.onload = function () {
             var iconData = this.responseText;
