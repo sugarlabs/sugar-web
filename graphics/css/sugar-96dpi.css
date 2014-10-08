@@ -80,6 +80,34 @@ a {
 .toolbar #stop-button {
   background-image: url('../icons/actions/activity-stop.svg');
 }
+/* Alert */
+.alert {
+  position: absolute;
+  top: 55px;
+  z-index: 10;
+  height: 55px;
+  width: 100%;
+  color: white;
+  background-color: black;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+.alert p {
+  padding-left: 11px;
+  vertical-align: middle;
+  width: 80%;
+}
+.alert .button-box {
+  position: fixed;
+  top: 55px;
+  right: 0px;
+  height: 55px;
+  width: 20%;
+  margin: 11px;
+}
+.alert button {
+  float: right;
+}
 /* Canvas */
 #canvas {
   position: absolute;
