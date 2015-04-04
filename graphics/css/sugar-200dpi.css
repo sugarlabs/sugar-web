@@ -478,5 +478,10 @@ ul.flat-list.striped li:nth-child(odd) {
 }
 /* ActivityPalette */
 #activity-palette .wrapper {
-  width: 371px;
+  min-width: 371px;
+  max-width: none;
+}
+#activity-palette .wrapper textarea {
+  min-width: 371px;
+  min-height: 8em;
 }
