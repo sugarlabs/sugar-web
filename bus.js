@@ -16,7 +16,7 @@ define(["sugar-web/env"], function (env) {
 
         env.getEnvironment(function (error, environment) {
             var port = environment.apiSocketPort;
-            var socket = new WebSocket("ws://localhost:" + port);
+            var socket = new WebSocket("ws://0.0.0.0:" + port);
 
             socket.binaryType = "arraybuffer";
 
