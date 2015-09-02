@@ -8,14 +8,10 @@ define(["sugar-web/graphics/palette",
     menupalette.MenuPalette = function (invoker, primaryText, menuData) {
         palette.Palette.call(this, invoker, primaryText);
 
-        this.selectItemEvent = new CustomEvent(
-            "selectItem", {
-                detail: {
-                    item: undefined
-                },
-                bubbles: true,
-                cancelable: true
-            });
+        var selectItemEvent = document.createEvent("CustomEvent");
+        selectItemEvent.initCustomEvent('selectItem', true, true, {
+            'item': undefined
+        });
 
         var menuElem = document.createElement('ul');
         menuElem.className = "menu";
