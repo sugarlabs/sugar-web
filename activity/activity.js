@@ -160,5 +160,62 @@ define(["webL10n",
 
     };
 
+    activity.showConfirmationAlert = function (title, message, btnOkLabel,
+                                               btnCancelLabel, btnCallback) {
+        /*
+        title, message, btnOkLabel and btCancelLabel are str parameters
+        callback is a function called when the user press a button,
+        and receives a boolean with true if the user pressed the Ok button
+        */
+        if (btnOkLabel == null) {
+            btnOkLabel = 'Ok';
+        }
+        if (btnCancelLabel == null) {
+            btnCancelLabel = 'Cancel';
+        }
+
+        var fragment = document.createDocumentFragment();
+        var div = document.createElement('div');
+        div.className = 'alert';
+        div.id = 'activity-alert';
+
+        div.innerHTML = '<p><b>' + title + '</b><br/>' + message + '</p>' +
+            '<p class="button-box">' +
+            '<button id="actvity-alert-ok-btn" class="icon">' +
+            '<span class="ok"></span>' +
+            btnOkLabel + '</button>' +
+            '<button id="actvity-alert-cancel-btn" class="icon">' +
+            '<span class="cancel"></span>' +
+            btnCancelLabel + '</button>' +
+            '</p>';
+
+        fragment.appendChild(div);
+
+        document.body.appendChild(fragment.cloneNode(true));
+
+        var okBtn = document.getElementById("actvity-alert-ok-btn");
+        var cancelBtn = document.getElementById("actvity-alert-cancel-btn");
+
+        function hideAlertAndReply(result) {
+            var alertNode = document.getElementById("activity-alert");
+            if (alertNode.parentNode) {
+                alertNode.parentNode.removeChild(alertNode);
+            };
+            if (btnCallback != null) {
+                btnCallback(result);
+            };
+        };
+
+        okBtn.addEventListener('click', function (e) {
+            hideAlertAndReply(true);
+        });
+
+        cancelBtn.addEventListener('click', function (e) {
+            hideAlertAndReply(false);
+        });
+
+    };
+
+
     return activity;
 });

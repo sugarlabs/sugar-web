@@ -108,6 +108,9 @@ a {
 .alert button {
   float: right;
 }
+.button-box button + button {
+  margin-right: 11px;
+}
 /* Canvas */
 #canvas {
   position: absolute;
