@@ -1,5 +1,5 @@
 define(["sugar-web/graphics/palette",
-        "text!sugar-web/graphics/menupalette.html", "mustache"], function (palette, template, mustache) {
+        "mustache"], function (palette, mustache) {
 
     'use strict';
 
@@ -16,6 +16,15 @@ define(["sugar-web/graphics/palette",
                 bubbles: true,
                 cancelable: true
             });
+
+        var template = '{{#.}}' +
+            '<li>' +
+            '  <button {{ #icon }}class="icon"{{ /icon }} {{ #id }}id="{{ id }}"{{ /id }}>' +
+            '    {{ #icon }}<span></span>{{ /icon }}' +
+            '    {{ label }}' +
+            '  </button>' +
+            '</li>' +
+            '{{/.}}';
 
         var menuElem = document.createElement('ul');
         menuElem.className = "menu";
