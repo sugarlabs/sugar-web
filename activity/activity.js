@@ -134,6 +134,9 @@ define(["webL10n",
             btnLabel = 'Ok';
         }
 
+        // if there are a alert visible, hide it
+        activity.hideAlert();
+
         var fragment = document.createDocumentFragment();
         var div = document.createElement('div');
         div.className = 'alert';
@@ -149,10 +152,7 @@ define(["webL10n",
 
         var btn = document.getElementById("actvity-alert-btn");
         btn.addEventListener('click', function (e) {
-            var alertNode = document.getElementById("activity-alert");
-            if (alertNode.parentNode) {
-                alertNode.parentNode.removeChild(alertNode);
-            }
+            activity.hideAlert();
             if (btnCallback != null) {
                 btnCallback();
             }
@@ -173,6 +173,9 @@ define(["webL10n",
         if (btnCancelLabel == null) {
             btnCancelLabel = 'Cancel';
         }
+
+        // if there are a alert visible, hide it
+        activity.hideAlert();
 
         var fragment = document.createDocumentFragment();
         var div = document.createElement('div');
@@ -197,10 +200,7 @@ define(["webL10n",
         var cancelBtn = document.getElementById("actvity-alert-cancel-btn");
 
         function hideAlertAndReply(result) {
-            var alertNode = document.getElementById("activity-alert");
-            if (alertNode.parentNode) {
-                alertNode.parentNode.removeChild(alertNode);
-            };
+            activity.hideAlert();
             if (btnCallback != null) {
                 btnCallback(result);
             };
@@ -216,6 +216,12 @@ define(["webL10n",
 
     };
 
+    activity.hideAlert = function() {
+        var alertNode = document.getElementById("activity-alert");
+        if (alertNode && alertNode.parentNode) {
+            alertNode.parentNode.removeChild(alertNode);
+        };
+    };
 
     return activity;
 });
