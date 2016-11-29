@@ -620,7 +620,13 @@ ul.flat-list.striped li:nth-child(odd) {
 /* ActivityPalette */
 
 #activity-palette .wrapper {
-  width: 5 * @cell-size - 2 * @line-width;
+  min-width: 5 * @cell-size - 2 * @line-width;
+  max-width: none;
+}
+
+#activity-palette .wrapper textarea {
+  min-width: 5 * @cell-size - 2 * @line-width;
+  min-height: 8em;
 }
 
 #activity-palette textarea {
