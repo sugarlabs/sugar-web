@@ -13,12 +13,12 @@ module.exports = function (grunt) {
         karma: {
             unit: {
                 configFile: 'test/karma-unit.conf.js',
-                browsers: ['Chrome'],
+                browsers: ['Firefox'],
                 singleRun: true
             },
             functional: {
                 configFile: 'test/karma-functional.conf.js',
-                browsers: ['Chrome'],
+                browsers: ['Firefox'],
                 singleRun: true
             }
         },

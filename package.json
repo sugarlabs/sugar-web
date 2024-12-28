@@ -2,16 +2,17 @@
   "name": "sugar-web",
   "version": "0.110.0",
   "devDependencies": {
-    "grunt": "0.4.4",
-    "grunt-contrib-jshint": "0.10.0",
-    "karma": "0.12.14",
-    "grunt-karma": "0.8.3",
-    "karma-jasmine": "0.1.5",
-    "requirejs": "2.1.11",
-    "karma-requirejs": "0.2.1",
-    "karma-chrome-launcher": "0.1.3",
+    "grunt": "^1.6.1",
+    "grunt-contrib-jshint": "^3.2.0",
     "grunt-jsbeautifier": "0.2.7",
+    "grunt-karma": "^4.0.2",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^0.1.3",
+    "karma-firefox-launcher": "^2.1.3",
+    "karma-jasmine": "^5.1.0",
+    "karma-requirejs": "^0.2.6",
     "karma-script-launcher": "0.1.0",
+    "requirejs": "^2.3.7",
     "which": "1.0.5"
   },
   "volo": {
@@ -21,5 +22,9 @@
       "mustache": "github:janl/mustache.js/0.7.2",
       "text": "github:requirejs/text"
     }
+  },
+  "dependencies": {
+    "mustache": "^4.2.0",
+    "webL10n": "github:sugarlabs/webL10n"
   }
 }
