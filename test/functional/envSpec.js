@@ -1,29 +1,22 @@
 define(["sugar-web/env"], function (env) {
-
     'use strict';
 
     describe("getObjectId", function () {
-
-        it("should return objectId from the sugar's environment", function () {
+        it("should return objectId from the sugar's environment", function (done) {
             var environment = {
                 objectId: "objectId"
             };
-            spyOn(env, "getEnvironment").andCallFake(function (callback) {
+            
+            spyOn(env, "getEnvironment").and.callFake(function (callback) {
                 setTimeout(function () {
                     callback(null, environment);
                 }, 0);
             });
-            var expected_objectId;
 
-            runs(function () {
-                env.getObjectId(function (objectId) {
-                    expected_objectId = objectId;
-                });
+            env.getObjectId(function (objectId) {
+                expect(objectId).toEqual(environment.objectId);
+                done();
             });
-
-            waitsFor(function () {
-                return expected_objectId !== undefined;
-            }, "should return objectId");
         });
     });
 
@@ -39,57 +32,46 @@ define(["sugar-web/env"], function (env) {
         });
 
         describe("in sugar mode", function () {
-
             beforeEach(function () {
-                spyOn(env, 'isStandalone').andReturn(false);
+                spyOn(env, 'isStandalone').and.returnValue(false);
             });
 
             describe("when env was already set", function () {
-
-                it("should run callback with null error and env", function () {
+                it("should run callback with null error and env", function (done) {
                     var environment = {};
                     window.top.sugar = {
                         environment: environment
                     };
-                    var callback = jasmine.createSpy();
-
-                    runs(function () {
-                        env.getEnvironment(callback);
-                    });
-
-                    waitsFor(function () {
-                        return callback.wasCalled;
-                    }, "callback should be executed");
-
-                    runs(function () {
-                        expect(callback).toHaveBeenCalledWith(
-                            null, environment);
+                    
+                    env.getEnvironment(function(error, env) {
+                        expect(error).toBeNull();
+                        expect(env).toBe(environment);
+                        done();
                     });
                 });
             });
 
             describe("when env was not set, yet", function () {
-
                 beforeEach(function () {
                     window.top.sugar = undefined;
                 });
 
                 it("should set onEnvironmentSet handler", function () {
-                    var sugar;
                     env.getEnvironment(function () {});
-                    sugar = window.top.sugar;
-                    expect(sugar.onEnvironmentSet).not.toBeUndefined();
+                    expect(window.top.sugar.onEnvironmentSet).toBeDefined();
                 });
 
-                it("should run callback on EnvironmentSet event", function () {
-                    var callback = jasmine.createSpy();
+                it("should run callback on EnvironmentSet event", function (done) {
                     var expectedEnv = "env";
+                    
+                    env.getEnvironment(function(error, env) {
+                        expect(error).toBeNull();
+                        expect(env).toBe(expectedEnv);
+                        done();
+                    });
 
-                    env.getEnvironment(callback);
                     window.top.sugar.environment = expectedEnv;
                     window.top.sugar.onEnvironmentSet();
-
-                    expect(callback).toHaveBeenCalledWith(null, expectedEnv);
                 });
             });
         });

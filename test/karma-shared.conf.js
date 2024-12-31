@@ -11,7 +11,13 @@ module.exports = function (config) {
         // base path, that will be used to resolve files and exclude
         basePath: '..',
 
-
+        plugins: [
+            'karma-jasmine',
+            'karma-requirejs',
+            'karma-firefox-launcher',
+            'karma-chrome-launcher',
+        ],
+        browsers: ['Firefox', 'Chrome'],
         files: [
             'test/loader.js',
             {
@@ -26,9 +32,31 @@ module.exports = function (config) {
             }, {
                 pattern: 'graphics/**/*',
                 included: false
+            },
+            {
+                pattern: 'node_modules/**/*.js',
+                included: false
+            },
+            {   
+                pattern: '!node_modules/jasmine-core/lib/jasmine-core/example/**', 
+                included: false
             }
+
         ],
 
+      
+         // Add client configuration
+         client: {
+            jasmine: {
+                random: false
+            },
+            useIframe: true,
+            runInParent: false
+        },
+
+            
+        transports: ['polling', 'websocket'],
+        
 
         // list of files to exclude
         exclude: [],

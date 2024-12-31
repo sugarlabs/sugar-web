@@ -1,5 +1,4 @@
 define(["sugar-web/graphics/palette"], function (palette) {
-
     'use strict';
 
     describe("palette", function () {
@@ -30,7 +29,5 @@ define(["sugar-web/graphics/palette"], function (palette) {
             expect(myPaletteA.isDown()).toBe(true);
             expect(myPaletteB.isDown()).toBe(false);
         });
-
     });
-
 });

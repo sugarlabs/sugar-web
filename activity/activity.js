@@ -202,8 +202,8 @@ define(["webL10n",
             activity.hideAlert();
             if (btnCallback != null) {
                 btnCallback(result);
-            };
-        };
+            }
+        }
 
         okBtn.addEventListener('click', function (e) {
             hideAlertAndReply(true);
@@ -219,7 +219,7 @@ define(["webL10n",
         var alertNode = document.getElementById("activity-alert");
         if (alertNode && alertNode.parentNode) {
             alertNode.parentNode.removeChild(alertNode);
-        };
+        }
     };
 
     return activity;
