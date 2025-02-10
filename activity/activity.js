@@ -94,7 +94,7 @@ define(["webL10n",
     };
 
 	activity.getPresenceObject = function(connectionCallback) {
-		if (presenceResponse == null) {
+		if (presenceResponse === null) {
 			presenceCallback = connectionCallback;
 		} else {
 			connectionCallback(presenceResponse.error, presenceResponse.presence);
@@ -102,6 +102,14 @@ define(["webL10n",
 		}
 		return presence;
 	};
+    bus.onNotification("presence.joined", function (msg) {
+        presenceResponse = msg.data;
+    
+        if (presenceCallback) {
+            presenceCallback(presenceResponse.error, presenceResponse.presence);
+            presenceCallback = null;
+        }
+    });
 
     activity.getXOColor = function (callback) {
         function onResponseReceived(error, result) {
