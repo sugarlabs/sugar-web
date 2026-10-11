@@ -129,9 +129,8 @@ define(function () {
             }
 
             (function removePreviousContent() {
-                for (var i = 0; i < containerElem.children.length; i++) {
-                    var child = containerElem.children[i];
-                    containerElem.removeChild(child);
+                while (containerElem.firstChild) {
+                    containerElem.removeChild(containerElem.firstChild);
                 }
             }());
 

@@ -29,5 +29,24 @@ define(["sugar-web/graphics/palette"], function (palette) {
             expect(myPaletteA.isDown()).toBe(true);
             expect(myPaletteB.isDown()).toBe(false);
         });
+
+        it("setContent removes all previous content", function () {
+            var invoker = document.createElement('button');
+            var myPalette = new palette.Palette(invoker);
+            var oldItems = [];
+            var newItems = [];
+            var i;
+            for (i = 0; i < 4; i++) {
+                oldItems.push(document.createElement('div'));
+                newItems.push(document.createElement('div'));
+            }
+            myPalette.setContent(oldItems);
+            myPalette.setContent(newItems);
+            var container = myPalette.getPalette().querySelector('.container');
+            expect(container.children.length).toBe(newItems.length);
+            for (i = 0; i < oldItems.length; i++) {
+                expect(oldItems[i].parentNode).toBe(null);
+            }
+        });
     });
 });
